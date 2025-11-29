@@ -37,15 +37,21 @@ jobs:
       run: |
         mkdir -p deploy/laravel_app
         mkdir -p deploy/public_html
+        
+        # Copier les fichiers Laravel
         rsync -av --exclude='node_modules' \
                   --exclude='.git' \
                   --exclude='tests' \
                   --exclude='public' \
                   --exclude='deploy' \
                   ./ deploy/laravel_app/
+        
+        # Copier le contenu public
         cp -r public/* deploy/public_html/
+        
         rm -f deploy/laravel_app/.env
-
+    
+    # NOUVELLE VERSION avec plus d'options
     - name: 🚀 Deploy to cPanel via FTP
       uses: SamKirkland/FTP-Deploy-Action@v4.3.6
       with:
@@ -54,7 +60,11 @@ jobs:
         password: ${{ secrets.FTP_PASSWORD }}
         local-dir: ./deploy/
         server-dir: ./
+        protocol: ftps  # ← CHANGEMENT ICI
+        port: 21
+        timeout: 300000  # 5 minutes
         dangerous-clean-slate: false
-
+        log-level: verbose
+        
     - name: ✅ Deployment complete
       run: echo "🎉 Déploiement terminé avec succès !"
