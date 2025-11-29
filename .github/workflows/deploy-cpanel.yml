@@ -1,0 +1,67 @@
+name: Deploy Laravel to cPanel
+
+on:
+  push:
+    branches: [ main ]
+  workflow_dispatch:
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: 🚚 Checkout code
+      uses: actions/checkout@v3
+    
+    - name: 🔧 Setup PHP
+      uses: shivammathur/setup-php@v2
+      with:
+        php-version: '8.2'
+        extensions: mbstring, dom, fileinfo, mysql, gd, bcmath, zip
+    
+    - name: 📦 Install Composer dependencies
+      run: composer install --no-dev --optimize-autoloader --no-interaction --prefer-dist
+    
+    - name: 🔧 Setup Node.js
+      uses: actions/setup-node@v3
+      with:
+        node-version: '18'
+    
+    - name: 📥 Install NPM dependencies
+      run: npm ci
+    
+    - name: 🔨 Build assets (Vite)
+      run: npm run build
+    
+    - name: 📋 Prepare deployment files
+      run: |
+        # Créer la structure pour cPanel
+        mkdir -p deploy/laravel_app
+        mkdir -p deploy/public_html
+        
+        # Copier les fichiers Laravel dans laravel_app
+        rsync -av --exclude='node_modules' \
+                  --exclude='.git' \
+                  --exclude='tests' \
+                  --exclude='public' \
+                  --exclude='deploy' \
+                  ./ deploy/laravel_app/
+        
+        # Copier le contenu de public dans public_html
+        cp -r public/* deploy/public_html/
+        
+        # S'assurer que le .env n'est pas inclus (on le créera sur le serveur)
+        rm -f deploy/laravel_app/.env
+    
+    - name: 🚀 Deploy to cPanel via FTP
+      uses: SamKirkland/[email protected]
+      with:
+        server: ${{ secrets.FTP_SERVER }}
+        username: ${{ secrets.FTP_USERNAME }}
+        password: ${{ secrets.FTP_PASSWORD }}
+        local-dir: ./deploy/
+        server-dir: ./
+        dangerous-clean-slate: false
+        
+    - name: ✅ Deployment complete
+      run: echo "🎉 Déploiement terminé avec succès !"

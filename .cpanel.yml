@@ -1,0 +1,6 @@
+---
+deployment:
+  tasks:
+    - export DEPLOYPATH=/home/jadavicu/laravel_app
+    - /bin/cp -R * $DEPLOYPATH
+    - /bin/cp -R public/* /home/jadavicu/public_html/
