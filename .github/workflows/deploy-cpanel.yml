@@ -35,26 +35,19 @@ jobs:
     
     - name: 📋 Prepare deployment files
       run: |
-        # Créer la structure pour cPanel
         mkdir -p deploy/laravel_app
         mkdir -p deploy/public_html
-        
-        # Copier les fichiers Laravel dans laravel_app
         rsync -av --exclude='node_modules' \
                   --exclude='.git' \
                   --exclude='tests' \
                   --exclude='public' \
                   --exclude='deploy' \
                   ./ deploy/laravel_app/
-        
-        # Copier le contenu de public dans public_html
         cp -r public/* deploy/public_html/
-        
-        # S'assurer que le .env n'est pas inclus (on le créera sur le serveur)
         rm -f deploy/laravel_app/.env
-    
+
     - name: 🚀 Deploy to cPanel via FTP
-      uses: SamKirkland/[email protected]
+      uses: SamKirkland/FTP-Deploy-Action@v4.3.6
       with:
         server: ${{ secrets.FTP_SERVER }}
         username: ${{ secrets.FTP_USERNAME }}
@@ -62,6 +55,6 @@ jobs:
         local-dir: ./deploy/
         server-dir: ./
         dangerous-clean-slate: false
-        
+
     - name: ✅ Deployment complete
       run: echo "🎉 Déploiement terminé avec succès !"
