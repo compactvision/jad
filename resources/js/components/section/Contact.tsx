@@ -58,30 +58,30 @@ export default function Contact() {
       title: 'Adresse',
       content: [
         'Ferme JAD',
-        'Route du Bocage',
-        '85000 La Chataigneraie, France'
+        'Avenue de l\'Agriculture',
+        'Mont Ngafula, Kinshasa, RDC'
       ],
       action: null
     },
     {
       icon: Phone,
       title: 'Téléphone',
-      content: ['+33 (0)2 49 12 34 56'],
-      action: 'tel:+33249123456'
+      content: ['+243 81 234 5678', '+243 90 123 4567 (WhatsApp)'],
+      action: 'tel:+243812345678'
     },
     {
       icon: Mail,
       title: 'Email',
-      content: ['contact@jad-farm.fr'],
-      action: 'mailto:contact@jad-farm.fr'
+      content: ['info@jad-rdc.cd', 'contact@jad-rdc.cd'],
+      action: 'mailto:info@jad-rdc.cd'
     },
     {
       icon: Clock,
       title: 'Horaires',
       content: [
-        'Lun - Ven: 8h - 18h',
-        'Sam: 7h - 13h (Marché)',
-        'Dim: 14h - 17h (Visites)'
+        'Lun - Sam: 7h30 - 18h',
+        'Dimanche: 8h - 12h',
+        'Fermé les jours fériés'
       ],
       action: null
     }
@@ -91,12 +91,12 @@ export default function Contact() {
     {
       icon: Calendar,
       title: 'Quand ?',
-      content: 'Chaque samedi matin'
+      content: 'Tous les jours sauf dimanche'
     },
     {
       icon: MapPin,
       title: 'Où ?',
-      content: 'Place de l\'église, centre-ville'
+      content: 'Marché de Mont Ngafula, Kinshasa'
     },
     {
       icon: Clock,

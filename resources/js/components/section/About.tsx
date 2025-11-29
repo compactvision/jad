@@ -36,27 +36,27 @@ export default function About() {
           >
             <div className="inline-block px-4 py-2 bg-green-100 rounded-full mb-6">
               <span className="text-green-700 font-medium text-sm">
-                Notre histoire
+                Notre histoire commence ici
               </span>
             </div>
 
             <h2 className="text-4xl lg:text-6xl font-serif text-slate-800 mb-6 leading-tight">
-              Passion fermière <br />
-              <span className="text-green-600">depuis 20 ans</span>
+              Une nouvelle ère agricole <br />
+              <span className="text-green-600">à Mont Ngafula</span>
             </h2>
 
             <div className="w-16 h-1 bg-amber-500 rounded-full mb-8" />
 
             <p className="text-lg text-slate-700 leading-relaxed mb-6 font-medium">
-              JAD cultive l'excellence dans l'élevage de volailles. Notre ferme
-              aux portes du bocage vendéen incarne une vision : produire
-              naturellement, respectueusement, passionnément.
+              JAD incarne l'avenir de l'agriculture congolaise. Notre ferme,
+              nichée à Mont Ngafula, se consacre à une agriculture innovante
+              et respectueuse de l'environnement, au service de notre communauté.
             </p>
 
             <p className="text-lg text-slate-600 leading-relaxed mb-8">
-              Chaque poule, chaque pintade, chaque canard s'épanouit en plein
-              air. Nous refusons la production intensive pour privilégier le
-              bien-être animal et la qualité des produits.
+              Nous cultivons des produits frais et sains en utilisant des méthodes
+              durables qui préservent la richesse de nos terres. Notre engagement
+              est de nourrir notre communauté avec des produits locaux de qualité.
             </p>
 
             <div className="space-y-4">
@@ -66,10 +66,10 @@ export default function About() {
                 </div>
                 <div>
                   <p className="font-medium text-slate-800">
-                    Élevage naturel et respectueux
+                    Agriculture biologique et durable
                   </p>
                   <p className="text-sm text-slate-600">
-                    Sans antibiotiques, en plein air
+                    Méthodes naturelles, sans produits chimiques
                   </p>
                 </div>
               </div>
@@ -79,10 +79,10 @@ export default function About() {
                 </div>
                 <div>
                   <p className="font-medium text-slate-800">
-                    Certification qualité
+                    Qualité supérieure
                   </p>
                   <p className="text-sm text-slate-600">
-                    100% plein air certifié
+                    Produits frais et locaux
                   </p>
                 </div>
               </div>
@@ -92,10 +92,10 @@ export default function About() {
                 </div>
                 <div>
                   <p className="font-medium text-slate-800">
-                    Durabilité garantie
+                    Engagement communautaire
                   </p>
                   <p className="text-sm text-slate-600">
-                    Agriculture responsable et durable
+                    Soutien à l'économie locale et au développement durable
                   </p>
                 </div>
               </div>

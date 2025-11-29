@@ -159,9 +159,9 @@ export default function Hero() {
             }`}
             style={{ textShadow: "0 2px 8px rgba(0, 0, 0, 0.7)" }}
           >
-            L'excellence fermière
+            L'excellence agricole
             <br />
-            au cœur de la nature
+            au cœur de la RDC
           </h2>
 
           <p
@@ -176,7 +176,7 @@ export default function Hero() {
               backdropFilter: "blur(4px)",
             }}
           >
-            Élevage de volailles en plein air, avec respect et passion
+            Agriculture biologique locale, éthique et respectueuse de l'environnement
           </p>
 
           <div
@@ -191,7 +191,7 @@ export default function Hero() {
               style={{ boxShadow: "0 4px 15px rgba(0, 0, 0, 0.3)" }}
             >
               <span className="relative z-10 flex items-center gap-2">
-                Découvrir notre ferme
+                Découvrir JAD
                 <ChevronRight className="w-5 h-5 transition-transform group-hover:translate-x-1" />
               </span>
               <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-1000"></div>
@@ -216,8 +216,8 @@ export default function Hero() {
         aria-label="Défiler vers le bas"
       >
         <div className="flex flex-col items-center gap-2">
-          <span className="text-white/80 text-sm animate-pulse font-medium">
-            Découvrir
+              <span className="text-white/80 text-sm animate-pulse font-medium">
+            En savoir plus
           </span>
           <div className="w-6 h-10 border-2 border-white/60 rounded-full flex items-start justify-center p-1">
             <div className="w-1.5 h-1.5 bg-white rounded-full mt-1 animate-bounce"></div>

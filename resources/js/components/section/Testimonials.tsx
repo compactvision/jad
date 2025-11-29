@@ -32,56 +32,56 @@ export default function Testimonials() {
 
   const testimonials = [
     {
-      name: "Marie Dupont",
-      role: "Chef cuisinier, Restaurant Le Bocage",
+      name: "Maman Nzuzi",
+      role: "Ménagère, Mont Ngafula",
       content:
-        "Les produits JAD sont exceptionnels. La qualité des œufs et des volailles transforme mes plats. Mes clients remarquent immédiatement la différence.",
+        "Depuis que j'achète mes œufs et poulets chez JAD, ma famille ne jure que par leur qualité. Le goût est incomparable !",
       rating: 5,
       avatar:
-        "https://images.pexels.com/photos/2182970/pexels-photo-2182970.jpeg?auto=compress&cs=tinysrgb&w=400",
+        "https://images.unsplash.com/photo-1614289371518-722f2615943d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=400&q=80",
       date: "Il y a 2 semaines",
       verified: true,
     },
     {
-      name: "Thomas Bernard",
-      role: "Client régulier",
+      name: "Papa Mbuyi",
+      role: "Restaurateur, Maquis Le Bon Coin",
       content:
-        "Depuis que j'achète chez JAD, le goût des œufs n'est pas comparable. C'est comme redécouvrir les vraies saveurs de l'enfance.",
+        "La qualité des produits JAD a transformé mes plats. Mes clients apprécient particulièrement la fraîcheur et le goût authentique de leurs volailles.",
       rating: 5,
       avatar:
-        "https://images.pexels.com/photos/2379004/pexels-photo-2379004.jpeg?auto=compress&cs=tinysrgb&w=400",
+        "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=400&q=80",
       date: "Il y a 1 mois",
       verified: true,
     },
     {
-      name: "Sophie Renaud",
-      role: "Restauratrice, Auberge de la Ferme",
+      name: "Madame Kabasele",
+      role: "Gérante, Epicerie du Coin",
       content:
-        "Travailler avec JAD c'est l'assurance d'une qualité constante et d'une traçabilité totale. Nos clients viennent pour les volailles JAD.",
+        "Je me fournis régulièrement chez JAD pour mon épicerie. La qualité est toujours au rendez-vous et mes clients sont ravis. Un partenariat gagnant !",
       rating: 5,
       avatar:
-        "https://images.pexels.com/photos/3184418/pexels-photo-3184418.jpeg?auto=compress&cs=tinysrgb&w=400",
+        "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=400&q=80",
       date: "Il y a 3 semaines",
       verified: true,
     },
     {
-      name: "Jean Moreau",
-      role: "Producteur local",
+      name: "Monsieur Tshilombo",
+      role: "Client fidèle",
       content:
-        "Visitée la ferme dimanche dernier. Magnifique ! Les poulets sont vraiment heureux. Je ne manquerais plus une visite.",
+        "J'ai visité la ferme JAD et j'ai été impressionné par les méthodes d'élevage respectueuses. Les animaux sont en bonne santé et bien traités.",
       rating: 5,
       avatar:
-        "https://images.pexels.com/photos/837358/pexels-photo-837358.jpeg?auto=compress&cs=tinysrgb&w=400",
+        "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=400&q=80",
       date: "Il y a 1 semaine",
       verified: false,
     },
   ];
 
   const stats = [
-    { number: "4.9", label: "Note moyenne", icon: Star },
-    { number: "500+", label: "Avis clients", icon: MessageCircle },
-    { number: "98%", label: "Clients satisfaits", icon: ThumbsUp },
-    { number: "5+", label: "Années de confiance", icon: TrendingUp },
+    { number: "4.8", label: "Note moyenne", icon: Star },
+    { number: "200+", label: "Familles ravies", icon: MessageCircle },
+    { number: "95%", label: "Clients satisfaits", icon: ThumbsUp },
+    { number: "1 an+", label: "Déjà une référence", icon: TrendingUp },
   ];
 
   return (

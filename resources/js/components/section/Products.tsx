@@ -23,46 +23,46 @@ export default function Products() {
 
   const products = [
     {
-      name: "Œufs fermiers",
+      name: "Œufs de poule locale",
       description:
-        "Œufs de poule élevée en plein air, riches en oméga-3 et saveur naturelle",
+        "Œufs frais de poules élevées en liberté, riches en nutriments et saveurs authentiques",
       image:
-        "https://images.pexels.com/photos/2317909/pexels-photo-2317909.jpeg?auto=compress&cs=tinysrgb&w=800",
-      tag: "Signature",
-      details: "Boîte de 6 ou 12 œufs",
-      rating: 4.8,
-      price: "4,50€",
-    },
-    {
-      name: "Poules fermières",
-      description:
-        "Viande tendre et savoureuse, idéale pour vos recettes gourmandes",
-      image:
-        "https://images.pexels.com/photos/2317906/pexels-photo-2317906.jpeg?auto=compress&cs=tinysrgb&w=800",
-      tag: "Premium",
-      details: "Poids: 2-2,5 kg",
-      rating: 4.9,
-      price: "12,90€",
-    },
-    {
-      name: "Pintades",
-      description: "Gibier fin aux délicats parfums de forêt et de bruyère",
-      image:
-        "https://images.pexels.com/photos/2317908/pexels-photo-2317908.jpeg?auto=compress&cs=tinysrgb&w=800",
-      tag: "Exclusif",
-      details: "Poids: 1,5-1,8 kg",
+        "https://images.unsplash.com/photo-1583258216-7b0d4740804b?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80",
+      tag: "Populaire",
+      details: "Boîte de 30 œufs",
       rating: 4.7,
-      price: "15,90€",
+      price: "5,000 CDF",
     },
     {
-      name: "Canards fermiers",
-      description: "Foies gras et magrets d'exception pour vos tables festives",
+      name: "Poulets de chair",
+      description:
+        "Poulets élevés en plein air, nourris aux céréales locales pour une chair savoureuse",
       image:
-        "https://images.pexels.com/photos/2317910/pexels-photo-2317910.jpeg?auto=compress&cs=tinysrgb&w=800",
-      tag: "Délice",
-      details: "Sur commande",
-      rating: 5.0,
-      price: "22,50€",
+        "https://images.unsplash.com/photo-1562967916-3dcbe9b9a2d5?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80",
+      tag: "Meilleure vente",
+      details: "Poids: 1,8-2,2 kg",
+      rating: 4.9,
+      price: "25,000 CDF",
+    },
+    {
+      name: "Légumes frais",
+      description: "Sélection de légumes locaux cultivés sans produits chimiques",
+      image:
+        "https://images.unsplash.com/photo-1541696432-82d48c8268a1?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80",
+      tag: "Bio",
+      details: "Au kilo (tomates, oignons, aubergines, etc.)",
+      rating: 4.8,
+      price: "À partir de 1,500 CDF",
+    },
+    {
+      name: "Fruits de saison",
+      description: "Frais cueillis, une explosion de saveurs tropicales",
+      image:
+        "https://images.unsplash.com/photo-1610832958506-aa56368176cf?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80",
+      tag: "Saisonnier",
+      details: "Mangues, ananas, papayes, etc.",
+      rating: 4.9,
+      price: "À partir de 2,000 CDF",
     },
   ];
 
@@ -85,12 +85,11 @@ export default function Products() {
             </span>
           </div>
           <h2 className="text-4xl lg:text-6xl font-serif text-slate-800 mb-6 leading-tight">
-            Excellence à chaque <span className="text-green-600">assiette</span>
+            Saveurs locales, <span className="text-green-600">qualité supérieure</span>
           </h2>
           <div className="w-16 h-1 bg-amber-500 rounded-full mx-auto mb-8" />
           <p className="text-xl text-slate-600 max-w-3xl mx-auto leading-relaxed">
-            Volailles fermières d'exception, élevées en plein air et
-            transformées avec soin pour ravir vos papilles
+            Produits agricoles frais et locaux, cultivés avec passion et respect de l'environnement pour une alimentation saine
           </p>
         </div>
 
