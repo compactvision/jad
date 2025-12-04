@@ -1,4 +1,5 @@
-import { Facebook, Instagram, Mail, MapPin, Phone, Clock, Heart } from 'lucide-react';
+import { Link } from '@inertiajs/react';
+import { Facebook, Instagram, Mail, MapPin, Phone, Clock, Heart, MessageCircle } from 'lucide-react';
 import { useState, useEffect } from 'react';
 
 export default function Footer() {
@@ -37,31 +38,28 @@ export default function Footer() {
     }
   };
 
-
   const navLinks = [
     { label: 'Notre histoire', id: 'about' },
-    { label: 'Nos produits', id: 'products' },
-    { label: 'Nos valeurs', id: 'values' },
-    { label: 'Témoignages', id: 'testimonials' },
+    { label: 'Nos activités', id: 'products' },
     { label: 'Contact', id: 'contact' },
   ];
 
   const legalLinks = [
     { label: 'Mentions légales', href: '/legal-notice' },
-    { label: 'Politique de confidentialité', href: '/privacy-policy' },
-    { label: 'CGV', href: '/terms' },
+    // { label: 'Politique de confidentialité', href: '/privacy-policy' },
+    // { label: 'CGV', href: '/terms' },
   ];
 
   const socialLinks = [
-    { icon: Facebook, href: 'https://facebook.com/jad-farm', label: 'Facebook' },
-    { icon: Instagram, href: 'https://instagram.com/jad-farm', label: 'Instagram' },
-    { icon: Mail, href: 'mailto:contact@jad-farm.fr', label: 'Email' },
+    { icon: Facebook, href: 'https://facebook.com/jadaviculture', label: 'Facebook' },
+    { icon: Instagram, href: 'https://instagram.com/jadaviculture', label: 'Instagram' },
+    { icon: Mail, href: 'mailto:contact@jadaviculture.com', label: 'Email' },
   ];
 
   const contactInfo = [
-    { icon: MapPin, content: 'Ferme JAD, Route du Bocage, 85000 La Chataigneraie' },
-    { icon: Phone, content: '+33 (0)2 49 12 34 56' },
-    { icon: Clock, content: 'Lun-Ven: 8h-18h, Sam: 7h-13h, Dim: 14h-17h' },
+    { icon: MapPin, content: 'Kindele, Vallée de la Funa, Commune de Mont-Ngafula, Kinshasa, RDC' },
+    { icon: Phone, content: '+1 418 455 3186 (Jonathan)' },
+    { icon: Clock, content: 'Lun-Ven: 7h30-18h, Sam: 7h30-13h, Dim: 8h-12h' },
   ];
 
   return (
@@ -74,9 +72,9 @@ export default function Footer() {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-12 mb-12">
           {/* Logo et description */}
           <div className={`lg:col-span-2 transition-all duration-1000 ${isVisible ? 'translate-y-0 opacity-100' : 'translate-y-10 opacity-0'}`}>
-            <h3 className="text-3xl font-bold mb-4 text-white">JAD</h3>
+            <h3 className="text-3xl font-bold mb-4 text-white">JAD Aviculture</h3>
             <p className="text-white/70 leading-relaxed mb-6">
-              Ferme de volailles en plein air. Excellence fermière et passion depuis plus de 20 ans.
+              Entreprise agro-pastorale innovante. Modernisation de l'agriculture congolaise grâce à la Méthode JAD Fibonacci™.
             </p>
             
             <div className="space-y-3">
@@ -89,6 +87,19 @@ export default function Footer() {
                   </div>
                 );
               })}
+              
+              {/* Bouton WhatsApp */}
+              <div className="flex items-center gap-3 mt-2">
+                <MessageCircle className="w-5 h-5 text-green-400 flex-shrink-0" />
+                <a 
+                  href="https://wa.me/14184553186" 
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-green-400 hover:text-green-300 transition-colors text-sm font-medium"
+                >
+                  WhatsApp Business
+                </a>
+              </div>
             </div>
           </div>
 
@@ -96,16 +107,23 @@ export default function Footer() {
           <div className={`transition-all duration-1000 delay-200 ${isVisible ? 'translate-y-0 opacity-100' : 'translate-y-10 opacity-0'}`}>
             <h4 className="font-serif text-xl mb-4 text-white">Navigation</h4>
             <ul className="space-y-2">
+              <li>
+                <Link href="/jad-fibonacci" className="text-white/70 hover:text-green-400 transition-colors inline-block">Méthode JAD Fibonacci™</Link>
+              </li>
+              <li>
+                <Link href="/become-member" className="text-white/70 hover:text-green-400 transition-colors inline-block">Devenir collaborateur</Link>
+              </li>
               {navLinks.map((link) => (
                 <li key={link.id}>
-                  <a
-                    href={`#${link.id}`}
+                  <Link
+                    href={`/#${link.id}`}
                     className="text-white/70 hover:text-green-400 transition-colors inline-block"
                   >
                     {link.label}
-                  </a>
+                  </Link>
                 </li>
               ))}
+
             </ul>
           </div>
 
@@ -130,7 +148,7 @@ export default function Footer() {
           <div className={`transition-all duration-1000 delay-400 ${isVisible ? 'translate-y-0 opacity-100' : 'translate-y-10 opacity-0'}`}>
             <h4 className="font-serif text-xl mb-4 text-white">Newsletter</h4>
             <p className="text-white/70 mb-4 text-sm">
-              Recevez nos actualités et offres exclusives
+              Recevez nos actualités et offres exclusives sur la Méthode JAD Fibonacci™
             </p>
             
             {subscribed ? (
@@ -181,10 +199,10 @@ export default function Footer() {
             
             <div className="text-center md:text-right text-white/60 text-sm">
               <p>
-                &copy; {currentYear} Ferme JAD. Tous droits réservés.
+                &copy; {currentYear} JAD Aviculture SARL. Tous droits réservés.
               </p>
               <p className="flex items-center justify-center md:justify-end gap-1 mt-1">
-                Fabriqué avec <Heart className="w-4 h-4 text-red-500 mx-1" /> pour l'agriculture responsable
+                Fabriqué avec <Heart className="w-4 h-4 text-red-500 mx-1" /> pour l'agriculture congolaise
               </p>
             </div>
           </div>

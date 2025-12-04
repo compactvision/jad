@@ -35,7 +35,8 @@ export default function Header({ scrolled }: HeaderProps) {
     { label: "L'histoire", href: "/#about" },
     { label: "Produits", href: "/#products" },
     { label: "Nos valeurs", href: "/#values" },
-    { label: "Contact", href: "/#contact" },
+    { label: "JAD Fibonacci™", href: "/jad-fibonacci" },
+    { label: "Partenariat", href: "/become-member" },
   ];
 
   return (

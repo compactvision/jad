@@ -7,6 +7,7 @@ use Laravel\Fortify\Features;
 Route::get('/', function () { return Inertia::render('welcome'); })->name('home');
 Route::get('/become-member', function () { return Inertia::render('member');})->name('become');
 Route::get('/jad-fibonacci', function () { return Inertia::render('fibonacci');})->name('fibonacci');
+Route::get('/legal-notice', function () { return Inertia::render('legal');})->name('legal-notice');
 
 
 

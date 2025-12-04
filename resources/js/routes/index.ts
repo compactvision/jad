@@ -438,3 +438,77 @@ fibonacciForm.head = (options?: RouteQueryOptions): RouteFormDefinition<'get'> =
 })
 
 fibonacci.form = fibonacciForm
+
+/**
+* @see routes/web.php:10
+* @route '/legal-notice'
+*/
+export const legalNotice = (options?: RouteQueryOptions): RouteDefinition<'get'> => ({
+    url: legalNotice.url(options),
+    method: 'get',
+})
+
+legalNotice.definition = {
+    methods: ["get","head"],
+    url: '/legal-notice',
+} satisfies RouteDefinition<["get","head"]>
+
+/**
+* @see routes/web.php:10
+* @route '/legal-notice'
+*/
+legalNotice.url = (options?: RouteQueryOptions) => {
+    return legalNotice.definition.url + queryParams(options)
+}
+
+/**
+* @see routes/web.php:10
+* @route '/legal-notice'
+*/
+legalNotice.get = (options?: RouteQueryOptions): RouteDefinition<'get'> => ({
+    url: legalNotice.url(options),
+    method: 'get',
+})
+
+/**
+* @see routes/web.php:10
+* @route '/legal-notice'
+*/
+legalNotice.head = (options?: RouteQueryOptions): RouteDefinition<'head'> => ({
+    url: legalNotice.url(options),
+    method: 'head',
+})
+
+/**
+* @see routes/web.php:10
+* @route '/legal-notice'
+*/
+const legalNoticeForm = (options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
+    action: legalNotice.url(options),
+    method: 'get',
+})
+
+/**
+* @see routes/web.php:10
+* @route '/legal-notice'
+*/
+legalNoticeForm.get = (options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
+    action: legalNotice.url(options),
+    method: 'get',
+})
+
+/**
+* @see routes/web.php:10
+* @route '/legal-notice'
+*/
+legalNoticeForm.head = (options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
+    action: legalNotice.url({
+        [options?.mergeQuery ? 'mergeQuery' : 'query']: {
+            _method: 'HEAD',
+            ...(options?.query ?? options?.mergeQuery ?? {}),
+        }
+    }),
+    method: 'get',
+})
+
+legalNotice.form = legalNoticeForm
