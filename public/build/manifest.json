@@ -1,6 +1,70 @@
 {
+  "_AppShell-CZ17oSM3.js": {
+    "file": "assets/AppShell-CZ17oSM3.js",
+    "name": "AppShell",
+    "imports": [
+      "resources/js/app.tsx"
+    ]
+  },
+  "_Breadcrumb-DE0oXcTT.js": {
+    "file": "assets/Breadcrumb-DE0oXcTT.js",
+    "name": "Breadcrumb",
+    "imports": [
+      "resources/js/app.tsx",
+      "_AppShell-CZ17oSM3.js"
+    ]
+  },
+  "_arrow-right-hI_qbUCA.js": {
+    "file": "assets/arrow-right-hI_qbUCA.js",
+    "name": "arrow-right",
+    "imports": [
+      "_AppShell-CZ17oSM3.js"
+    ]
+  },
+  "_award-DlApHvL_.js": {
+    "file": "assets/award-DlApHvL_.js",
+    "name": "award",
+    "imports": [
+      "_AppShell-CZ17oSM3.js"
+    ]
+  },
+  "_circle-alert-BCK6Gkdg.js": {
+    "file": "assets/circle-alert-BCK6Gkdg.js",
+    "name": "circle-alert",
+    "imports": [
+      "_AppShell-CZ17oSM3.js"
+    ]
+  },
+  "_circle-check-big-CmUOeyLN.js": {
+    "file": "assets/circle-check-big-CmUOeyLN.js",
+    "name": "circle-check-big",
+    "imports": [
+      "_AppShell-CZ17oSM3.js"
+    ]
+  },
+  "_file-text-DJmZ2V3u.js": {
+    "file": "assets/file-text-DJmZ2V3u.js",
+    "name": "file-text",
+    "imports": [
+      "_AppShell-CZ17oSM3.js"
+    ]
+  },
+  "_target-DrHzyInK.js": {
+    "file": "assets/target-DrHzyInK.js",
+    "name": "target",
+    "imports": [
+      "_AppShell-CZ17oSM3.js"
+    ]
+  },
+  "_trending-up-CyGbdYmy.js": {
+    "file": "assets/trending-up-CyGbdYmy.js",
+    "name": "trending-up",
+    "imports": [
+      "_AppShell-CZ17oSM3.js"
+    ]
+  },
   "resources/css/app.css": {
-    "file": "assets/app-CKRsOiyW.css",
+    "file": "assets/app-BAmc3QRm.css",
     "src": "resources/css/app.css",
     "isEntry": true,
     "names": [
@@ -8,27 +72,89 @@
     ]
   },
   "resources/js/app.tsx": {
-    "file": "assets/app-Ckh1KrN1.js",
+    "file": "assets/app-Cio38hJG.js",
     "name": "app",
     "src": "resources/js/app.tsx",
     "isEntry": true,
     "dynamicImports": [
+      "resources/js/pages/fibonacci.tsx",
+      "resources/js/pages/legal.tsx",
+      "resources/js/pages/member.tsx",
       "resources/js/pages/welcome.tsx"
     ],
     "css": [
-      "assets/app-CKRsOiyW.css"
+      "assets/app-BAmc3QRm.css"
+    ]
+  },
+  "resources/js/pages/fibonacci.tsx": {
+    "file": "assets/fibonacci-72XL18tG.js",
+    "name": "fibonacci",
+    "src": "resources/js/pages/fibonacci.tsx",
+    "isDynamicEntry": true,
+    "imports": [
+      "resources/js/app.tsx",
+      "_AppShell-CZ17oSM3.js",
+      "_Breadcrumb-DE0oXcTT.js",
+      "_trending-up-CyGbdYmy.js",
+      "_award-DlApHvL_.js",
+      "_target-DrHzyInK.js",
+      "_arrow-right-hI_qbUCA.js"
+    ],
+    "css": [
+      "assets/app-BAmc3QRm.css"
+    ]
+  },
+  "resources/js/pages/legal.tsx": {
+    "file": "assets/legal-2sXAPWcQ.js",
+    "name": "legal",
+    "src": "resources/js/pages/legal.tsx",
+    "isDynamicEntry": true,
+    "imports": [
+      "resources/js/app.tsx",
+      "_AppShell-CZ17oSM3.js",
+      "_Breadcrumb-DE0oXcTT.js",
+      "_file-text-DJmZ2V3u.js",
+      "_circle-alert-BCK6Gkdg.js",
+      "_award-DlApHvL_.js",
+      "_target-DrHzyInK.js",
+      "_circle-check-big-CmUOeyLN.js"
+    ],
+    "css": [
+      "assets/app-BAmc3QRm.css"
+    ]
+  },
+  "resources/js/pages/member.tsx": {
+    "file": "assets/member-GkTAPJUJ.js",
+    "name": "member",
+    "src": "resources/js/pages/member.tsx",
+    "isDynamicEntry": true,
+    "imports": [
+      "resources/js/app.tsx",
+      "_AppShell-CZ17oSM3.js",
+      "_Breadcrumb-DE0oXcTT.js",
+      "_circle-check-big-CmUOeyLN.js",
+      "_arrow-right-hI_qbUCA.js",
+      "_file-text-DJmZ2V3u.js"
+    ],
+    "css": [
+      "assets/app-BAmc3QRm.css"
     ]
   },
   "resources/js/pages/welcome.tsx": {
-    "file": "assets/welcome-C2Ho4o9M.js",
+    "file": "assets/welcome-4NNmb5yC.js",
     "name": "welcome",
     "src": "resources/js/pages/welcome.tsx",
     "isDynamicEntry": true,
     "imports": [
-      "resources/js/app.tsx"
+      "resources/js/app.tsx",
+      "_AppShell-CZ17oSM3.js",
+      "_trending-up-CyGbdYmy.js",
+      "_award-DlApHvL_.js",
+      "_circle-alert-BCK6Gkdg.js",
+      "_circle-check-big-CmUOeyLN.js"
     ],
     "css": [
-      "assets/app-CKRsOiyW.css"
+      "assets/app-BAmc3QRm.css"
     ]
   }
 }
