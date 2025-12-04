@@ -1,4 +1,4 @@
-import { MapPin, Phone, Mail, Clock, Send, Calendar, Users, CheckCircle, AlertCircle } from 'lucide-react';
+import { MapPin, Phone, Mail, Clock, Send, Calendar, Users, CheckCircle, AlertCircle, MessageCircle } from 'lucide-react';
 import { useState, useEffect } from 'react';
 
 export default function Contact() {
@@ -57,23 +57,23 @@ export default function Contact() {
       icon: MapPin,
       title: 'Adresse',
       content: [
-        'Ferme JAD',
-        'Avenue de l\'Agriculture',
-        'Mont Ngafula, Kinshasa, RDC'
+        'Kindele, Vallée de la Funa',
+        'Commune de Mont-Ngafula',
+        'Kinshasa, RDC'
       ],
       action: null
     },
     {
       icon: Phone,
       title: 'Téléphone',
-      content: ['+243 81 234 5678', '+243 90 123 4567 (WhatsApp)'],
-      action: 'tel:+243812345678'
+      content: ['+1 418 455 3186'],
+      action: 'tel:+14184553186'
     },
     {
       icon: Mail,
       title: 'Email',
-      content: ['info@jad-rdc.cd', 'contact@jad-rdc.cd'],
-      action: 'mailto:info@jad-rdc.cd'
+      content: ['contact@jadaviculture.com'],
+      action: 'mailto:contact@jadaviculture.com'
     },
     {
       icon: Clock,
@@ -168,6 +168,25 @@ export default function Contact() {
               );
             })}
 
+            {/* Bouton WhatsApp Business */}
+            <div className="group flex gap-6">
+              <div className="flex-shrink-0 mt-1 p-3 bg-green-500 rounded-lg group-hover:bg-green-600 transition-colors">
+                <MessageCircle className="w-6 h-6 text-white" />
+              </div>
+              <div>
+                <h3 className="font-serif text-xl text-slate-800 mb-2">WhatsApp Business</h3>
+                <a 
+                  href="https://wa.me/14184553186" 
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center gap-2 px-4 py-2 bg-green-500 hover:bg-green-600 text-white rounded-full transition-colors font-medium"
+                >
+                  <MessageCircle className="w-4 h-4" />
+                  Contacter sur WhatsApp
+                </a>
+              </div>
+            </div>
+
             <div className="mt-12 p-8 bg-gradient-to-br from-green-50 to-amber-50 rounded-3xl border-2 border-green-200 hover:border-green-400 transition-all shadow-md hover:shadow-lg">
               <h4 className="font-serif text-2xl text-slate-800 mb-4">Marché local</h4>
               <p className="text-slate-700 mb-6 text-lg leading-relaxed">
@@ -195,13 +214,13 @@ export default function Contact() {
             {/* Carte interactive */}
             <div className="rounded-3xl overflow-hidden shadow-lg h-64 relative">
               <iframe
-                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2881.904367292878!2d-0.7086560844645433!3d46.81157597912856!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x4806ec1a5e8b9e1b%3A0x40b9c8e5e8b9e1b!2sLa%20Ch%C3%A2taigneraie!5e0!3m2!1sen!2sfr!4v1623945678910!5m2!1sen!2sfr"
+                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3989.5033865618843!2d15.258771315332467!3d-4.382632846517748!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x1a6a33b9b7e7e7e7%3A0x1a6a33b9b7e7e7e7!2sMont-Ngafula%2C%20Kinshasa%2C%20Democratic%20Republic%20of%20the%20Congo!5e0!3m2!1sen!2s!4v1623945678910!5m2!1sen!2s"
                 width="100%"
                 height="100%"
                 style={{ border: 0 }}
                 allowFullScreen
                 loading="lazy"
-                title="Carte de la ferme JAD"
+                title="Carte de JAD Aviculture à Mont-Ngafula"
                 className="absolute inset-0"
               ></iframe>
             </div>
@@ -275,6 +294,7 @@ export default function Contact() {
                     <option value="order">Commander des produits</option>
                     <option value="visit">Visiter la ferme</option>
                     <option value="partnership">Partenariat</option>
+                    <option value="fibonacci">Méthode JAD Fibonacci™</option>
                     <option value="other">Autre</option>
                   </select>
                 </div>
