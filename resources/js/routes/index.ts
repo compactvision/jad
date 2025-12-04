@@ -292,69 +292,69 @@ homeForm.head = (options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
 home.form = homeForm
 
 /**
-* @see routes/web.php:14
-* @route '/dashboard'
+* @see routes/web.php:8
+* @route '/become-member'
 */
-export const dashboard = (options?: RouteQueryOptions): RouteDefinition<'get'> => ({
-    url: dashboard.url(options),
+export const become = (options?: RouteQueryOptions): RouteDefinition<'get'> => ({
+    url: become.url(options),
     method: 'get',
 })
 
-dashboard.definition = {
+become.definition = {
     methods: ["get","head"],
-    url: '/dashboard',
+    url: '/become-member',
 } satisfies RouteDefinition<["get","head"]>
 
 /**
-* @see routes/web.php:14
-* @route '/dashboard'
+* @see routes/web.php:8
+* @route '/become-member'
 */
-dashboard.url = (options?: RouteQueryOptions) => {
-    return dashboard.definition.url + queryParams(options)
+become.url = (options?: RouteQueryOptions) => {
+    return become.definition.url + queryParams(options)
 }
 
 /**
-* @see routes/web.php:14
-* @route '/dashboard'
+* @see routes/web.php:8
+* @route '/become-member'
 */
-dashboard.get = (options?: RouteQueryOptions): RouteDefinition<'get'> => ({
-    url: dashboard.url(options),
+become.get = (options?: RouteQueryOptions): RouteDefinition<'get'> => ({
+    url: become.url(options),
     method: 'get',
 })
 
 /**
-* @see routes/web.php:14
-* @route '/dashboard'
+* @see routes/web.php:8
+* @route '/become-member'
 */
-dashboard.head = (options?: RouteQueryOptions): RouteDefinition<'head'> => ({
-    url: dashboard.url(options),
+become.head = (options?: RouteQueryOptions): RouteDefinition<'head'> => ({
+    url: become.url(options),
     method: 'head',
 })
 
 /**
-* @see routes/web.php:14
-* @route '/dashboard'
+* @see routes/web.php:8
+* @route '/become-member'
 */
-const dashboardForm = (options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
-    action: dashboard.url(options),
+const becomeForm = (options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
+    action: become.url(options),
     method: 'get',
 })
 
 /**
-* @see routes/web.php:14
-* @route '/dashboard'
+* @see routes/web.php:8
+* @route '/become-member'
 */
-dashboardForm.get = (options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
-    action: dashboard.url(options),
+becomeForm.get = (options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
+    action: become.url(options),
     method: 'get',
 })
 
 /**
-* @see routes/web.php:14
-* @route '/dashboard'
+* @see routes/web.php:8
+* @route '/become-member'
 */
-dashboardForm.head = (options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
-    action: dashboard.url({
+becomeForm.head = (options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
+    action: become.url({
         [options?.mergeQuery ? 'mergeQuery' : 'query']: {
             _method: 'HEAD',
             ...(options?.query ?? options?.mergeQuery ?? {}),
@@ -363,4 +363,78 @@ dashboardForm.head = (options?: RouteQueryOptions): RouteFormDefinition<'get'> =
     method: 'get',
 })
 
-dashboard.form = dashboardForm
+become.form = becomeForm
+
+/**
+* @see routes/web.php:9
+* @route '/jad-fibonacci'
+*/
+export const fibonacci = (options?: RouteQueryOptions): RouteDefinition<'get'> => ({
+    url: fibonacci.url(options),
+    method: 'get',
+})
+
+fibonacci.definition = {
+    methods: ["get","head"],
+    url: '/jad-fibonacci',
+} satisfies RouteDefinition<["get","head"]>
+
+/**
+* @see routes/web.php:9
+* @route '/jad-fibonacci'
+*/
+fibonacci.url = (options?: RouteQueryOptions) => {
+    return fibonacci.definition.url + queryParams(options)
+}
+
+/**
+* @see routes/web.php:9
+* @route '/jad-fibonacci'
+*/
+fibonacci.get = (options?: RouteQueryOptions): RouteDefinition<'get'> => ({
+    url: fibonacci.url(options),
+    method: 'get',
+})
+
+/**
+* @see routes/web.php:9
+* @route '/jad-fibonacci'
+*/
+fibonacci.head = (options?: RouteQueryOptions): RouteDefinition<'head'> => ({
+    url: fibonacci.url(options),
+    method: 'head',
+})
+
+/**
+* @see routes/web.php:9
+* @route '/jad-fibonacci'
+*/
+const fibonacciForm = (options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
+    action: fibonacci.url(options),
+    method: 'get',
+})
+
+/**
+* @see routes/web.php:9
+* @route '/jad-fibonacci'
+*/
+fibonacciForm.get = (options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
+    action: fibonacci.url(options),
+    method: 'get',
+})
+
+/**
+* @see routes/web.php:9
+* @route '/jad-fibonacci'
+*/
+fibonacciForm.head = (options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
+    action: fibonacci.url({
+        [options?.mergeQuery ? 'mergeQuery' : 'query']: {
+            _method: 'HEAD',
+            ...(options?.query ?? options?.mergeQuery ?? {}),
+        }
+    }),
+    method: 'get',
+})
+
+fibonacci.form = fibonacciForm

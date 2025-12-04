@@ -1,4 +1,5 @@
 // src/components/Header.tsx
+import { Link } from "@inertiajs/react";
 import { Menu, X } from "lucide-react";
 import { useState, useEffect, useRef } from "react";
 
@@ -31,10 +32,10 @@ export default function Header({ scrolled }: HeaderProps) {
   };
 
   const navLinks = [
-    { label: "L'histoire", id: "about" },
-    { label: "Produits", id: "products" },
-    { label: "Nos valeurs", id: "values" },
-    { label: "Contact", id: "contact" },
+    { label: "L'histoire", href: "/#about" },
+    { label: "Produits", href: "/#products" },
+    { label: "Nos valeurs", href: "/#values" },
+    { label: "Contact", href: "/#contact" },
   ];
 
   return (
@@ -48,30 +49,22 @@ export default function Header({ scrolled }: HeaderProps) {
       <div className="max-w-7xl mx-auto px-6 sm:px-8 lg:px-12">
         <div className="flex justify-between items-center">
           {/* Logo */}
-          <a
-            href="#hero"
-            onClick={(e) => {
-              e.preventDefault();
-              scrollToSection("hero");
-            }}
+          <Link
+            href="/"
             className={`text-3xl font-bold transition-colors duration-300 ${
               scrolled ? "text-slate-800" : "text-white"
             }`}
             aria-label="Retour à l'accueil"
           >
             JAD
-          </a>
+          </Link>
 
           {/* Navigation Desktop */}
           <nav className="hidden md:flex items-center space-x-8">
             {navLinks.map((link) => (
-              <a
-                key={link.id}
-                href={`#${link.id}`}
-                onClick={(e) => {
-                  e.preventDefault();
-                  scrollToSection(link.id);
-                }}
+              <Link
+                key={link.href}
+                href={link.href}
                 className={`relative text-sm font-medium transition-all duration-300 group ${
                   scrolled
                     ? "text-slate-600 hover:text-green-600"
@@ -80,17 +73,13 @@ export default function Header({ scrolled }: HeaderProps) {
               >
                 {link.label}
                 <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-green-500 transition-all duration-300 group-hover:w-full"></span>
-              </a>
+              </Link>
             ))}
           </nav>
 
           {/* Bouton CTA Desktop */}
-          <a
-            href="#contact"
-            onClick={(e) => {
-              e.preventDefault();
-              scrollToSection("contact");
-            }}
+          <Link
+            href="/#contact"
             className={`hidden md:block px-6 py-2 rounded-full text-sm font-semibold transition-all duration-300 transform hover:scale-105 ${
               scrolled
                 ? "bg-green-600 text-white shadow-md hover:bg-green-700"
@@ -98,7 +87,7 @@ export default function Header({ scrolled }: HeaderProps) {
             }`}
           >
             Nous contacter
-          </a>
+          </Link>
 
           {/* Bouton Menu Mobile */}
           <button
@@ -122,29 +111,21 @@ export default function Header({ scrolled }: HeaderProps) {
           >
             <nav className="flex flex-col p-4 space-y-1">
               {navLinks.map((link) => (
-                <a
-                  key={link.id}
-                  href={`#${link.id}`}
-                  onClick={(e) => {
-                    e.preventDefault();
-                    scrollToSection(link.id);
-                  }}
+                <Link
+                  key={link.href}
+                  href={link.href}
                   className="block py-3 px-4 text-base font-medium text-slate-700 rounded-md hover:bg-green-50 hover:text-green-600 transition-colors duration-200"
                 >
                   {link.label}
-                </a>
+                </Link>
               ))}
               <div className="pt-4 mt-4 border-t border-slate-200">
-                <a
-                  href="#contact"
-                  onClick={(e) => {
-                    e.preventDefault();
-                    scrollToSection("contact");
-                  }}
+                <Link
+                  href="/#contact"
                   className="block w-full text-center px-4 py-3 bg-green-600 text-white rounded-md font-semibold hover:bg-green-700 transition-colors duration-300"
                 >
                   Nous contacter
-                </a>
+                </Link>
               </div>
             </nav>
           </div>
