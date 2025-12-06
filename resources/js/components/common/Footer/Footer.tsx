@@ -53,12 +53,12 @@ export default function Footer() {
   const socialLinks = [
     { icon: Facebook, href: 'https://facebook.com/jadaviculture', label: 'Facebook' },
     { icon: Instagram, href: 'https://instagram.com/jadaviculture', label: 'Instagram' },
-    { icon: Mail, href: 'mailto:contact@jadaviculture.com', label: 'Email' },
+    { icon: Mail, href: 'jadaviculture@gmail.com', label: 'Email' },
   ];
 
   const contactInfo = [
     { icon: MapPin, content: 'Kindele, Vallée de la Funa, Commune de Mont-Ngafula, Kinshasa, RDC' },
-    { icon: Phone, content: '+1 418 455 3186 (Jonathan)' },
+    { icon: Phone, content: '+243 83 27 83 069' },
     { icon: Clock, content: 'Lun-Ven: 7h30-18h, Sam: 7h30-13h, Dim: 8h-12h' },
   ];
 
@@ -92,7 +92,7 @@ export default function Footer() {
               <div className="flex items-center gap-3 mt-2">
                 <MessageCircle className="w-5 h-5 text-green-400 flex-shrink-0" />
                 <a 
-                  href="https://wa.me/14184553186" 
+                  href="https://wa.me/243832783069" 
                   target="_blank"
                   rel="noopener noreferrer"
                   className="text-green-400 hover:text-green-300 transition-colors text-sm font-medium"

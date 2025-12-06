@@ -66,8 +66,8 @@ export default function Contact() {
     {
       icon: Phone,
       title: 'Téléphone',
-      content: ['+1 418 455 3186'],
-      action: 'tel:+14184553186'
+      content: ['+243 832 783 069'],
+      action: 'tel:+243832783069'
     },
     {
       icon: Mail,
@@ -176,7 +176,7 @@ export default function Contact() {
               <div>
                 <h3 className="font-serif text-xl text-slate-800 mb-2">WhatsApp Business</h3>
                 <a 
-                  href="https://wa.me/14184553186" 
+                  href="https://wa.me/243832783069" 
                   target="_blank"
                   rel="noopener noreferrer"
                   className="inline-flex items-center gap-2 px-4 py-2 bg-green-500 hover:bg-green-600 text-white rounded-full transition-colors font-medium"

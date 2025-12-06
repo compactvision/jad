@@ -171,10 +171,10 @@ export default function Products() {
                     </p>
                   </div>
 
-                  <button className="w-full px-4 py-3 bg-gradient-to-r from-green-600 to-green-700 hover:from-green-700 hover:to-green-800 text-white rounded-full font-semibold transition-all duration-300 shadow-md hover:shadow-lg active:scale-95 flex items-center justify-center gap-2">
+                  {/* <button className="w-full px-4 py-3 bg-gradient-to-r from-green-600 to-green-700 hover:from-green-700 hover:to-green-800 text-white rounded-full font-semibold transition-all duration-300 shadow-md hover:shadow-lg active:scale-95 flex items-center justify-center gap-2">
                     <Award className="w-4 h-4" />
                     En savoir plus
-                  </button>
+                  </button> */}
                 </div>
               </div>
             </div>
@@ -223,11 +223,11 @@ export default function Products() {
             </div>
 
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <button className="px-8 py-4 bg-green-600 hover:bg-green-700 rounded-full font-semibold text-white transition-all hover:scale-105 shadow-lg active:scale-95 flex items-center justify-center gap-2">
+              <a href="tel:+243832783069" className="px-8 py-4 bg-green-600 hover:bg-green-700 rounded-full font-semibold text-white transition-all hover:scale-105 shadow-lg active:scale-95 flex items-center justify-center gap-2">
                 <Phone className="w-5 h-5" />
                 Nous contacter
-              </button>
-              <button className="px-8 py-4 bg-white/20 hover:bg-white/30 border-2 border-white/50 rounded-full font-semibold text-white transition-all hover:scale-105 flex items-center justify-center gap-2">
+              </a>
+              <button disabled={true} className="px-8 py-4 bg-white/20 hover:bg-white/30 border-2 border-white/50 rounded-full font-semibold text-white transition-all hover:scale-105 flex items-center justify-center gap-2">
                 <Clock className="w-5 h-5" />
                 Prochain atelier
               </button>

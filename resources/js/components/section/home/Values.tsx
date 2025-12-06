@@ -157,10 +157,10 @@ export default function Values() {
                 })}
               </div>
 
-              <button className="px-8 py-4 bg-gradient-to-r from-amber-500 to-amber-600 hover:from-amber-600 hover:to-amber-700 text-slate-800 rounded-full font-semibold transition-all hover:scale-105 shadow-lg active:scale-95 flex items-center justify-center gap-2">
+              <a href='mailto:jadaviculture@gmail.com' className="px-8 py-4 bg-gradient-to-r from-amber-500 to-amber-600 hover:from-amber-600 hover:to-amber-700 text-slate-800 rounded-full font-semibold transition-all hover:scale-105 shadow-lg active:scale-95 flex items-center justify-center gap-2">
                 <Calendar className="w-5 h-5" />
                 Réserver une visite
-              </button>
+              </a>
             </div>
 
             <div className="relative">

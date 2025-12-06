@@ -32,49 +32,49 @@ export default function Testimonials() {
 
   const testimonials = [
     {
-      name: "Maman Nzuzi",
-      role: "Ménagère, Mont Ngafula",
+      name: "Brenda",
+      role: "Etudiante",
       content:
-        "Depuis que j'achète mes œufs et poulets chez JAD, ma famille ne jure que par leur qualité. Le goût est incomparable !",
+        "Je suis intéressée par JAD parce qu’ils proposent une formation pratique et pas seulement de la théorie. C’est ce qu’il nous faut pour nous lancer en agriculture. Ce modèle est motivant car il permet aux jeunes de passer de l’idée à un vrai projet rentable.",
       rating: 5,
       avatar:
-        "https://images.unsplash.com/photo-1614289371518-722f2615943d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=400&q=80",
+        "/assets/testimonials/brenda.jpeg",
       date: "Il y a 2 semaines",
       verified: true,
     },
     {
-      name: "Papa Mbuyi",
-      role: "Restaurateur, Maquis Le Bon Coin",
+      name: "Gloria",
+      role: "Visiteur",
       content:
-        "La qualité des produits JAD a transformé mes plats. Mes clients apprécient particulièrement la fraîcheur et le goût authentique de leurs volailles.",
+        "JAD Aviculture peut vraiment aider les jeunes à devenir autonomes. Avec un système encadré, ce n’est plus un rêve, mais une activité qui peut nourrir une famille.",
       rating: 5,
       avatar:
-        "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=400&q=80",
+        "/assets/testimonials/gloria.jpeg",
       date: "Il y a 1 mois",
       verified: true,
     },
     {
-      name: "Madame Kabasele",
-      role: "Gérante, Epicerie du Coin",
+      name: "Roseline",
+      role: "Visiteur",
       content:
-        "Je me fournis régulièrement chez JAD pour mon épicerie. La qualité est toujours au rendez-vous et mes clients sont ravis. Un partenariat gagnant !",
+        "Une vraie opportunité pour les jeunes !",
       rating: 5,
       avatar:
-        "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=400&q=80",
+        "/assets/testimonials/roseline.jpeg",
       date: "Il y a 3 semaines",
       verified: true,
     },
-    {
-      name: "Monsieur Tshilombo",
-      role: "Client fidèle",
-      content:
-        "J'ai visité la ferme JAD et j'ai été impressionné par les méthodes d'élevage respectueuses. Les animaux sont en bonne santé et bien traités.",
-      rating: 5,
-      avatar:
-        "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=400&q=80",
-      date: "Il y a 1 semaine",
-      verified: false,
-    },
+    // {
+    //   name: "Monsieur Tshilombo",
+    //   role: "Client fidèle",
+    //   content:
+    //     "J'ai visité la ferme JAD et j'ai été impressionné par les méthodes d'élevage respectueuses. Les animaux sont en bonne santé et bien traités.",
+    //   rating: 5,
+    //   avatar:
+    //     "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=400&q=80",
+    //   date: "Il y a 1 semaine",
+    //   verified: false,
+    // },
   ];
 
   const stats = [
@@ -202,7 +202,7 @@ export default function Testimonials() {
           ))}
         </div>
 
-        <div
+        {/* <div
           className={`bg-gradient-to-br from-slate-800 to-slate-700 text-white rounded-3xl p-16 text-center shadow-2xl relative overflow-hidden transition-all duration-1000 delay-700 ${isVisible ? "translate-y-0 opacity-100" : "translate-y-10 opacity-0"}`}
         >
           <div className="absolute top-0 left-0 w-96 h-96 bg-green-600/20 rounded-full -translate-x-1/2 -translate-y-1/2 blur-3xl" />
@@ -263,7 +263,7 @@ export default function Testimonials() {
               </button>
             </div>
           </div>
-        </div>
+        </div> */}
       </div>
     </section>
   );
