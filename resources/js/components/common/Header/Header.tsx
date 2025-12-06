@@ -52,12 +52,32 @@ export default function Header({ scrolled }: HeaderProps) {
           {/* Logo */}
           <Link
             href="/"
-            className={`text-3xl font-bold transition-colors duration-300 ${
+            className={`flex items-center transition-colors duration-300 ${
               scrolled ? "text-slate-800" : "text-white"
             }`}
             aria-label="Retour à l'accueil"
           >
-            JAD
+            <div className="flex items-center">
+              <img 
+                src="/assets/logo.jpg" 
+                alt="Logo JAD" 
+                className="h-20 w-auto mr-2 object-contain"
+                onError={(e) => {
+                  // Fallback si l'image ne se charge pas
+                  const target = e.target as HTMLImageElement;
+                  target.style.display = 'none';
+                  const fallback = document.getElementById('logo-fallback');
+                  if (fallback) fallback.style.display = 'block';
+                }}
+              />
+              <span 
+                id="logo-fallback" 
+                className={`text-2xl font-bold ${scrolled ? "text-slate-800" : "text-white"}`}
+                style={{ display: 'none' }}
+              >
+                JAD
+              </span>
+            </div>
           </Link>
 
           {/* Navigation Desktop */}
