@@ -9,6 +9,7 @@ interface HeaderProps {
 
 export default function Header({ scrolled }: HeaderProps) {
   const [isOpen, setIsOpen] = useState(false);
+  const [logoError, setLogoError] = useState(false);
   const menuRef = useRef<HTMLDivElement>(null);
 
   // Fermer le menu mobile si on clique à l'extérieur
@@ -39,15 +40,17 @@ export default function Header({ scrolled }: HeaderProps) {
     { label: "Partenariat", href: "/become-member" },
   ];
 
+  const logoPath = scrolled ? "/logo.png" : "/logo1.png";
+
   return (
     <header
       className={`fixed top-0 left-0 right-0 z-50 w-full transition-all duration-500 ease-in-out ${
         scrolled
-          ? "bg-white/95 backdrop-blur-md shadow-md py-4"
-          : "bg-transparent py-6"
+          ? "bg-white/95 backdrop-blur-md shadow-md py-3 md:py-4"
+          : "bg-transparent py-4 md:py-6"
       }`}
     >
-      <div className="max-w-7xl mx-auto px-6 sm:px-8 lg:px-12">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-12">
         <div className="flex justify-between items-center">
           {/* Logo */}
           <Link
@@ -58,30 +61,27 @@ export default function Header({ scrolled }: HeaderProps) {
             aria-label="Retour à l'accueil"
           >
             <div className="flex items-center">
-              <img 
-                src="/assets/logo.jpg" 
-                alt="Logo JAD" 
-                className="h-20 w-auto mr-2 object-contain"
-                onError={(e) => {
-                  // Fallback si l'image ne se charge pas
-                  const target = e.target as HTMLImageElement;
-                  target.style.display = 'none';
-                  const fallback = document.getElementById('logo-fallback');
-                  if (fallback) fallback.style.display = 'block';
-                }}
-              />
-              <span 
-                id="logo-fallback" 
-                className={`text-2xl font-bold ${scrolled ? "text-slate-800" : "text-white"}`}
-                style={{ display: 'none' }}
-              >
-                JAD
-              </span>
+              {!logoError ? (
+                <img 
+                  src={logoPath} 
+                  alt="Logo JAD" 
+                  className="h-15 sm:h-15 md:h-15 lg:h-20 w-auto mr-2 sm:mr-3 object-contain"
+                  onError={() => setLogoError(true)}
+                />
+              ) : (
+                <span 
+                  className={`text-xl sm:text-2xl md:text-3xl font-bold ${
+                    scrolled ? "text-slate-800" : "text-white"
+                  }`}
+                >
+                  JAD
+                </span>
+              )}
             </div>
           </Link>
 
           {/* Navigation Desktop */}
-          <nav className="hidden md:flex items-center space-x-8">
+          <nav className="hidden md:flex items-center space-x-6 lg:space-x-8">
             {navLinks.map((link) => (
               <Link
                 key={link.href}
@@ -101,13 +101,14 @@ export default function Header({ scrolled }: HeaderProps) {
           {/* Bouton CTA Desktop */}
           <Link
             href="/#contact"
-            className={`hidden md:block px-6 py-2 rounded-full text-sm font-semibold transition-all duration-300 transform hover:scale-105 ${
+            className={`hidden md:block px-4 lg:px-6 py-2 rounded-full text-sm font-semibold transition-all duration-300 transform hover:scale-105 ${
               scrolled
                 ? "bg-green-600 text-white shadow-md hover:bg-green-700"
                 : "bg-white/20 backdrop-blur-sm text-white border border-white/30 hover:bg-white/30"
             }`}
           >
-            Nous contacter
+            <span className="hidden lg:inline">Nous contacter</span>
+            <span className="lg:hidden">Contact</span>
           </Link>
 
           {/* Bouton Menu Mobile */}
