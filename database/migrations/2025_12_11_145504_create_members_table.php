@@ -36,6 +36,7 @@ return new class extends Migration
                 'gros_consommateur',
                 'administrateur_jad',
                 'collaborateur_jad',
+                'super_admin',
             ]);
             $table->string('province');
             $table->string('city');

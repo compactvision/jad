@@ -151,7 +151,7 @@
 <body>
     <div class="email-container">
         <div class="header">
-            <img src="{{ asset('logo.png') }}" alt="Jad Aviculture" class="logo">
+            <img src="{{ asset('logo1.png') }}" alt="Jad Aviculture" class="logo">
             <h1 style="color: white; margin-top: 10px;">Bienvenue chez Jad Aviculture</h1>
         </div>
         
@@ -176,7 +176,7 @@
             
             @php
                 // C'est mieux d'utiliser un nom de route si vous en avez un
-                $profileLink = route('profile'); 
+                $profileLink = route('profile.edit'); 
                 // Si vous n'avez pas de route nommée, gardez l'URL en dur :
                 // $profileLink = "https://jadaviculture.com/profile/";
             @endphp

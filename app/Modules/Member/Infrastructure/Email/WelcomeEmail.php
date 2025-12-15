@@ -34,7 +34,7 @@ class WelcomeEmail extends Mailable
     {
         return new Envelope(
             from: 'contact@jadaviculture.com',
-            subject: 'Bienvenue chez Jada Vulture !',
+            subject: 'Bienvenue chez Jad aviculture !',
         );
     }
 

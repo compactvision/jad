@@ -10,6 +10,8 @@ interface MemberRepositoryInterface
     public function save(Member $member): Member;
     public function findByEmail(string $email): ?Member;
     public function findById(int $id): ?Member;
+    /** @return Member[] */
+    public function findByRole(Role $role): array;
     public function getStatistics(): array; // Pour le dashboard JAD
     public function getBreederData(int $memberId): array; // Pour le dashboard Éleveur
     public function getSupplierData(int $memberId): array; // Pour le dashboard Fournisseur

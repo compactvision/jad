@@ -15,13 +15,18 @@ class DatabaseSeeder extends Seeder
     {
         // User::factory(10)->create();
 
-        User::firstOrCreate(
-            ['email' => 'test@example.com'],
-            [
-                'name' => 'Test User',
-                'password' => 'password',
-                'email_verified_at' => now(),
-            ]
-        );
+        // Create Admin Member
+        \App\Modules\Member\Infrastructure\Eloquent\EloquentMember::create([
+            'name' => 'Admin JAD',
+            'email' => 'admin@jad.com',
+            'password' => bcrypt('password'), // 
+            'phone' => '+0000000000',
+            'role' => \App\Modules\Member\Domain\Enums\Role::ADMINISTRATEUR_JAD->value,
+            'province' => 'Kinshasa',
+            'city' => 'Kinshasa',
+            'sector' => \App\Modules\Member\Domain\Enums\Sector::AUTRE->value,
+            'status' => 'approved',
+            'is_visible' => false,
+        ]);
     }
 }

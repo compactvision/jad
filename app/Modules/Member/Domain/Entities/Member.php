@@ -18,7 +18,11 @@ class Member
         private Sector $sector,
         private ?string $avatar = null,
         private ?string $activationToken = null,
-        private ?string $password = null
+        private ?string $password = null,
+        private string $status = 'pending',
+        private bool $isVisible = false,
+        private ?string $bio = null,
+        private array $socialLinks = []
     ) {}
 
     // Getters
@@ -33,10 +37,18 @@ class Member
     public function getAvatar(): ?string { return $this->avatar; }
     public function getActivationToken(): ?string { return $this->activationToken; }
     public function getPassword(): ?string { return $this->password; }
+    public function getStatus(): string { return $this->status; }
+    public function isVisible(): bool { return $this->isVisible; }
+    public function getBio(): ?string { return $this->bio; }
+    public function getSocialLinks(): array { return $this->socialLinks; }
 
     // Setters si nécessaire
     public function setId(int $id): void { $this->id = $id; }
     public function setAvatar(?string $avatar): void { $this->avatar = $avatar; }
     public function setActivationToken(?string $activationToken): void { $this->activationToken = $activationToken; }
     public function setPassword(?string $password): void { $this->password = $password; }
+    public function setStatus(string $status): void { $this->status = $status; }
+    public function setIsVisible(bool $isVisible): void { $this->isVisible = $isVisible; }
+    public function setBio(?string $bio): void { $this->bio = $bio; }
+    public function setSocialLinks(array $socialLinks): void { $this->socialLinks = $socialLinks; }
 }

@@ -26,6 +26,27 @@
   }
 }
 
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.member-card-item {
+    /* L'élément commence invisible */
+    opacity: 0;
+    /* On applique l'animation définie ci-dessus */
+    animation-name: fadeInUp;
+    animation-duration: 0.6s;
+    animation-timing-function: ease-out;
+    animation-fill-mode: forwards; /* L'élément reste visible après l'animation */
+}
+
 @keyframes scaleIn {
   from {
     opacity: 0;

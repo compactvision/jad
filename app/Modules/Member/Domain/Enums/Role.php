@@ -51,6 +51,7 @@ enum Role: string
             self::GROS_CONSOMMATEUR => 'Gros Consommateur',
             self::ADMINISTRATEUR_JAD => 'Administrateur JAD',
             self::COLLABORATEUR_JAD => 'Collaborateur JAD',
+            self::SUPER_ADMIN => 'Super Administrateur',
         };
     }
 

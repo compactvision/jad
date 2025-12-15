@@ -4,6 +4,7 @@ namespace App\Modules\Member\Infrastructure\Eloquent;
 
 use App\Modules\Member\Domain\Entities\Member;
 use App\Modules\Member\Domain\Repositories\MemberRepositoryInterface;
+use App\Modules\Member\Domain\Enums\Role;
 use Illuminate\Http\UploadedFile;
 
 class EloquentMemberRepository implements MemberRepositoryInterface
@@ -33,6 +34,14 @@ class EloquentMemberRepository implements MemberRepositoryInterface
     {
         $eloquentMember = EloquentMember::find($id);
         return $eloquentMember?->toDomainEntity();
+    }
+
+    public function findByRole(Role $role): array
+    {
+        return EloquentMember::where('role', $role->value)
+            ->get()
+            ->map(fn(EloquentMember $m) => $m->toDomainEntity())
+            ->toArray();
     }
 
     // Implémentations pour les données des dashboards (retourne des tableaux pour simplifier)

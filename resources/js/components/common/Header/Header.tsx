@@ -1,6 +1,6 @@
 // src/components/Header.tsx
-import { Link } from "@inertiajs/react";
-import { Menu, X } from "lucide-react";
+import { Link, usePage } from "@inertiajs/react";
+import { Menu, X, User } from "lucide-react";
 import { useState, useEffect, useRef } from "react";
 
 interface HeaderProps {
@@ -10,6 +10,10 @@ interface HeaderProps {
 export default function Header({ scrolled }: HeaderProps) {
   const [isOpen, setIsOpen] = useState(false);
   const [logoError, setLogoError] = useState(false);
+  const { props } = usePage();
+  const user = props.auth.user as any;
+  const dashboardHref =
+    user?.role === "administrateur_jad" ? "/dashboard" : "/dashboard/profile";
   const menuRef = useRef<HTMLDivElement>(null);
 
   // Fermer le menu mobile si on clique à l'extérieur
@@ -35,7 +39,7 @@ export default function Header({ scrolled }: HeaderProps) {
   const navLinks = [
     { label: "L'histoire", href: "/#about" },
     { label: "Produits", href: "/#products" },
-    { label: "Nos valeurs", href: "/#values" },
+    { label: "Nos membres", href: "/members" },
     { label: "JAD Fibonacci™", href: "/jad-fibonacci" },
     { label: "Partenariat", href: "/become-member" },
   ];
@@ -62,14 +66,14 @@ export default function Header({ scrolled }: HeaderProps) {
           >
             <div className="flex items-center">
               {!logoError ? (
-                <img 
-                  src={logoPath} 
-                  alt="Logo JAD" 
+                <img
+                  src={logoPath}
+                  alt="Logo JAD"
                   className="h-15 sm:h-15 md:h-15 lg:h-20 w-auto mr-2 sm:mr-3 object-contain"
                   onError={() => setLogoError(true)}
                 />
               ) : (
-                <span 
+                <span
                   className={`text-xl sm:text-2xl md:text-3xl font-bold ${
                     scrolled ? "text-slate-800" : "text-white"
                   }`}
@@ -98,18 +102,31 @@ export default function Header({ scrolled }: HeaderProps) {
             ))}
           </nav>
 
-          {/* Bouton CTA Desktop */}
-          <Link
-            href="/#contact"
-            className={`hidden md:block px-4 lg:px-6 py-2 rounded-full text-sm font-semibold transition-all duration-300 transform hover:scale-105 ${
-              scrolled
-                ? "bg-green-600 text-white shadow-md hover:bg-green-700"
-                : "bg-white/20 backdrop-blur-sm text-white border border-white/30 hover:bg-white/30"
-            }`}
-          >
-            <span className="hidden lg:inline">Nous contacter</span>
-            <span className="lg:hidden">Contact</span>
-          </Link>
+          {/* Boutons CTA et Profil Desktop */}
+          <div className="hidden md:flex items-center space-x-3">
+            <Link
+              href={dashboardHref}
+              className={`p-2 rounded-full transition-all duration-300 transform hover:scale-105 ${
+                scrolled
+                  ? "text-slate-600 hover:text-green-600 hover:bg-green-50"
+                  : "text-white/90 hover:text-white hover:bg-white/10"
+              }`}
+              aria-label="Accéder à mon profil"
+            >
+              <User className="w-5 h-5" />
+            </Link>
+            <Link
+              href="/#contact"
+              className={`px-4 lg:px-6 py-2 rounded-full text-sm font-semibold transition-all duration-300 transform hover:scale-105 ${
+                scrolled
+                  ? "bg-green-600 text-white shadow-md hover:bg-green-700"
+                  : "bg-white/20 backdrop-blur-sm text-white border border-white/30 hover:bg-white/30"
+              }`}
+            >
+              <span className="hidden lg:inline">Nous contacter</span>
+              <span className="lg:hidden">Contact</span>
+            </Link>
+          </div>
 
           {/* Bouton Menu Mobile */}
           <button
@@ -141,7 +158,14 @@ export default function Header({ scrolled }: HeaderProps) {
                   {link.label}
                 </Link>
               ))}
-              <div className="pt-4 mt-4 border-t border-slate-200">
+              <div className="pt-4 mt-4 border-t border-slate-200 space-y-2">
+                <Link
+                  href={dashboardHref}
+                  className="flex items-center justify-center w-full px-4 py-3 text-base font-medium text-slate-700 rounded-md hover:bg-green-50 hover:text-green-600 transition-colors duration-200"
+                >
+                  <User className="w-5 h-5 mr-2" />
+                  Mon profil
+                </Link>
                 <Link
                   href="/#contact"
                   className="block w-full text-center px-4 py-3 bg-green-600 text-white rounded-md font-semibold hover:bg-green-700 transition-colors duration-300"

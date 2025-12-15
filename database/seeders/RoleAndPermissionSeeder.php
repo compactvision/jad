@@ -15,26 +15,58 @@ class RoleAndPermissionSeeder extends Seeder
         app()[\Spatie\Permission\PermissionRegistrar::class]->forgetCachedPermissions();
 
         // Création des permissions
-        Permission::create(['name' => 'manage users']);
-        Permission::create(['name' => 'edit articles']);
-        Permission::create(['name' => 'delete articles']);
-        Permission::create(['name' => 'publish articles']);
+        $permissions = [
+            'manage users',
+            'edit articles',
+            'delete articles',
+            'publish articles',
+            'view_audit',
+            'manage_settings',
+            'manage_roles',
+        ];
+
+        foreach ($permissions as $permission) {
+            Permission::firstOrCreate(['name' => $permission]);
+        }
 
         // Création des rôles et assignation des permissions
-        $roleAdmin = Role::create(['name' => 'admin']);
-        $roleAdmin->givePermissionTo(Permission::all()); // L'admin a toutes les permissions
+        $roleSuperAdmin = Role::firstOrCreate(['name' => 'super_admin']);
+        $roleSuperAdmin->givePermissionTo(Permission::all());
 
-        $roleEditor = Role::create(['name' => 'editor']);
+        $roleAdmin = Role::firstOrCreate(['name' => 'admin']);
+        $roleAdmin->givePermissionTo(['manage users', 'edit articles', 'publish articles']);
+
+        $roleEditor = Role::firstOrCreate(['name' => 'editor']);
         $roleEditor->givePermissionTo(['edit articles', 'publish articles']);
 
-        $roleUser = Role::create(['name' => 'user']);
-        // Le rôle de base n'a peut-être aucune permission spécifique
+        $roleUser = Role::firstOrCreate(['name' => 'user']);
+        
+        $roleJadAdmin = Role::firstOrCreate(['name' => 'administrateur_jad']);
+        // $roleJadAdmin->givePermissionTo([...]); // Add specific permissions if needed
 
-        // Création d'un utilisateur admin pour tester
-        $user = User::factory()->create([
-            'name' => 'Admin User',
-            'email' => 'admin@example.com',
-        ]);
-        $user->assignRole($roleAdmin);
+        // Création d'un utilisateur Super Admin pour tester (dans la table members car c'est le provider d'auth)
+        $superAdminEmail = 'superadmin@example.com';
+        if (!\App\Modules\Member\Infrastructure\Eloquent\EloquentMember::where('email', $superAdminEmail)->exists()) {
+            $member = \App\Modules\Member\Infrastructure\Eloquent\EloquentMember::create([
+                'name' => 'Super Admin',
+                'email' => $superAdminEmail,
+                'phone' => '0000000000', // Dummy phone
+                'password' => bcrypt('password'),
+                'role' => 'super_admin',
+                'province' => 'AdminProv',
+                'city' => 'AdminCity',
+                'sector' => 'autre',
+                'status' => 'active',
+                'is_visible' => false,
+            ]);
+            $member->assignRole($roleSuperAdmin);
+        }
+        
+        // Disable User seeder logic for now as auth uses members table
+        /*
+        if (!User::where('email', $superAdminEmail)->exists()) {
+             // ...
+        }
+        */
     }
 }

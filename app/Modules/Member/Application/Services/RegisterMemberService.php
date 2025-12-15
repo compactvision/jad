@@ -42,6 +42,26 @@ class RegisterMemberService
 
         $this->emailSender->sendWelcomeEmail($memberDto, $password); // Envoyer le mot de passe par email
 
+        // Notifier les administrateurs
+        $admins = $this->memberRepository->findByRole(Role::ADMINISTRATEUR_JAD);
+        if (!empty($admins)) {
+            // Convert domain entities to Eloquent models or Notifiable objects
+            // Since Notification::send expects Notifiables, and our Entities might not be Notifiable directly if they are POPOs.
+            // EloquentMember is Notifiable.
+            // We can fetch Eloquent models or just use email if we implement routeNotificationForMail
+            // But standard way is passing Notifiable.
+            // let's fetch EloquentMembers for admins.
+            // Actually, we can just use the repository if it returned Eloquent models, but it returns Entities.
+            // So we might need to rely on the fact that we can send to on-demand notifiables or convert back.
+            // Simplest: use Notification::route('mail', $email)->notify(...) for each admin.
+            
+            foreach ($admins as $admin) {
+                 // Assuming Member entity has getEmail
+                \Illuminate\Support\Facades\Notification::route('mail', $admin->getEmail())
+                    ->notify(new \App\Modules\Member\Application\Notifications\NewMemberNotification($member));
+            }
+        }
+
         return $memberDto;
     }
 }
