@@ -94,7 +94,7 @@ export default function Fibonacci() {
         <AppShell>
             <Head title="Méthode JAD Fibonacci™" />
             <Breadcrumb title="Méthode JAD Fibonacci™" desc="Un modèle d'élévation progressive des producteurs agricoles"/>
-            
+            {/* <h1>Test</h1> */}
             <section className="relative bg-gradient-to-b from-white to-gray-50 text-gray-800 overflow-hidden">
                 {/* Hero Section */}
                 <div className="relative px-4 sm:px-6 lg:px-12 pt-24 sm:pt-32 pb-16 sm:pb-20">
