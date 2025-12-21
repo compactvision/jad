@@ -117,6 +117,13 @@ export function DashSidebar() {
   };
 
   const visibleNavigation = allNavigation.filter((item) => {
+    if (
+      user?.status !== "approved" &&
+      item.href !== "/dashboard/profile" &&
+      item.href !== "/dashboard"
+    ) {
+      return false;
+    }
     if (item.roles.includes("*")) return true;
     return item.roles.includes(user?.role);
   });

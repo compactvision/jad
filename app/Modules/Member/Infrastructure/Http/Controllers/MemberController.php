@@ -15,7 +15,8 @@ class MemberController extends Controller
 {
     public function __construct(
         private RegisterMemberService $registerMemberService,
-        private \App\Modules\Member\Domain\Repositories\MemberRepositoryInterface $memberRepository
+        private \App\Modules\Member\Domain\Repositories\MemberRepositoryInterface $memberRepository,
+        private \App\Modules\Member\Infrastructure\Email\EmailSenderInterface $emailSender
     ) {}
 
     public function index(Request $request)
@@ -87,6 +88,9 @@ class MemberController extends Controller
 
         $member->setStatus('approved');
         $this->memberRepository->save($member);
+
+        // Envoyer l'email de validation
+        $this->emailSender->sendMemberValidatedEmail($member);
 
         return redirect()->back()->with('success', 'Membre approuvé avec succès');
     }

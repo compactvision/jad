@@ -6,6 +6,7 @@ use App\Modules\Member\Domain\Entities\Member;
 use Illuminate\Support\Facades\Mail;
 // Assurez-vous d'importer votre classe Mailable !
 use App\Modules\Member\Infrastructure\Email\WelcomeEmail; 
+use App\Modules\Member\Infrastructure\Email\MemberValidatedEmail; 
 
 class LaravelEmailSender implements EmailSenderInterface
 {
@@ -15,5 +16,10 @@ class LaravelEmailSender implements EmailSenderInterface
     {
         // On utilise la façade Mail pour envoyer une instance de notre classe Mailable
         Mail::to($member->getEmail())->send(new WelcomeEmail($member, $plainPassword));
+    }
+
+    public function sendMemberValidatedEmail(Member $member): void
+    {
+        Mail::to($member->getEmail())->send(new MemberValidatedEmail($member));
     }
 }

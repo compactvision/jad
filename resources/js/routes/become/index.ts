@@ -1,7 +1,7 @@
 import { queryParams, type RouteQueryOptions, type RouteDefinition, type RouteFormDefinition } from './../../wayfinder'
 /**
 * @see \App\Modules\Member\Infrastructure\Http\Controllers\MemberController::store
-* @see app/Modules/Member/Infrastructure/Http/Controllers/MemberController.php:72
+* @see app/Modules/Member/Infrastructure/Http/Controllers/MemberController.php:73
 * @route '/become-member'
 */
 export const store = (options?: RouteQueryOptions): RouteDefinition<'post'> => ({
@@ -16,7 +16,7 @@ store.definition = {
 
 /**
 * @see \App\Modules\Member\Infrastructure\Http\Controllers\MemberController::store
-* @see app/Modules/Member/Infrastructure/Http/Controllers/MemberController.php:72
+* @see app/Modules/Member/Infrastructure/Http/Controllers/MemberController.php:73
 * @route '/become-member'
 */
 store.url = (options?: RouteQueryOptions) => {
@@ -25,7 +25,7 @@ store.url = (options?: RouteQueryOptions) => {
 
 /**
 * @see \App\Modules\Member\Infrastructure\Http\Controllers\MemberController::store
-* @see app/Modules/Member/Infrastructure/Http/Controllers/MemberController.php:72
+* @see app/Modules/Member/Infrastructure/Http/Controllers/MemberController.php:73
 * @route '/become-member'
 */
 store.post = (options?: RouteQueryOptions): RouteDefinition<'post'> => ({
@@ -35,7 +35,7 @@ store.post = (options?: RouteQueryOptions): RouteDefinition<'post'> => ({
 
 /**
 * @see \App\Modules\Member\Infrastructure\Http\Controllers\MemberController::store
-* @see app/Modules/Member/Infrastructure/Http/Controllers/MemberController.php:72
+* @see app/Modules/Member/Infrastructure/Http/Controllers/MemberController.php:73
 * @route '/become-member'
 */
 const storeForm = (options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
@@ -45,7 +45,7 @@ const storeForm = (options?: RouteQueryOptions): RouteFormDefinition<'post'> => 
 
 /**
 * @see \App\Modules\Member\Infrastructure\Http\Controllers\MemberController::store
-* @see app/Modules/Member/Infrastructure/Http/Controllers/MemberController.php:72
+* @see app/Modules/Member/Infrastructure/Http/Controllers/MemberController.php:73
 * @route '/become-member'
 */
 storeForm.post = (options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({

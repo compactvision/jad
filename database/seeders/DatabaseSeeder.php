@@ -18,7 +18,7 @@ class DatabaseSeeder extends Seeder
         // Create Admin Member
         \App\Modules\Member\Infrastructure\Eloquent\EloquentMember::create([
             'name' => 'Admin JAD',
-            'email' => 'admin@jad.com',
+            'email' => 'contact@jadaviculture.com',
             'password' => bcrypt('password'), // 
             'phone' => '+0000000000',
             'role' => \App\Modules\Member\Domain\Enums\Role::ADMINISTRATEUR_JAD->value,
