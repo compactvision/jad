@@ -13,7 +13,7 @@ Route::get('/jad-fibonacci', function () { return Inertia::render('fibonacci');}
 Route::get('/legal-notice', function () { return Inertia::render('legal');})->name('legal-notice');
 Route::get('/members', [MemberController::class, 'publicIndex'])->name('members.public');
 Route::get('/maintenance', function () { return Inertia::render('Maintenance'); })->name('maintenance');
-
+Route::get('/politique-de-confidentialite', function () { return Inertia::render('politique'); })->name('privacy-policy');
 
 Route::middleware(['auth', 'verified'])
     ->prefix('/dashboard')

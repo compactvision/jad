@@ -588,6 +588,80 @@ maintenanceForm.head = (options?: RouteQueryOptions): RouteFormDefinition<'get'>
 maintenance.form = maintenanceForm
 
 /**
+* @see routes/web.php:16
+* @route '/politique-de-confidentialite'
+*/
+export const privacyPolicy = (options?: RouteQueryOptions): RouteDefinition<'get'> => ({
+    url: privacyPolicy.url(options),
+    method: 'get',
+})
+
+privacyPolicy.definition = {
+    methods: ["get","head"],
+    url: '/politique-de-confidentialite',
+} satisfies RouteDefinition<["get","head"]>
+
+/**
+* @see routes/web.php:16
+* @route '/politique-de-confidentialite'
+*/
+privacyPolicy.url = (options?: RouteQueryOptions) => {
+    return privacyPolicy.definition.url + queryParams(options)
+}
+
+/**
+* @see routes/web.php:16
+* @route '/politique-de-confidentialite'
+*/
+privacyPolicy.get = (options?: RouteQueryOptions): RouteDefinition<'get'> => ({
+    url: privacyPolicy.url(options),
+    method: 'get',
+})
+
+/**
+* @see routes/web.php:16
+* @route '/politique-de-confidentialite'
+*/
+privacyPolicy.head = (options?: RouteQueryOptions): RouteDefinition<'head'> => ({
+    url: privacyPolicy.url(options),
+    method: 'head',
+})
+
+/**
+* @see routes/web.php:16
+* @route '/politique-de-confidentialite'
+*/
+const privacyPolicyForm = (options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
+    action: privacyPolicy.url(options),
+    method: 'get',
+})
+
+/**
+* @see routes/web.php:16
+* @route '/politique-de-confidentialite'
+*/
+privacyPolicyForm.get = (options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
+    action: privacyPolicy.url(options),
+    method: 'get',
+})
+
+/**
+* @see routes/web.php:16
+* @route '/politique-de-confidentialite'
+*/
+privacyPolicyForm.head = (options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
+    action: privacyPolicy.url({
+        [options?.mergeQuery ? 'mergeQuery' : 'query']: {
+            _method: 'HEAD',
+            ...(options?.query ?? options?.mergeQuery ?? {}),
+        }
+    }),
+    method: 'get',
+})
+
+privacyPolicy.form = privacyPolicyForm
+
+/**
 * @see routes/web.php:30
 * @route '/dashboard'
 */
