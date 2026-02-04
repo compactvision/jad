@@ -13,10 +13,13 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
+        // Run RoleAndPermissionSeeder first
+        $this->call(RoleAndPermissionSeeder::class);
+
         // User::factory(10)->create();
 
         // Create Admin Member
-        \App\Modules\Member\Infrastructure\Eloquent\EloquentMember::create([
+        $admin = \App\Modules\Member\Infrastructure\Eloquent\EloquentMember::create([
             'name' => 'Admin JAD',
             'email' => 'contact@jadaviculture.com',
             'password' => bcrypt('password'), // 
@@ -28,5 +31,8 @@ class DatabaseSeeder extends Seeder
             'status' => 'approved',
             'is_visible' => false,
         ]);
+
+        // Assign Spatie role
+        $admin->assignRole('administrateur_jad');
     }
 }

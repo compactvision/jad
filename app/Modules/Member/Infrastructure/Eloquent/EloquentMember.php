@@ -29,6 +29,7 @@ class EloquentMember extends Authenticatable
         'name', 'phone', 'email', 'password', 'member_roles', 'province', 'city', 'member_sectors', 'avatar', 'activationToken', 'status', 'is_visible', 'bio', 'social_links'
     ];
     protected $hidden = ['password', 'remember_token'];
+    protected $appends = ['role'];
 
     protected $casts = [
         'member_roles' => 'array',
@@ -134,5 +135,11 @@ class EloquentMember extends Authenticatable
         return $this->avatar 
             ? Storage::url($this->avatar) 
             : null;
+    }
+
+    // Accessor for backward compatibility with front-end which expects 'role'
+    public function getRoleAttribute(): ?string
+    {
+        return $this->member_roles[0] ?? null;
     }
 }
