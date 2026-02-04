@@ -51,6 +51,12 @@ const allNavigation = [
     roles: ["administrateur_jad"],
   },
   {
+    name: "Formations",
+    href: "/dashboard/formations",
+    icon: FileText,
+    roles: ["administrateur_jad"],
+  },
+  {
     name: "Ventes",
     href: "/dashboard/sales",
     icon: ShoppingCart,
@@ -170,7 +176,7 @@ export function DashSidebar() {
             ? "translate-x-0 w-64"
             : "-translate-x-full lg:translate-x-0",
           // Desktop: width based on desktopCollapsed
-          desktopCollapsed ? "lg:w-20" : "lg:w-64"
+          desktopCollapsed ? "lg:w-20" : "lg:w-64",
         )}
       >
         <div className="flex h-full flex-col">
@@ -180,7 +186,7 @@ export function DashSidebar() {
             <div
               className={cn(
                 "flex items-center gap-3",
-                desktopCollapsed && "lg:justify-center"
+                desktopCollapsed && "lg:justify-center",
               )}
             >
               <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-green-600 flex-shrink-0">
@@ -189,7 +195,7 @@ export function DashSidebar() {
               <span
                 className={cn(
                   "font-display text-lg font-semibold text-white transition-opacity duration-200",
-                  desktopCollapsed ? "lg:hidden" : "block"
+                  desktopCollapsed ? "lg:hidden" : "block",
                 )}
               >
                 AgroGest
@@ -205,7 +211,7 @@ export function DashSidebar() {
               <ChevronLeft
                 className={cn(
                   "h-5 w-5 transition-transform",
-                  desktopCollapsed && "rotate-180"
+                  desktopCollapsed && "rotate-180",
                 )}
               />
             </Button>
@@ -233,14 +239,14 @@ export function DashSidebar() {
                     active
                       ? "bg-green-600 text-white shadow-md"
                       : "text-green-100/80 hover:bg-green-800 hover:text-white",
-                    desktopCollapsed && "lg:justify-center lg:px-2"
+                    desktopCollapsed && "lg:justify-center lg:px-2",
                   )}
                   onClick={() => setMobileOpen(false)}
                 >
                   <item.icon
                     className={cn(
                       "h-5 w-5 flex-shrink-0",
-                      active && "text-white"
+                      active && "text-white",
                     )}
                   />
                   <span
@@ -266,7 +272,7 @@ export function DashSidebar() {
                     active
                       ? "bg-green-600 text-white"
                       : "text-green-100/80 hover:bg-green-800 hover:text-white",
-                    desktopCollapsed && "lg:justify-center lg:px-2"
+                    desktopCollapsed && "lg:justify-center lg:px-2",
                   )}
                   onClick={() => setMobileOpen(false)}
                 >
@@ -284,7 +290,7 @@ export function DashSidebar() {
               className={cn(
                 "flex w-full items-center gap-3 rounded-lg px-3 py-2.5 text-sm font-medium transition-all duration-200",
                 "text-green-100/80 hover:bg-red-900/30 hover:text-red-300",
-                desktopCollapsed && "lg:justify-center lg:px-2"
+                desktopCollapsed && "lg:justify-center lg:px-2",
               )}
             >
               <LogOut className="h-5 w-5 flex-shrink-0" />

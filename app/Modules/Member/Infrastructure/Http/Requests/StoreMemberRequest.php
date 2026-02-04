@@ -28,10 +28,12 @@ class StoreMemberRequest extends FormRequest
             'name' => 'required|string|max:255',
             'email' => 'required|string|email|unique:members,email',
             'phone' => 'required|string|unique:members,phone',
-            'role' => ['required', new Enum(\App\Modules\Member\Domain\Enums\Role::class)],
+            'roles' => 'required|array|min:1',
+            'roles.*' => ['required', new Enum(\App\Modules\Member\Domain\Enums\Role::class)],
             'province' => 'required|string|max:255',
             'city' => 'required|string|max:255',
-            'sector' => ['required', new Enum(\App\Modules\Member\Domain\Enums\Sector::class)],
+            'sectors' => 'required|array|min:1',
+            'sectors.*' => ['required', new Enum(\App\Modules\Member\Domain\Enums\Sector::class)],
             'avatar' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
             'terms' => 'accepted',
         ];
@@ -55,8 +57,11 @@ class StoreMemberRequest extends FormRequest
             'phone.required' => 'Le numéro de téléphone est obligatoire.',
             'phone.unique' => 'Ce numéro de téléphone est déjà utilisé.',
             
-            'role.required' => 'Le rôle est obligatoire.',
-            'role.enum' => 'Le rôle sélectionné n\'est pas valide.',
+            'roles.required' => 'Au moins un rôle est obligatoire.',
+            'roles.array' => 'Le format des rôles n\'est pas valide.',
+            'roles.min' => 'Vous devez sélectionner au moins un rôle.',
+            'roles.*.required' => 'Chaque rôle doit être valide.',
+            'roles.*.enum' => 'Un ou plusieurs rôles sélectionnés ne sont pas valides.',
             
             'province.required' => 'La province est obligatoire.',
             'province.max' => 'Le nom de la province ne doit pas dépasser 255 caractères.',
@@ -64,8 +69,11 @@ class StoreMemberRequest extends FormRequest
             'city.required' => 'La ville est obligatoire.',
             'city.max' => 'Le nom de la ville ne doit pas dépasser 255 caractères.',
             
-            'sector.required' => 'Le secteur d\'activité est obligatoire.',
-            'sector.enum' => 'Le secteur sélectionné n\'est pas valide.',
+            'sectors.required' => 'Au moins un secteur d\'activité est obligatoire.',
+            'sectors.array' => 'Le format des secteurs n\'est pas valide.',
+            'sectors.min' => 'Vous devez sélectionner au moins un secteur.',
+            'sectors.*.required' => 'Chaque secteur doit être valide.',
+            'sectors.*.enum' => 'Un ou plusieurs secteurs sélectionnés ne sont pas valides.',
             
             'avatar.image' => 'Le fichier téléchargé doit être une image.',
             'avatar.mimes' => 'Le format de l\'image n\'est pas valide. Formats acceptés : jpeg, png, jpg, gif.',

@@ -6,7 +6,7 @@ use Laravel\Fortify\Features;
 use App\Modules\Member\Infrastructure\Http\Controllers\MemberController;
 use App\Modules\Member\Infrastructure\Http\Controllers\ProfileController;
 
-Route::get('/', function () { return Inertia::render('welcome'); })->name('home');
+Route::get('/', [\App\Http\Controllers\TrainingController::class, 'publicIndex'])->name('home');
 Route::get('/become-member', function () { return Inertia::render('become-member');})->name('become');
 Route::post('/become-member', [MemberController::class, 'store'])->name('become.store');
 Route::get('/jad-fibonacci', function () { return Inertia::render('fibonacci');})->name('fibonacci');
@@ -14,6 +14,9 @@ Route::get('/legal-notice', function () { return Inertia::render('legal');})->na
 Route::get('/members', [MemberController::class, 'publicIndex'])->name('members.public');
 Route::get('/maintenance', function () { return Inertia::render('Maintenance'); })->name('maintenance');
 Route::get('/politique-de-confidentialite', function () { return Inertia::render('politique'); })->name('privacy-policy');
+Route::get('/formations', [\App\Http\Controllers\TrainingController::class, 'publicIndex'])->name('formations.public');
+Route::get('/formations/{training}', [\App\Http\Controllers\TrainingController::class, 'publicShow'])->name('formations.show');
+Route::get('/formations/{training}/read', [\App\Http\Controllers\TrainingController::class, 'publicRead'])->name('formations.read');
 
 Route::middleware(['auth', 'verified'])
     ->prefix('/dashboard')
@@ -35,6 +38,14 @@ Route::middleware(['auth', 'verified'])
                 Route::get('/{id}', [MemberController::class, 'show'])->name('members.show');
                 Route::patch('/{id}/approve', [MemberController::class, 'approve'])->name('members.approve');
                 Route::patch('/{id}/visibility', [MemberController::class, 'toggleVisibility'])->name('members.visibility');
+            });
+
+            Route::prefix('formations')->group(function () {
+                Route::get('/', [\App\Http\Controllers\TrainingController::class, 'index'])->name('formations.index');
+                Route::post('/', [\App\Http\Controllers\TrainingController::class, 'store'])->name('formations.store');
+                Route::get('/{training}', [\App\Http\Controllers\TrainingController::class, 'show'])->name('formations.show.admin');
+                Route::patch('/{training}', [\App\Http\Controllers\TrainingController::class, 'update'])->name('formations.update');
+                Route::delete('/{training}', [\App\Http\Controllers\TrainingController::class, 'destroy'])->name('formations.destroy');
             });
         });
 

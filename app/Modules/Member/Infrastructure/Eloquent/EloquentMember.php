@@ -26,11 +26,13 @@ class EloquentMember extends Authenticatable
 
     protected $table = 'members';
     protected $fillable = [
-        'name', 'phone', 'email', 'password', 'role', 'province', 'city', 'sector', 'avatar', 'activationToken', 'status', 'is_visible', 'bio', 'social_links'
+        'name', 'phone', 'email', 'password', 'roles', 'province', 'city', 'sectors', 'avatar', 'activationToken', 'status', 'is_visible', 'bio', 'social_links'
     ];
     protected $hidden = ['password', 'remember_token'];
 
     protected $casts = [
+        'roles' => 'array',
+        'sectors' => 'array',
         'social_links' => 'array',
         'is_visible' => 'boolean',
     ];
@@ -38,15 +40,19 @@ class EloquentMember extends Authenticatable
     // Convertit le modèle Eloquent en entité de domaine
     public function toDomainEntity(): Member
     {
+        // Convert JSON arrays back to Role/Sector enums
+        $roles = array_map(fn($role) => Role::from($role), $this->roles ?? []);
+        $sectors = array_map(fn($sector) => Sector::from($sector), $this->sectors ?? []);
+
         return new Member(
             $this->id,
             $this->name,
             $this->email,
             $this->phone,
-            Role::from($this->role),
+            $roles,
             $this->province,
             $this->city,
-            Sector::from($this->sector),
+            $sectors,
             $this->avatar,
             $this->activationToken,
             null, // Password
@@ -60,14 +66,18 @@ class EloquentMember extends Authenticatable
     // Crée un modèle Eloquent depuis une entité de domaine
     public static function fromDomainEntity(Member $member): self
     {
+        // Convert Role/Sector enum arrays to string arrays for JSON storage
+        $roles = array_map(fn($role) => $role->value, $member->getRoles());
+        $sectors = array_map(fn($sector) => $sector->value, $member->getSectors());
+
         $data = [
             'name' => $member->getName(),
             'email' => $member->getEmail(),
             'phone' => $member->getPhone(),
-            'role' => $member->getRole()->value,
+            'roles' => $roles,
             'province' => $member->getProvince(),
             'city' => $member->getCity(),
-            'sector' => $member->getSector()->value,
+            'sectors' => $sectors,
             'avatar' => $member->getAvatar(),
             'activationToken' => $member->getActivationToken(),
             'status' => $member->getStatus(),

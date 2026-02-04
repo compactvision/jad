@@ -2,7 +2,7 @@ import AppShell from "@/layouts/AppShell";
 import { Head, router, useForm } from "@inertiajs/react";
 import Breadcrumb from "@/components/common/Breadcrumb";
 import { JSX, useEffect, useState } from "react";
-import Select, { SingleValue, StylesConfig } from "react-select";
+import { MultiSelectPopup } from "@/components/common/MultiSelectPopup";
 import {
   Users,
   Camera,
@@ -28,9 +28,9 @@ interface FormData {
   name: string;
   email: string;
   phone: string;
-  role: SelectOption | null;
-  sector: SelectOption | null;
-  province: SelectOption | null;
+  roles: SelectOption[];
+  sectors: SelectOption[];
+  province: string;
   city: string;
   description: string;
   avatar: File | null;
@@ -280,9 +280,9 @@ export default function Member() {
     name: "",
     email: "",
     phone: "",
-    role: null,
-    sector: null,
-    province: null,
+    roles: [],
+    sectors: [],
+    province: "",
     city: "",
     description: "",
     avatar: null,
@@ -299,19 +299,12 @@ export default function Member() {
 
   // Handlers
   const handleInputChange = (
-    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
   ) => {
     const { name, value, type } = e.target;
     const finalValue =
       type === "checkbox" ? (e.target as HTMLInputElement).checked : value;
     setData(name as keyof FormData, finalValue as never);
-  };
-
-  const handleSelectChange = (
-    name: keyof FormData,
-    selectedOption: SingleValue<SelectOption>
-  ) => {
-    setData(name, selectedOption as never);
   };
 
   const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -327,9 +320,9 @@ export default function Member() {
       name: data.name,
       email: data.email,
       phone: data.phone,
-      role: data.role?.value || null,
-      sector: data.sector?.value || null,
-      province: data.province?.value || null,
+      roles: data.roles.map((r) => r.value),
+      sectors: data.sectors.map((s) => s.value),
+      province: data.province,
       city: data.city,
       description: data.description,
       avatar: data.avatar
@@ -346,17 +339,24 @@ export default function Member() {
     console.log(formDataForLog);
     console.log("===========================");
 
-    // Pour l'envoi réel, décommentez ce qui suit:
     const formData = new FormData();
     formData.append("name", data.name);
     formData.append("email", data.email);
     formData.append("phone", data.phone);
     formData.append("city", data.city);
     formData.append("description", data.description);
+    formData.append("province", data.province);
 
-    if (data.role) formData.append("role", data.role.value);
-    if (data.sector) formData.append("sector", data.sector.value);
-    if (data.province) formData.append("province", data.province.value);
+    // Append roles as array
+    data.roles.forEach((role, index) => {
+      formData.append(`roles[${index}]`, role.value);
+    });
+
+    // Append sectors as array
+    data.sectors.forEach((sector, index) => {
+      formData.append(`sectors[${index}]`, sector.value);
+    });
+
     if (data.avatar) formData.append("avatar", data.avatar);
 
     formData.append("terms", data.terms ? "1" : "0");
@@ -375,28 +375,6 @@ export default function Member() {
         console.error("Erreurs de validation:", errors);
       },
     });
-  };
-
-  // Styles pour react-select
-  const selectStyles: StylesConfig<SelectOption, false> = {
-    control: (baseStyles, state) => ({
-      ...baseStyles,
-      borderColor:
-        errors.phone || errors.role || errors.sector || errors.province
-          ? "#EF4444"
-          : "#D1D5DB",
-      "&:hover": { borderColor: "#10B981" },
-      boxShadow: state.isFocused ? "0 0 0 2px rgba(16, 185, 129, 0.5)" : "none",
-    }),
-    option: (baseStyles, state) => ({
-      ...baseStyles,
-      backgroundColor: state.isSelected
-        ? "#10B981"
-        : state.isFocused
-          ? "#D1FAE5"
-          : "#FFFFFF",
-      color: state.isSelected ? "#FFFFFF" : "#111827",
-    }),
   };
 
   // Fonction pour extraire les erreurs de manière robuste
@@ -620,67 +598,64 @@ export default function Member() {
                   </div>
 
                   <div>
-                    <label className="block text-sm font-medium text-gray-700 mb-2">
-                      Rôle
-                    </label>
-                    <Select
+                    <MultiSelectPopup
                       options={ROLE_OPTIONS}
-                      value={data.role}
-                      onChange={(option) => handleSelectChange("role", option)}
-                      placeholder="Sélectionnez votre rôle"
-                      styles={selectStyles}
-                      isSearchable
-                      noOptionsMessage={() => "Aucun rôle trouvé"}
+                      selectedValues={data.roles}
+                      onChange={(selected) =>
+                        setData("roles", selected as never)
+                      }
+                      label="Rôle(s)"
+                      placeholder="Sélectionnez un ou plusieurs rôles"
+                      error={
+                        getError("roles")
+                          ? Array.isArray(getError("roles"))
+                            ? getError("roles")?.join(", ")
+                            : getError("roles")
+                          : undefined
+                      }
                     />
-                    {getError("role") && (
-                      <p className="text-red-500 text-xs mt-1">
-                        {Array.isArray(getError("role"))
-                          ? getError("role")?.join(", ")
-                          : getError("role")}
-                      </p>
-                    )}
                   </div>
                 </div>
 
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
                   <div>
-                    <label className="block text-sm font-medium text-gray-700 mb-2">
-                      Secteur d'activité
-                    </label>
-                    <Select
+                    <MultiSelectPopup
                       options={SECTOR_OPTIONS}
-                      value={data.sector}
-                      onChange={(option) =>
-                        handleSelectChange("sector", option)
+                      selectedValues={data.sectors}
+                      onChange={(selected) =>
+                        setData("sectors", selected as never)
                       }
-                      placeholder="Sélectionnez votre secteur"
-                      styles={selectStyles}
-                      isSearchable
-                      noOptionsMessage={() => "Aucun secteur trouvé"}
+                      label="Secteur(s) d'activité"
+                      placeholder="Sélectionnez un ou plusieurs secteurs"
+                      error={
+                        getError("sectors")
+                          ? Array.isArray(getError("sectors"))
+                            ? getError("sectors")?.join(", ")
+                            : getError("sectors")
+                          : undefined
+                      }
                     />
-                    {getError("sector") && (
-                      <p className="text-red-500 text-xs mt-1">
-                        {Array.isArray(getError("sector"))
-                          ? getError("sector")?.join(", ")
-                          : getError("sector")}
-                      </p>
-                    )}
                   </div>
 
                   <div>
-                    <label className="block text-sm font-medium text-gray-700 mb-2">
-                      Province
+                    <label
+                      htmlFor="province"
+                      className="block text-sm font-medium text-gray-700 mb-2"
+                    >
+                      Province / Région
                     </label>
-                    <Select
-                      options={PROVINCE_OPTIONS}
+                    <input
+                      type="text"
+                      id="province"
+                      name="province"
                       value={data.province}
-                      onChange={(option) =>
-                        handleSelectChange("province", option)
-                      }
-                      placeholder="Sélectionnez votre province"
-                      styles={selectStyles}
-                      isSearchable
-                      noOptionsMessage={() => "Aucune province trouvée"}
+                      onChange={handleInputChange}
+                      className={`w-full px-4 py-3 border rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent transition-all ${
+                        getError("province")
+                          ? "border-red-500"
+                          : "border-gray-300"
+                      }`}
+                      placeholder="Ex: Kinshasa, Paris, New York..."
                     />
                     {getError("province") && (
                       <p className="text-red-500 text-xs mt-1">

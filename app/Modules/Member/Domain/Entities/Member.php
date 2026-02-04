@@ -12,10 +12,10 @@ class Member
         private string $name,
         private string $email,
         private string $phone,
-        private Role $role,
+        private array $roles,  // Changed from Role to array of Role
         private string $province,
         private string $city,
-        private Sector $sector,
+        private array $sectors,  // Changed from Sector to array of Sector
         private ?string $avatar = null,
         private ?string $activationToken = null,
         private ?string $password = null,
@@ -30,10 +30,10 @@ class Member
     public function getName(): string { return $this->name; }
     public function getEmail(): string { return $this->email; }
     public function getPhone(): string { return $this->phone; }
-    public function getRole(): Role { return $this->role; }
+    public function getRoles(): array { return $this->roles; }  // Returns array of Role enums
     public function getProvince(): string { return $this->province; }
     public function getCity(): string { return $this->city; }
-    public function getSector(): Sector { return $this->sector; }
+    public function getSectors(): array { return $this->sectors; }  // Returns array of Sector enums
     public function getAvatar(): ?string { return $this->avatar; }
     public function getActivationToken(): ?string { return $this->activationToken; }
     public function getPassword(): ?string { return $this->password; }

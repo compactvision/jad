@@ -25,15 +25,19 @@ class RegisterMemberService
         $activationToken = Str::random(60);
         $password = Str::random(10); // Générer un mot de passe aléatoire
 
+        // Convert roles and sectors arrays to enum arrays
+        $roles = array_map(fn($role) => Role::from($role), $data['roles']);
+        $sectors = array_map(fn($sector) => Sector::from($sector), $data['sectors']);
+
         $member = new Member(
             id: null,
             name: $data['name'],
             email: $data['email'],
             phone: $data['phone'],
-            role: Role::from($data['role']),
+            roles: $roles,
             province: $data['province'],
             city: $data['city'],
-            sector: Sector::from($data['sector']),
+            sectors: $sectors,
             activationToken: $activationToken,
             password: $password // Passer le mot de passe à l'entité
         );

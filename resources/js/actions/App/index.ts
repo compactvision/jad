@@ -1,9 +1,9 @@
-import Modules from './Modules'
 import Http from './Http'
+import Modules from './Modules'
 
 const App = {
-    Modules: Object.assign(Modules, Modules),
     Http: Object.assign(Http, Http),
+    Modules: Object.assign(Modules, Modules),
 }
 
 export default App
