@@ -25,7 +25,7 @@ class UserController extends Controller
                 'id' => $user->id,
                 'name' => $user->name,
                 'email' => $user->email,
-                'role' => $user->roles->pluck('name')->first() ?? $user->role, // Spatie role or native column
+                'role' => $user->roles->pluck('name')->first() ?? ($user->member_roles[0] ?? null), // Spatie role or first native role
                 'created_at' => $user->created_at->format('d/m/Y'),
             ];
         });

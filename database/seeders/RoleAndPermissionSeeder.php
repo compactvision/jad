@@ -52,10 +52,10 @@ class RoleAndPermissionSeeder extends Seeder
                 'email' => $superAdminEmail,
                 'phone' => '0000000000', // Dummy phone
                 'password' => bcrypt('password'),
-                'role' => 'super_admin',
+                'member_roles' => ['super_admin'],
                 'province' => 'AdminProv',
                 'city' => 'AdminCity',
-                'sector' => 'autre',
+                'member_sectors' => ['autre'],
                 'status' => 'active',
                 'is_visible' => false,
             ]);

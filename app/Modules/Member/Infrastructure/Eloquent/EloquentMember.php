@@ -26,13 +26,13 @@ class EloquentMember extends Authenticatable
 
     protected $table = 'members';
     protected $fillable = [
-        'name', 'phone', 'email', 'password', 'roles', 'province', 'city', 'sectors', 'avatar', 'activationToken', 'status', 'is_visible', 'bio', 'social_links'
+        'name', 'phone', 'email', 'password', 'member_roles', 'province', 'city', 'member_sectors', 'avatar', 'activationToken', 'status', 'is_visible', 'bio', 'social_links'
     ];
     protected $hidden = ['password', 'remember_token'];
 
     protected $casts = [
-        'roles' => 'array',
-        'sectors' => 'array',
+        'member_roles' => 'array',
+        'member_sectors' => 'array',
         'social_links' => 'array',
         'is_visible' => 'boolean',
     ];
@@ -41,8 +41,8 @@ class EloquentMember extends Authenticatable
     public function toDomainEntity(): Member
     {
         // Convert JSON arrays back to Role/Sector enums
-        $roles = array_map(fn($role) => Role::from($role), $this->roles ?? []);
-        $sectors = array_map(fn($sector) => Sector::from($sector), $this->sectors ?? []);
+        $roles = array_map(fn($role) => Role::from($role), $this->member_roles ?? []);
+        $sectors = array_map(fn($sector) => Sector::from($sector), $this->member_sectors ?? []);
 
         return new Member(
             $this->id,
@@ -74,10 +74,10 @@ class EloquentMember extends Authenticatable
             'name' => $member->getName(),
             'email' => $member->getEmail(),
             'phone' => $member->getPhone(),
-            'roles' => $roles,
+            'member_roles' => $roles,
             'province' => $member->getProvince(),
             'city' => $member->getCity(),
-            'sectors' => $sectors,
+            'member_sectors' => $sectors,
             'avatar' => $member->getAvatar(),
             'activationToken' => $member->getActivationToken(),
             'status' => $member->getStatus(),

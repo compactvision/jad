@@ -17,8 +17,8 @@ return new class extends Migration
         
         // 1. Create new columns
         Schema::table('members', function (Blueprint $table) {
-            $table->json('roles_temp')->nullable();
-            $table->json('sectors_temp')->nullable();
+            $table->json('member_roles_temp')->nullable();
+            $table->json('member_sectors_temp')->nullable();
         });
         
         // 2. Copy and convert data
@@ -27,8 +27,8 @@ return new class extends Migration
             DB::table('members')
                 ->where('id', $member->id)
                 ->update([
-                    'roles_temp' => json_encode([$member->role]),
-                    'sectors_temp' => json_encode([$member->sector]),
+                    'member_roles_temp' => json_encode([$member->role]),
+                    'member_sectors_temp' => json_encode([$member->sector]),
                 ]);
         }
         
@@ -45,8 +45,8 @@ return new class extends Migration
         }
         
         // 4. Rename temp columns to final names
-        DB::statement('ALTER TABLE members RENAME COLUMN roles_temp TO roles');
-        DB::statement('ALTER TABLE members RENAME COLUMN sectors_temp TO sectors');
+        DB::statement('ALTER TABLE members RENAME COLUMN member_roles_temp TO member_roles');
+        DB::statement('ALTER TABLE members RENAME COLUMN member_sectors_temp TO member_sectors');
     }
 
     /**
@@ -63,8 +63,8 @@ return new class extends Migration
         // 2. Convert JSON back to single values
         $members = DB::table('members')->get();
         foreach ($members as $member) {
-            $roles = json_decode($member->roles, true);
-            $sectors = json_decode($member->sectors, true);
+            $roles = json_decode($member->member_roles, true);
+            $sectors = json_decode($member->member_sectors, true);
             
             DB::table('members')
                 ->where('id', $member->id)
@@ -75,8 +75,8 @@ return new class extends Migration
         }
         
         // 3. Drop new columns
-        DB::statement('ALTER TABLE members RENAME COLUMN roles TO roles_old');
-        DB::statement('ALTER TABLE members RENAME COLUMN sectors TO sectors_old');
+        DB::statement('ALTER TABLE members RENAME COLUMN member_roles TO member_roles_old');
+        DB::statement('ALTER TABLE members RENAME COLUMN member_sectors TO member_sectors_old');
         
         // 4. Rename temp to final
         DB::statement('ALTER TABLE members RENAME COLUMN role_temp TO role');
@@ -84,7 +84,7 @@ return new class extends Migration
         
         // 5. Clean up
         Schema::table('members', function (Blueprint $table) {
-            $table->dropColumn(['roles_old', 'sectors_old']);
+            $table->dropColumn(['member_roles_old', 'member_sectors_old']);
         });
     }
 };

@@ -21,10 +21,10 @@ class DatabaseSeeder extends Seeder
             'email' => 'contact@jadaviculture.com',
             'password' => bcrypt('password'), // 
             'phone' => '+0000000000',
-            'role' => \App\Modules\Member\Domain\Enums\Role::ADMINISTRATEUR_JAD->value,
+            'member_roles' => [\App\Modules\Member\Domain\Enums\Role::ADMINISTRATEUR_JAD->value],
             'province' => 'Kinshasa',
             'city' => 'Kinshasa',
-            'sector' => \App\Modules\Member\Domain\Enums\Sector::AUTRE->value,
+            'member_sectors' => [\App\Modules\Member\Domain\Enums\Sector::AUTRE->value],
             'status' => 'approved',
             'is_visible' => false,
         ]);

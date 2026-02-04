@@ -38,7 +38,7 @@ class EloquentMemberRepository implements MemberRepositoryInterface
 
     public function findByRole(Role $role): array
     {
-        return EloquentMember::where('role', $role->value)
+        return EloquentMember::whereJsonContains('member_roles', $role->value)
             ->get()
             ->map(fn(EloquentMember $m) => $m->toDomainEntity())
             ->toArray();
@@ -47,9 +47,20 @@ class EloquentMemberRepository implements MemberRepositoryInterface
     // Implémentations pour les données des dashboards (retourne des tableaux pour simplifier)
     public function getStatistics(): array
     {
-        $total = EloquentMember::count();
-        $byRole = EloquentMember::selectRaw('role, count(*) as count')->groupBy('role')->pluck('count', 'role')->toArray();
-        $bySector = EloquentMember::selectRaw('sector, count(*) as count')->groupBy('sector')->pluck('count', 'sector')->toArray();
+        $members = EloquentMember::all();
+        $total = $members->count();
+        
+        $byRole = [];
+        $bySector = [];
+        
+        foreach ($members as $member) {
+            foreach (($member->member_roles ?? []) as $role) {
+                $byRole[$role] = ($byRole[$role] ?? 0) + 1;
+            }
+            foreach (($member->member_sectors ?? []) as $sector) {
+                $bySector[$sector] = ($bySector[$sector] ?? 0) + 1;
+            }
+        }
         
         return ['total' => $total, 'byRole' => $byRole, 'bySector' => $bySector];
     }

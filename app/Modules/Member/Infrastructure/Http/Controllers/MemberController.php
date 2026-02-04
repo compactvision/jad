@@ -27,7 +27,7 @@ class MemberController extends Controller
             $query->where(function ($q) use ($search) {
                 $q->where('name', 'like', "%{$search}%")
                   ->orWhere('email', 'like', "%{$search}%")
-                  ->orWhere('sector', 'like', "%{$search}%");
+                  ->orWhere('member_sectors', 'like', "%{$search}%");
             });
         }
 
@@ -37,10 +37,10 @@ class MemberController extends Controller
                 'name' => $m->name,
                 'email' => $m->email,
                 'phone' => $m->phone,
-                'role' => $m->role, 
+                'role' => $m->member_roles[0] ?? null, 
                 'status' => $m->status,
                 'avatar' => $m->avatar, 
-                'farm' => $m->sector, 
+                'farm' => $m->member_sectors[0] ?? null, 
              ];
         });
 
@@ -56,9 +56,9 @@ class MemberController extends Controller
              return [
                 'id' => $m->id,
                 'name' => $m->name,
-                'role' => $m->role, 
+                'role' => $m->member_roles[0] ?? null, 
                 'avatar' => $m->avatar, 
-                'sector' => $m->sector, 
+                'sector' => $m->member_sectors[0] ?? null, 
                 'city' => $m->city,
                 'description' => $m->bio,
                 'social_links' => $m->social_links,
@@ -121,10 +121,10 @@ class MemberController extends Controller
                 'name' => $member->getName(),
                 'email' => $member->getEmail(),
                 'phone' => $member->getPhone(),
-                'role' => $member->getRole()->value,
+                'role' => ($member->getRoles()[0] ?? Role::MEMBRE_JAD)->value,
                 'province' => $member->getProvince(),
                 'city' => $member->getCity(),
-                'sector' => $member->getSector()->value,
+                'sector' => ($member->getSectors()[0] ?? Sector::AUTRE)->value,
                 'avatar' => $member->getAvatar(),
                 'status' => $member->getStatus(),
                 'is_visible' => $member->isVisible(),
