@@ -1,6 +1,0 @@
-import{j as t,L as i}from"./app-DMbAYP4g.js";import{a as h,c as x}from"./createLucideIcon-D1li8g8d.js";import{C as f}from"./chevron-right-Bved6-jl.js";/**
- * @license lucide-react v0.475.0 - ISC
- *
- * This source code is licensed under the ISC license.
- * See the LICENSE file in the root directory of this source tree.
- */const p=[["path",{d:"M15 21v-8a1 1 0 0 0-1-1h-4a1 1 0 0 0-1 1v8",key:"5wwlr5"}],["path",{d:"M3 10a2 2 0 0 1 .709-1.528l7-5.999a2 2 0 0 1 2.582 0l7 5.999A2 2 0 0 1 21 10v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z",key:"1d0kgt"}]],d=h("House",p);function y(m){const e=x.c(7),{items:s}=m;let r;e[0]===Symbol.for("react.memo_cache_sentinel")?(r=t.jsx(i,{href:"/",className:"text-gray-500 hover:text-gray-700 transition-colors",children:t.jsx(d,{className:"w-4 h-4"})}),e[0]=r):r=e[0];let a;if(e[1]!==s){let c;e[3]!==s.length?(c=(o,n)=>t.jsxs("div",{className:"flex items-center space-x-2",children:[t.jsx(f,{className:"w-4 h-4 text-gray-400"}),n===s.length-1?t.jsx("span",{className:"text-gray-900 font-medium",children:o.label}):t.jsx(i,{href:o.href,className:"text-gray-500 hover:text-gray-700 transition-colors",children:o.label})]},n),e[3]=s.length,e[4]=c):c=e[4],a=s.map(c),e[1]=s,e[2]=a}else a=e[2];let l;return e[5]!==a?(l=t.jsxs("nav",{className:"flex items-center space-x-2 text-sm mb-6",children:[r,a]}),e[5]=a,e[6]=l):l=e[6],l}export{y as S};
