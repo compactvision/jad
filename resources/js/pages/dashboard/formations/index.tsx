@@ -26,6 +26,7 @@ interface Training {
   pdf_path: string;
   allowed_pages: number;
   is_public: boolean;
+  color: string;
   created_at: string;
 }
 
@@ -45,6 +46,7 @@ export default function FormationIndex({
     pdf: null as File | null,
     allowed_pages: 10,
     is_public: true,
+    color: "#064e3b",
   });
 
   const handleAddSubmit = (e: React.FormEvent) => {
@@ -75,8 +77,14 @@ export default function FormationIndex({
       header: "Titre",
       render: (t) => (
         <div className="flex items-center gap-3">
-          <div className="p-2 bg-blue-50 rounded-lg">
-            <FileText className="w-5 h-5 text-blue-600" />
+          <div
+            className="p-2 rounded-lg"
+            style={{ backgroundColor: t.color ? `${t.color}15` : "#f0f9ff" }}
+          >
+            <FileText
+              className="w-5 h-5"
+              style={{ color: t.color || "#3b82f6" }}
+            />
           </div>
           <div>
             <p className="font-medium text-gray-900">{t.title}</p>
@@ -211,6 +219,47 @@ export default function FormationIndex({
                 />
                 <Label htmlFor="is_public">Public</Label>
               </div>
+            </div>
+
+            <div className="space-y-3">
+              <Label>Couleur du livre</Label>
+              <div className="flex flex-wrap gap-2">
+                {[
+                  { name: "Emeraude", color: "#064e3b" },
+                  { name: "Bleu Nuit", color: "#1e3a8a" },
+                  { name: "Bordeaux", color: "#7f1d1d" },
+                  { name: "Violet", color: "#4c1d95" },
+                  { name: "Ardoise", color: "#0f172a" },
+                  { name: "Terre", color: "#451a03" },
+                ].map((c) => (
+                  <button
+                    key={c.color}
+                    type="button"
+                    className={`w-10 h-10 rounded-full border-2 transition-all ${
+                      data.color === c.color
+                        ? "border-blue-500 scale-110 shadow-md"
+                        : "border-transparent hover:scale-105"
+                    }`}
+                    style={{ backgroundColor: c.color }}
+                    onClick={() => setData("color", c.color)}
+                    title={c.name}
+                  />
+                ))}
+                <div className="flex items-center gap-2 ml-2">
+                  <Input
+                    type="color"
+                    value={data.color}
+                    onChange={(e) => setData("color", e.target.value)}
+                    className="w-10 h-10 p-0 border-none rounded-full overflow-hidden cursor-pointer"
+                  />
+                  <span className="text-xs text-gray-400 font-mono uppercase">
+                    {data.color}
+                  </span>
+                </div>
+              </div>
+              {errors.color && (
+                <p className="text-sm text-red-500">{errors.color}</p>
+              )}
             </div>
 
             <div className="space-y-2">

@@ -1,7 +1,7 @@
 import { queryParams, type RouteQueryOptions, type RouteDefinition, type RouteFormDefinition, applyUrlDefaults } from './../../../../../../../wayfinder'
 /**
 * @see \App\Modules\Member\Infrastructure\Http\Controllers\MemberController::store
-* @see app/Modules/Member/Infrastructure/Http/Controllers/MemberController.php:73
+* @see app/Modules/Member/Infrastructure/Http/Controllers/MemberController.php:77
 * @route '/become-member'
 */
 const storef7c6d16c1a1d3a178f9fe06a91e80f92 = (options?: RouteQueryOptions): RouteDefinition<'post'> => ({
@@ -16,7 +16,7 @@ storef7c6d16c1a1d3a178f9fe06a91e80f92.definition = {
 
 /**
 * @see \App\Modules\Member\Infrastructure\Http\Controllers\MemberController::store
-* @see app/Modules/Member/Infrastructure/Http/Controllers/MemberController.php:73
+* @see app/Modules/Member/Infrastructure/Http/Controllers/MemberController.php:77
 * @route '/become-member'
 */
 storef7c6d16c1a1d3a178f9fe06a91e80f92.url = (options?: RouteQueryOptions) => {
@@ -25,7 +25,7 @@ storef7c6d16c1a1d3a178f9fe06a91e80f92.url = (options?: RouteQueryOptions) => {
 
 /**
 * @see \App\Modules\Member\Infrastructure\Http\Controllers\MemberController::store
-* @see app/Modules/Member/Infrastructure/Http/Controllers/MemberController.php:73
+* @see app/Modules/Member/Infrastructure/Http/Controllers/MemberController.php:77
 * @route '/become-member'
 */
 storef7c6d16c1a1d3a178f9fe06a91e80f92.post = (options?: RouteQueryOptions): RouteDefinition<'post'> => ({
@@ -35,7 +35,7 @@ storef7c6d16c1a1d3a178f9fe06a91e80f92.post = (options?: RouteQueryOptions): Rout
 
 /**
 * @see \App\Modules\Member\Infrastructure\Http\Controllers\MemberController::store
-* @see app/Modules/Member/Infrastructure/Http/Controllers/MemberController.php:73
+* @see app/Modules/Member/Infrastructure/Http/Controllers/MemberController.php:77
 * @route '/become-member'
 */
 const storef7c6d16c1a1d3a178f9fe06a91e80f92Form = (options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
@@ -45,7 +45,7 @@ const storef7c6d16c1a1d3a178f9fe06a91e80f92Form = (options?: RouteQueryOptions):
 
 /**
 * @see \App\Modules\Member\Infrastructure\Http\Controllers\MemberController::store
-* @see app/Modules/Member/Infrastructure/Http/Controllers/MemberController.php:73
+* @see app/Modules/Member/Infrastructure/Http/Controllers/MemberController.php:77
 * @route '/become-member'
 */
 storef7c6d16c1a1d3a178f9fe06a91e80f92Form.post = (options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
@@ -56,7 +56,7 @@ storef7c6d16c1a1d3a178f9fe06a91e80f92Form.post = (options?: RouteQueryOptions): 
 storef7c6d16c1a1d3a178f9fe06a91e80f92.form = storef7c6d16c1a1d3a178f9fe06a91e80f92Form
 /**
 * @see \App\Modules\Member\Infrastructure\Http\Controllers\MemberController::store
-* @see app/Modules/Member/Infrastructure/Http/Controllers/MemberController.php:73
+* @see app/Modules/Member/Infrastructure/Http/Controllers/MemberController.php:77
 * @route '/dashboard/members/store'
 */
 const storec3e9f2b310ba20767a438743cf37f8ee = (options?: RouteQueryOptions): RouteDefinition<'post'> => ({
@@ -71,7 +71,7 @@ storec3e9f2b310ba20767a438743cf37f8ee.definition = {
 
 /**
 * @see \App\Modules\Member\Infrastructure\Http\Controllers\MemberController::store
-* @see app/Modules/Member/Infrastructure/Http/Controllers/MemberController.php:73
+* @see app/Modules/Member/Infrastructure/Http/Controllers/MemberController.php:77
 * @route '/dashboard/members/store'
 */
 storec3e9f2b310ba20767a438743cf37f8ee.url = (options?: RouteQueryOptions) => {
@@ -80,7 +80,7 @@ storec3e9f2b310ba20767a438743cf37f8ee.url = (options?: RouteQueryOptions) => {
 
 /**
 * @see \App\Modules\Member\Infrastructure\Http\Controllers\MemberController::store
-* @see app/Modules/Member/Infrastructure/Http/Controllers/MemberController.php:73
+* @see app/Modules/Member/Infrastructure/Http/Controllers/MemberController.php:77
 * @route '/dashboard/members/store'
 */
 storec3e9f2b310ba20767a438743cf37f8ee.post = (options?: RouteQueryOptions): RouteDefinition<'post'> => ({
@@ -90,7 +90,7 @@ storec3e9f2b310ba20767a438743cf37f8ee.post = (options?: RouteQueryOptions): Rout
 
 /**
 * @see \App\Modules\Member\Infrastructure\Http\Controllers\MemberController::store
-* @see app/Modules/Member/Infrastructure/Http/Controllers/MemberController.php:73
+* @see app/Modules/Member/Infrastructure/Http/Controllers/MemberController.php:77
 * @route '/dashboard/members/store'
 */
 const storec3e9f2b310ba20767a438743cf37f8eeForm = (options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
@@ -100,7 +100,7 @@ const storec3e9f2b310ba20767a438743cf37f8eeForm = (options?: RouteQueryOptions):
 
 /**
 * @see \App\Modules\Member\Infrastructure\Http\Controllers\MemberController::store
-* @see app/Modules/Member/Infrastructure/Http/Controllers/MemberController.php:73
+* @see app/Modules/Member/Infrastructure/Http/Controllers/MemberController.php:77
 * @route '/dashboard/members/store'
 */
 storec3e9f2b310ba20767a438743cf37f8eeForm.post = (options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
@@ -279,7 +279,7 @@ index.form = indexForm
 
 /**
 * @see \App\Modules\Member\Infrastructure\Http\Controllers\MemberController::show
-* @see app/Modules/Member/Infrastructure/Http/Controllers/MemberController.php:111
+* @see app/Modules/Member/Infrastructure/Http/Controllers/MemberController.php:115
 * @route '/dashboard/members/{id}'
 */
 export const show = (args: { id: string | number } | [id: string | number ] | string | number, options?: RouteQueryOptions): RouteDefinition<'get'> => ({
@@ -294,7 +294,7 @@ show.definition = {
 
 /**
 * @see \App\Modules\Member\Infrastructure\Http\Controllers\MemberController::show
-* @see app/Modules/Member/Infrastructure/Http/Controllers/MemberController.php:111
+* @see app/Modules/Member/Infrastructure/Http/Controllers/MemberController.php:115
 * @route '/dashboard/members/{id}'
 */
 show.url = (args: { id: string | number } | [id: string | number ] | string | number, options?: RouteQueryOptions) => {
@@ -321,7 +321,7 @@ show.url = (args: { id: string | number } | [id: string | number ] | string | nu
 
 /**
 * @see \App\Modules\Member\Infrastructure\Http\Controllers\MemberController::show
-* @see app/Modules/Member/Infrastructure/Http/Controllers/MemberController.php:111
+* @see app/Modules/Member/Infrastructure/Http/Controllers/MemberController.php:115
 * @route '/dashboard/members/{id}'
 */
 show.get = (args: { id: string | number } | [id: string | number ] | string | number, options?: RouteQueryOptions): RouteDefinition<'get'> => ({
@@ -331,7 +331,7 @@ show.get = (args: { id: string | number } | [id: string | number ] | string | nu
 
 /**
 * @see \App\Modules\Member\Infrastructure\Http\Controllers\MemberController::show
-* @see app/Modules/Member/Infrastructure/Http/Controllers/MemberController.php:111
+* @see app/Modules/Member/Infrastructure/Http/Controllers/MemberController.php:115
 * @route '/dashboard/members/{id}'
 */
 show.head = (args: { id: string | number } | [id: string | number ] | string | number, options?: RouteQueryOptions): RouteDefinition<'head'> => ({
@@ -341,7 +341,7 @@ show.head = (args: { id: string | number } | [id: string | number ] | string | n
 
 /**
 * @see \App\Modules\Member\Infrastructure\Http\Controllers\MemberController::show
-* @see app/Modules/Member/Infrastructure/Http/Controllers/MemberController.php:111
+* @see app/Modules/Member/Infrastructure/Http/Controllers/MemberController.php:115
 * @route '/dashboard/members/{id}'
 */
 const showForm = (args: { id: string | number } | [id: string | number ] | string | number, options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
@@ -351,7 +351,7 @@ const showForm = (args: { id: string | number } | [id: string | number ] | strin
 
 /**
 * @see \App\Modules\Member\Infrastructure\Http\Controllers\MemberController::show
-* @see app/Modules/Member/Infrastructure/Http/Controllers/MemberController.php:111
+* @see app/Modules/Member/Infrastructure/Http/Controllers/MemberController.php:115
 * @route '/dashboard/members/{id}'
 */
 showForm.get = (args: { id: string | number } | [id: string | number ] | string | number, options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
@@ -361,7 +361,7 @@ showForm.get = (args: { id: string | number } | [id: string | number ] | string 
 
 /**
 * @see \App\Modules\Member\Infrastructure\Http\Controllers\MemberController::show
-* @see app/Modules/Member/Infrastructure/Http/Controllers/MemberController.php:111
+* @see app/Modules/Member/Infrastructure/Http/Controllers/MemberController.php:115
 * @route '/dashboard/members/{id}'
 */
 showForm.head = (args: { id: string | number } | [id: string | number ] | string | number, options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
@@ -378,7 +378,7 @@ show.form = showForm
 
 /**
 * @see \App\Modules\Member\Infrastructure\Http\Controllers\MemberController::approve
-* @see app/Modules/Member/Infrastructure/Http/Controllers/MemberController.php:82
+* @see app/Modules/Member/Infrastructure/Http/Controllers/MemberController.php:86
 * @route '/dashboard/members/{id}/approve'
 */
 export const approve = (args: { id: string | number } | [id: string | number ] | string | number, options?: RouteQueryOptions): RouteDefinition<'patch'> => ({
@@ -393,7 +393,7 @@ approve.definition = {
 
 /**
 * @see \App\Modules\Member\Infrastructure\Http\Controllers\MemberController::approve
-* @see app/Modules/Member/Infrastructure/Http/Controllers/MemberController.php:82
+* @see app/Modules/Member/Infrastructure/Http/Controllers/MemberController.php:86
 * @route '/dashboard/members/{id}/approve'
 */
 approve.url = (args: { id: string | number } | [id: string | number ] | string | number, options?: RouteQueryOptions) => {
@@ -420,7 +420,7 @@ approve.url = (args: { id: string | number } | [id: string | number ] | string |
 
 /**
 * @see \App\Modules\Member\Infrastructure\Http\Controllers\MemberController::approve
-* @see app/Modules/Member/Infrastructure/Http/Controllers/MemberController.php:82
+* @see app/Modules/Member/Infrastructure/Http/Controllers/MemberController.php:86
 * @route '/dashboard/members/{id}/approve'
 */
 approve.patch = (args: { id: string | number } | [id: string | number ] | string | number, options?: RouteQueryOptions): RouteDefinition<'patch'> => ({
@@ -430,7 +430,7 @@ approve.patch = (args: { id: string | number } | [id: string | number ] | string
 
 /**
 * @see \App\Modules\Member\Infrastructure\Http\Controllers\MemberController::approve
-* @see app/Modules/Member/Infrastructure/Http/Controllers/MemberController.php:82
+* @see app/Modules/Member/Infrastructure/Http/Controllers/MemberController.php:86
 * @route '/dashboard/members/{id}/approve'
 */
 const approveForm = (args: { id: string | number } | [id: string | number ] | string | number, options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
@@ -445,7 +445,7 @@ const approveForm = (args: { id: string | number } | [id: string | number ] | st
 
 /**
 * @see \App\Modules\Member\Infrastructure\Http\Controllers\MemberController::approve
-* @see app/Modules/Member/Infrastructure/Http/Controllers/MemberController.php:82
+* @see app/Modules/Member/Infrastructure/Http/Controllers/MemberController.php:86
 * @route '/dashboard/members/{id}/approve'
 */
 approveForm.patch = (args: { id: string | number } | [id: string | number ] | string | number, options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
@@ -462,7 +462,7 @@ approve.form = approveForm
 
 /**
 * @see \App\Modules\Member\Infrastructure\Http\Controllers\MemberController::toggleVisibility
-* @see app/Modules/Member/Infrastructure/Http/Controllers/MemberController.php:98
+* @see app/Modules/Member/Infrastructure/Http/Controllers/MemberController.php:102
 * @route '/dashboard/members/{id}/visibility'
 */
 export const toggleVisibility = (args: { id: string | number } | [id: string | number ] | string | number, options?: RouteQueryOptions): RouteDefinition<'patch'> => ({
@@ -477,7 +477,7 @@ toggleVisibility.definition = {
 
 /**
 * @see \App\Modules\Member\Infrastructure\Http\Controllers\MemberController::toggleVisibility
-* @see app/Modules/Member/Infrastructure/Http/Controllers/MemberController.php:98
+* @see app/Modules/Member/Infrastructure/Http/Controllers/MemberController.php:102
 * @route '/dashboard/members/{id}/visibility'
 */
 toggleVisibility.url = (args: { id: string | number } | [id: string | number ] | string | number, options?: RouteQueryOptions) => {
@@ -504,7 +504,7 @@ toggleVisibility.url = (args: { id: string | number } | [id: string | number ] |
 
 /**
 * @see \App\Modules\Member\Infrastructure\Http\Controllers\MemberController::toggleVisibility
-* @see app/Modules/Member/Infrastructure/Http/Controllers/MemberController.php:98
+* @see app/Modules/Member/Infrastructure/Http/Controllers/MemberController.php:102
 * @route '/dashboard/members/{id}/visibility'
 */
 toggleVisibility.patch = (args: { id: string | number } | [id: string | number ] | string | number, options?: RouteQueryOptions): RouteDefinition<'patch'> => ({
@@ -514,7 +514,7 @@ toggleVisibility.patch = (args: { id: string | number } | [id: string | number ]
 
 /**
 * @see \App\Modules\Member\Infrastructure\Http\Controllers\MemberController::toggleVisibility
-* @see app/Modules/Member/Infrastructure/Http/Controllers/MemberController.php:98
+* @see app/Modules/Member/Infrastructure/Http/Controllers/MemberController.php:102
 * @route '/dashboard/members/{id}/visibility'
 */
 const toggleVisibilityForm = (args: { id: string | number } | [id: string | number ] | string | number, options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
@@ -529,7 +529,7 @@ const toggleVisibilityForm = (args: { id: string | number } | [id: string | numb
 
 /**
 * @see \App\Modules\Member\Infrastructure\Http\Controllers\MemberController::toggleVisibility
-* @see app/Modules/Member/Infrastructure/Http/Controllers/MemberController.php:98
+* @see app/Modules/Member/Infrastructure/Http/Controllers/MemberController.php:102
 * @route '/dashboard/members/{id}/visibility'
 */
 toggleVisibilityForm.patch = (args: { id: string | number } | [id: string | number ] | string | number, options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({

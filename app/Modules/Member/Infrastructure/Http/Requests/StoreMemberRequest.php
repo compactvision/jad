@@ -35,6 +35,7 @@ class StoreMemberRequest extends FormRequest
             'sectors' => 'required|array|min:1',
             'sectors.*' => ['required', new Enum(\App\Modules\Member\Domain\Enums\Sector::class)],
             'avatar' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
+            'company_logo' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
             'terms' => 'accepted',
         ];
     }
@@ -78,6 +79,10 @@ class StoreMemberRequest extends FormRequest
             'avatar.image' => 'Le fichier téléchargé doit être une image.',
             'avatar.mimes' => 'Le format de l\'image n\'est pas valide. Formats acceptés : jpeg, png, jpg, gif.',
             'avatar.max' => 'L\'image ne doit pas dépasser 2 Mo.',
+
+            'company_logo.image' => 'Le fichier téléchargé doit être une image.',
+            'company_logo.mimes' => 'Le format de l\'image n\'est pas valide. Formats acceptés : jpeg, png, jpg, gif.',
+            'company_logo.max' => 'L\'image ne doit pas dépasser 2 Mo.',
 
             'terms.accepted' => 'Vous devez accepter les conditions d\'utilisation.',
         ];

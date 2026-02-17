@@ -13,6 +13,7 @@ interface Training {
   title: string;
   description: string;
   pdf_path: string;
+  color?: string;
 }
 
 export default function Welcome({ trainings }: { trainings: Training[] }) {
@@ -45,6 +46,7 @@ export default function Welcome({ trainings }: { trainings: Training[] }) {
                   title={training.title}
                   description={training.description}
                   pdfPath={training.pdf_path}
+                  color={training.color}
                 />
               ))}
             </div>

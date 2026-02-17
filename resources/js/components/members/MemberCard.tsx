@@ -24,6 +24,18 @@ const MemberCard = ({ member }: { member: any }) => {
     }
   };
 
+  const displayName =
+    member.primary_name_display === "company" && member.company_name
+      ? member.company_name
+      : member.name;
+
+  const displayImage =
+    member.primary_image_display === "company_logo" && member.company_logo
+      ? `/storage/${member.company_logo}`
+      : member.avatar
+        ? `/storage/${member.avatar}`
+        : "/images/default-avatar.png";
+
   return (
     <>
       <style>{`
@@ -55,8 +67,8 @@ const MemberCard = ({ member }: { member: any }) => {
 
           {/* Image de profil */}
           <img
-            src={member.image}
-            alt={`${member.name} portrait`}
+            src={displayImage}
+            alt={`${displayName} portrait`}
             className="relative z-10 w-full h-full rounded-full object-cover border-4 border-white shadow-xl"
           />
 
@@ -77,18 +89,23 @@ const MemberCard = ({ member }: { member: any }) => {
         {/* Contenu Texte */}
         <div className="text-center">
           <h3 className="text-xl font-bold text-slate-800 mb-1">
-            {member.name}
+            {displayName}
           </h3>
-          <p className="text-sm font-semibold text-green-600 mb-4">
-            {member.role}
+          <p className="text-sm font-semibold text-green-600 mb-2">
+            {member.roles?.join(", ")}
           </p>
-          <p className="text-slate-600 text-sm leading-relaxed">{member.bio}</p>
+          <p className="text-xs font-medium text-slate-400 mb-4 uppercase tracking-wider">
+            {member.sectors?.join(", ")}
+          </p>
+          <p className="text-slate-600 text-sm leading-relaxed line-clamp-3">
+            {member.description || member.bio}
+          </p>
         </div>
 
         {/* Icônes Sociales */}
         <div className="flex justify-center items-center space-x-3 mt-6">
-          {member.socials &&
-            Object.entries(member.socials)
+          {member.social_links &&
+            Object.entries(member.social_links)
               .filter(([_, link]) => link) // Filter out empty links
               .map(([platform, link]) => (
                 <a
@@ -97,7 +114,7 @@ const MemberCard = ({ member }: { member: any }) => {
                   target="_blank"
                   rel="noopener noreferrer"
                   className="p-2 text-slate-400 bg-slate-100 rounded-full transition-all duration-300 hover:bg-green-600 hover:text-white hover:scale-110 hover:shadow-md"
-                  aria-label={`Lien vers le profil ${platform} de ${member.name}`}
+                  aria-label={`Lien vers le profil ${platform} de ${displayName}`}
                 >
                   {getSocialIcon(platform)}
                 </a>

@@ -23,9 +23,20 @@ interface Training {
 export default function FormationRead({ training }: { training: Training }) {
   const [numPages, setNumPages] = useState<number | null>(null);
   const [pageNumber, setPageNumber] = useState(1);
-  const [scale, setScale] = useState(1.0);
+  const [containerWidth, setContainerWidth] = useState<number>(0);
   const [isBookOpen, setIsBookOpen] = useState(false);
   const [showDownloadMessage, setShowDownloadMessage] = useState(false);
+
+  useEffect(() => {
+    const updateWidth = () => {
+      const el = document.getElementById("pdf-container");
+      if (el) setContainerWidth(el.clientWidth - 32); // Subtract padding
+    };
+
+    updateWidth();
+    window.addEventListener("resize", updateWidth);
+    return () => window.removeEventListener("resize", updateWidth);
+  }, [isBookOpen]);
 
   useEffect(() => {
     // Trigger book opening animation after mount
@@ -57,13 +68,14 @@ export default function FormationRead({ training }: { training: Training }) {
 
       {/* Book Opening Animation Overlay */}
       <div
-        className={`fixed inset-0 z-50 bg-emerald-950 transition-all duration-1500 ease-out ${
+        className={`fixed inset-0 z-50 transition-all duration-1500 ease-out ${
           isBookOpen ? "opacity-0 pointer-events-none" : "opacity-100"
         }`}
+        style={{ backgroundColor: training.color || "#064e3b" }}
       >
-        <div className="absolute inset-0 flex items-center justify-center">
+        <div className="absolute inset-0 flex items-center justify-center p-4">
           <div
-            className={`relative w-[600px] h-[800px] transition-all duration-1500 ease-out ${
+            className={`relative w-full max-w-[600px] aspect-[3/4] transition-all duration-1500 ease-out ${
               isBookOpen ? "scale-150 opacity-0" : "scale-100 opacity-100"
             }`}
           >
@@ -71,20 +83,28 @@ export default function FormationRead({ training }: { training: Training }) {
             <div className="absolute inset-0 flex">
               {/* Left Page */}
               <div
-                className={`w-1/2 h-full bg-emerald-900 border-r-2 border-emerald-800 flex items-center justify-center transition-transform duration-1500 ease-out origin-right ${
+                className={`w-1/2 h-full border-r-2 flex items-center justify-center transition-transform duration-1500 ease-out origin-right ${
                   isBookOpen ? "-rotate-y-90" : "rotate-y-0"
                 }`}
-                style={{ transformStyle: "preserve-3d" }}
+                style={{
+                  transformStyle: "preserve-3d",
+                  backgroundColor: training.color || "#064e3b",
+                  borderColor: `${training.color}88` || "#065f46",
+                }}
               >
                 <div className="text-white text-4xl font-bold">JAD</div>
               </div>
 
               {/* Right Page */}
               <div
-                className={`w-1/2 h-full bg-emerald-900 border-l-2 border-emerald-800 flex items-center justify-center transition-transform duration-1500 ease-out origin-left ${
+                className={`w-1/2 h-full border-l-2 flex items-center justify-center transition-transform duration-1500 ease-out origin-left ${
                   isBookOpen ? "rotate-y-90" : "rotate-y-0"
                 }`}
-                style={{ transformStyle: "preserve-3d" }}
+                style={{
+                  transformStyle: "preserve-3d",
+                  backgroundColor: training.color || "#064e3b",
+                  borderColor: `${training.color}88` || "#065f46",
+                }}
               >
                 <div className="text-white text-2xl font-display">
                   {training.title}
@@ -124,9 +144,12 @@ export default function FormationRead({ training }: { training: Training }) {
           </div>
 
           {/* PDF Viewer */}
-          <div className="bg-white rounded-2xl shadow-2xl p-8 min-h-[600px]">
+          <div className="bg-white rounded-2xl shadow-2xl p-2 sm:p-8 min-h-[400px] sm:min-h-[600px]">
             <div className="flex flex-col items-center">
-              <div className="bg-gray-100 shadow-inner rounded-lg p-4">
+              <div
+                id="pdf-container"
+                className="w-full bg-gray-100 shadow-inner rounded-lg p-1 sm:p-4 overflow-hidden flex justify-center"
+              >
                 <Document
                   file={`/storage/${training.pdf_path}`}
                   onLoadSuccess={onDocumentLoadSuccess}
@@ -145,24 +168,24 @@ export default function FormationRead({ training }: { training: Training }) {
                 >
                   <Page
                     pageNumber={pageNumber}
-                    scale={scale}
+                    width={containerWidth || undefined}
                     renderAnnotationLayer={true}
                     renderTextLayer={true}
-                    className="shadow-lg"
+                    className="shadow-lg max-w-full"
                   />
                 </Document>
               </div>
 
               {/* Navigation Controls */}
-              <div className="mt-8 flex items-center gap-6 bg-white px-6 py-4 rounded-full shadow-lg border border-gray-200">
+              <div className="mt-8 flex items-center gap-3 sm:gap-6 bg-white px-4 sm:px-6 py-3 sm:py-4 rounded-full shadow-lg border border-gray-200">
                 <Button
                   variant="ghost"
                   size="icon"
                   onClick={handlePrevPage}
                   disabled={pageNumber <= 1}
-                  className="rounded-full"
+                  className="rounded-full h-8 w-8 sm:h-10 sm:w-10"
                 >
-                  <ChevronLeft className="h-5 w-5" />
+                  <ChevronLeft className="h-4 w-4 sm:h-5 sm:w-5" />
                 </Button>
 
                 <div className="flex flex-col items-center">
@@ -181,9 +204,9 @@ export default function FormationRead({ training }: { training: Training }) {
                   size="icon"
                   onClick={handleNextPage}
                   disabled={pageNumber >= training.allowed_pages}
-                  className="rounded-full"
+                  className="rounded-full h-8 w-8 sm:h-10 sm:w-10"
                 >
-                  <ChevronRight className="h-5 w-5" />
+                  <ChevronRight className="h-4 w-4 sm:h-5 sm:w-5" />
                 </Button>
               </div>
 

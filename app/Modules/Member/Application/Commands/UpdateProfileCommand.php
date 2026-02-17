@@ -15,6 +15,14 @@ class UpdateProfileCommand
         public ?string $province,
         public ?string $bio,
         public ?array $socialLinks,
-        public ?UploadedFile $avatar = null
+        public ?UploadedFile $avatar = null,
+        public ?UploadedFile $companyLogo = null,
+        public string $primaryImageDisplay = 'avatar',
+        public ?string $companyName = null,
+        public ?string $companyDescription = null,
+        public ?string $companyWebsite = null,
+        public ?string $companyPhone = null,
+        public ?string $companyAddress = null,
+        public string $primaryNameDisplay = 'personal'
     ) {}
 }

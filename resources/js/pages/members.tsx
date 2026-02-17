@@ -8,23 +8,24 @@ import MemberCard from "@/components/members/MemberCard";
 interface Member {
   id: number;
   name: string;
-  role: string;
+  roles: string[];
   avatar: string | null;
-  sector: string;
+  sectors: string[];
   city: string;
   description?: string;
   social_links?: Record<string, string>;
+  company_name?: string;
+  company_logo?: string;
+  primary_name_display?: string;
+  primary_image_display?: string;
 }
 
 export default function Members({ members }: { members: Member[] }) {
   const [activeCategory, setActiveCategory] = useState("Tous");
 
-  // Map backend members to frontend structure if needed or use directly
-  // The previous code used 'category' which seems to map to 'sector' or 'role'.
-  // Let's assume 'sector' is the category for filtering.
-
   const categories = useMemo(() => {
-    const uniqueCategories = new Set(members.map((m) => m.sector));
+    const allSectors = members.flatMap((m) => m.sectors || []);
+    const uniqueCategories = new Set(allSectors);
     return ["Tous", ...Array.from(uniqueCategories)];
   }, [members]);
 
@@ -32,7 +33,7 @@ export default function Members({ members }: { members: Member[] }) {
     if (activeCategory === "Tous") {
       return members;
     }
-    return members.filter((member) => member.sector === activeCategory);
+    return members.filter((member) => member.sectors?.includes(activeCategory));
   }, [activeCategory, members]);
 
   return (
@@ -83,20 +84,7 @@ export default function Members({ members }: { members: Member[] }) {
               className="member-card-item"
               style={{ animationDelay: `${index * 100}ms` }}
             >
-              <MemberCard
-                member={{
-                  ...member,
-                  id: member.id.toString(),
-                  category: member.sector,
-                  image: member.avatar
-                    ? `/storage/${member.avatar}`
-                    : `https://ui-avatars.com/api/?name=${member.name}`,
-                  bio:
-                    member.description ||
-                    `${member.role} spécialisé dans le secteur ${member.sector}.`,
-                  socials: member.social_links || {},
-                }}
-              />
+              <MemberCard member={member} />
             </div>
           ))}
         </div>

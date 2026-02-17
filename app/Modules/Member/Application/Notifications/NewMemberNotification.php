@@ -39,7 +39,7 @@ class NewMemberNotification extends Notification
                     ->subject('Nouvelle demande d\'adhésion - JAD')
                     ->greeting('Bonjour Admin,')
                     ->line('Un nouvel utilisateur souhaite rejoindre l\'équipe : ' . $this->member->getName())
-                    ->line('Rôle demandé : ' . $this->member->getRole()->name) // Assuming Role is enum
+                    ->line('Rôles demandés : ' . implode(', ', array_map(fn($role) => $role->label(), $this->member->getRoles())))
                     ->action('Voir le dossier', url('/dashboard/members/' . $this->member->getId())) // Assumes this route
                     ->line('Connectez-vous pour accepter ou refuser cette demande.');
     }

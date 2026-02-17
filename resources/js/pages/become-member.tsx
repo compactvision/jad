@@ -34,6 +34,7 @@ interface FormData {
   city: string;
   description: string;
   avatar: File | null;
+  company_logo: File | null;
   terms: boolean;
 }
 
@@ -286,6 +287,7 @@ export default function Member() {
     city: "",
     description: "",
     avatar: null,
+    company_logo: null,
     terms: false,
   });
 
@@ -308,8 +310,9 @@ export default function Member() {
   };
 
   const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const { name } = e.target;
     const file = e.target.files?.[0] || null;
-    setData("avatar", file as never);
+    setData(name as keyof FormData, file as never);
   };
 
   const submit = (e: React.FormEvent<HTMLFormElement>) => {
@@ -358,6 +361,7 @@ export default function Member() {
     });
 
     if (data.avatar) formData.append("avatar", data.avatar);
+    if (data.company_logo) formData.append("company_logo", data.company_logo);
 
     formData.append("terms", data.terms ? "1" : "0");
 
@@ -766,6 +770,53 @@ export default function Member() {
                       {Array.isArray(getError("avatar"))
                         ? getError("avatar")?.join(", ")
                         : getError("avatar")}
+                    </p>
+                  )}
+                </div>
+
+                <div className="mb-6">
+                  <label className="block text-sm font-medium text-gray-700 mb-2">
+                    Logo de l'entreprise (Optionnel)
+                  </label>
+                  <div className="border-2 border-dashed border-gray-300 rounded-lg p-6 text-center hover:border-green-500 transition-colors cursor-pointer">
+                    <input
+                      type="file"
+                      id="company_logo"
+                      name="company_logo"
+                      onChange={handleFileChange}
+                      accept="image/*"
+                      className="hidden"
+                    />
+                    <label htmlFor="company_logo" className="cursor-pointer">
+                      {data.company_logo ? (
+                        <div className="flex flex-col items-center">
+                          <img
+                            src={URL.createObjectURL(data.company_logo)}
+                            alt="Aperçu Logo"
+                            className="w-24 h-24 object-contain mx-auto mb-3"
+                          />
+                          <p className="text-green-600 font-medium">
+                            {data.company_logo.name}
+                          </p>
+                        </div>
+                      ) : (
+                        <div className="flex flex-col items-center">
+                          <Store className="w-12 h-12 text-gray-400 mx-auto mb-3" />
+                          <p className="text-gray-600 mb-2">
+                            Cliquez pour télécharger le logo
+                          </p>
+                          <p className="text-sm text-gray-500">
+                            JPG, PNG (max. 2MB)
+                          </p>
+                        </div>
+                      )}
+                    </label>
+                  </div>
+                  {getError("company_logo") && (
+                    <p className="text-red-500 text-xs mt-1">
+                      {Array.isArray(getError("company_logo"))
+                        ? getError("company_logo")?.join(", ")
+                        : getError("company_logo")}
                     </p>
                   )}
                 </div>

@@ -14,7 +14,7 @@ class RegisterMemberService
 {
     public function __construct(private MemberRepositoryInterface $memberRepository, private EmailSenderInterface $emailSender) {}
 
-    public function execute(array $data, ?UploadedFile $avatar = null): Member
+    public function execute(array $data, ?UploadedFile $avatar = null, ?UploadedFile $companyLogo = null): Member
     {
         if ($this->memberRepository->findByEmail($data['email'])) {
             throw new MemberAlreadyExistsException("Un membre avec cet email existe déjà.");
@@ -42,7 +42,7 @@ class RegisterMemberService
             password: $password // Passer le mot de passe à l'entité
         );
 
-        $memberDto = $this->memberRepository->save($member, $avatar);
+        $memberDto = $this->memberRepository->save($member, $avatar, $companyLogo);
 
         $this->emailSender->sendWelcomeEmail($memberDto, $password); // Envoyer le mot de passe par email
 

@@ -46,6 +46,14 @@ export interface Member {
   province?: string;
   bio?: string;
   avatar?: string;
+  company_logo?: string;
+  company_name?: string;
+  company_description?: string;
+  company_website?: string;
+  company_phone?: string;
+  company_address?: string;
+  primary_image_display: "avatar" | "company_logo";
+  primary_name_display: "personal" | "company";
   role: string;
   sector: string;
   status: "approved" | "pending";

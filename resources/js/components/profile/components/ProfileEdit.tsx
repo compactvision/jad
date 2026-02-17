@@ -5,7 +5,13 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Label } from "@/components/ui/label";
-import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
+import {
+  Card,
+  CardContent,
+  CardHeader,
+  CardTitle,
+  CardDescription,
+} from "@/components/ui/card";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import {
   Camera,
@@ -18,6 +24,10 @@ import {
   Facebook,
   Twitter,
   Instagram,
+  Building2,
+  Check,
+  ChevronsUpDown,
+  FileText,
 } from "lucide-react";
 import { SocialIcon } from "./SocialIcon";
 import { useProfileForm } from "../hooks/useProfileForm";
@@ -30,7 +40,10 @@ interface ProfileEditProps {
 
 export function ProfileEdit({ member, onCancel }: ProfileEditProps) {
   const [previewUrl, setPreviewUrl] = useState<string | null>(
-    member.avatar ? `/storage/${member.avatar}` : null
+    member.avatar ? `/storage/${member.avatar}` : null,
+  );
+  const [previewLogoUrl, setPreviewLogoUrl] = useState<string | null>(
+    member.company_logo ? `/storage/${member.company_logo}` : null,
   );
 
   const {
@@ -49,6 +62,15 @@ export function ProfileEdit({ member, onCancel }: ProfileEditProps) {
       setData("avatar", file);
       const url = URL.createObjectURL(file);
       setPreviewUrl(url);
+    }
+  };
+
+  const handleLogoChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (file) {
+      setData("company_logo", file);
+      const url = URL.createObjectURL(file);
+      setPreviewLogoUrl(url);
     }
   };
 
@@ -74,59 +96,256 @@ export function ProfileEdit({ member, onCancel }: ProfileEditProps) {
           <CardHeader className="bg-gradient-to-r from-slate-50 to-slate-100 border-b">
             <CardTitle className="flex items-center gap-2">
               <Camera className="w-5 h-5 text-green-600" />
-              Photo de profil
+              Identité Visuelle
             </CardTitle>
             <CardDescription>
-              Votre photo de profil visible par les autres membres.
+              Gérez votre photo de profil et le logo de votre entreprise.
             </CardDescription>
           </CardHeader>
-          <CardContent className="pt-6">
-            <div className="flex flex-col sm:flex-row items-center gap-6">
-              <div className="relative group">
-                <div className="absolute -inset-1 bg-gradient-to-r from-green-400 to-emerald-400 rounded-full blur opacity-75 group-hover:opacity-100 transition duration-300"></div>
-                <Avatar className="relative w-24 h-24 md:w-32 md:h-32 border-4 border-white shadow-xl">
-                  <AvatarImage
-                    src={previewUrl || undefined}
-                    className="object-cover"
-                  />
-                  <AvatarFallback className="text-2xl md:text-3xl font-bold bg-white text-green-800">
-                    {member.name.substring(0, 2).toUpperCase()}
-                  </AvatarFallback>
-                </Avatar>
-                <div
-                  className="absolute inset-0 bg-black/40 rounded-full opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center cursor-pointer"
-                  onClick={() =>
-                    document.getElementById("avatar-upload")?.click()
-                  }
-                >
-                  <Camera className="text-white w-6 h-6" />
+          <CardContent className="pt-6 space-y-8">
+            <div className="grid md:grid-cols-2 gap-8">
+              {/* Avatar Section */}
+              <div className="space-y-4">
+                <Label className="text-base font-semibold">
+                  Photo de profil (Individuel)
+                </Label>
+                <div className="flex items-center gap-6">
+                  <div className="relative group">
+                    <div className="absolute -inset-1 bg-gradient-to-r from-green-400 to-emerald-400 rounded-full blur opacity-75 group-hover:opacity-100 transition duration-300"></div>
+                    <Avatar className="relative w-24 h-24 border-4 border-white shadow-xl">
+                      <AvatarImage
+                        src={previewUrl || undefined}
+                        className="object-cover"
+                      />
+                      <AvatarFallback className="text-2xl font-bold bg-white text-green-800">
+                        {member.name.substring(0, 2).toUpperCase()}
+                      </AvatarFallback>
+                    </Avatar>
+                    <div
+                      className="absolute inset-0 bg-black/40 rounded-full opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center cursor-pointer"
+                      onClick={() =>
+                        document.getElementById("avatar-upload")?.click()
+                      }
+                    >
+                      <Camera className="text-white w-6 h-6" />
+                    </div>
+                  </div>
+
+                  <div className="space-y-2 flex-1">
+                    <Button
+                      type="button"
+                      variant="outline"
+                      size="sm"
+                      onClick={() =>
+                        document.getElementById("avatar-upload")?.click()
+                      }
+                    >
+                      Changer la photo
+                    </Button>
+                    <input
+                      id="avatar-upload"
+                      type="file"
+                      className="hidden"
+                      accept="image/*"
+                      onChange={handleFileChange}
+                    />
+                    <p className="text-xs text-muted-foreground">
+                      Carré, max 2 Mo.
+                    </p>
+                    {errors.avatar && (
+                      <p className="text-xs text-destructive font-medium">
+                        {errors.avatar}
+                      </p>
+                    )}
+                  </div>
                 </div>
               </div>
 
-              <div className="space-y-4 flex-1 text-center sm:text-left">
-                <div className="space-y-1">
-                  <Label
-                    htmlFor="avatar-upload"
-                    className="cursor-pointer inline-flex items-center justify-center rounded-md text-sm font-medium bg-gradient-to-r from-green-600 to-emerald-600 hover:from-green-700 hover:to-emerald-700 text-white h-10 px-6 py-2"
-                  >
-                    Changer la photo
-                  </Label>
-                  <input
-                    id="avatar-upload"
-                    type="file"
-                    className="hidden"
-                    accept="image/*"
-                    onChange={handleFileChange}
-                  />
+              {/* Logo Section */}
+              <div className="space-y-4">
+                <Label className="text-base font-semibold">
+                  Logo d'Entreprise
+                </Label>
+                <div className="flex items-center gap-6">
+                  <div className="relative group">
+                    <div className="absolute -inset-1 bg-gradient-to-r from-blue-400 to-indigo-400 rounded-full blur opacity-75 group-hover:opacity-100 transition duration-300"></div>
+                    <Avatar className="relative w-24 h-24 border-4 border-white shadow-xl">
+                      <AvatarImage
+                        src={previewLogoUrl || undefined}
+                        className="object-cover"
+                      />
+                      <AvatarFallback className="text-2xl font-bold bg-white text-blue-800">
+                        <Building2 className="w-8 h-8" />
+                      </AvatarFallback>
+                    </Avatar>
+                    <div
+                      className="absolute inset-0 bg-black/40 rounded-full opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center cursor-pointer"
+                      onClick={() =>
+                        document.getElementById("logo-upload")?.click()
+                      }
+                    >
+                      <Camera className="text-white w-6 h-6" />
+                    </div>
+                  </div>
+
+                  <div className="space-y-2 flex-1">
+                    <Button
+                      type="button"
+                      variant="outline"
+                      size="sm"
+                      onClick={() =>
+                        document.getElementById("logo-upload")?.click()
+                      }
+                    >
+                      Changer le logo
+                    </Button>
+                    <input
+                      id="logo-upload"
+                      type="file"
+                      className="hidden"
+                      accept="image/*"
+                      onChange={handleLogoChange}
+                    />
+                    <p className="text-xs text-muted-foreground">
+                      Carré, max 2 Mo.
+                    </p>
+                    {errors.company_logo && (
+                      <p className="text-xs text-destructive font-medium">
+                        {errors.company_logo}
+                      </p>
+                    )}
+                  </div>
                 </div>
-                <p className="text-xs text-muted-foreground">
-                  Recommandé: Image carrée, max 2 Mo. (JPG, PNG)
-                </p>
-                {errors.avatar && (
-                  <p className="text-sm text-destructive font-medium">
-                    {errors.avatar}
-                  </p>
-                )}
+              </div>
+            </div>
+
+            <div className="pt-4 border-t space-y-6">
+              <div className="space-y-3">
+                <Label className="text-base font-semibold block">
+                  Image principale à afficher
+                </Label>
+                <div className="grid grid-cols-2 gap-4">
+                  <div
+                    className={`cursor-pointer p-4 rounded-xl border-2 transition-all flex items-center gap-3 ${
+                      data.primary_image_display === "avatar"
+                        ? "border-green-600 bg-green-50/50"
+                        : "border-slate-200 hover:border-slate-300"
+                    }`}
+                    onClick={() => setData("primary_image_display", "avatar")}
+                  >
+                    <div
+                      className={`w-5 h-5 rounded-full border-2 flex items-center justify-center ${
+                        data.primary_image_display === "avatar"
+                          ? "border-green-600 bg-green-600"
+                          : "border-slate-300"
+                      }`}
+                    >
+                      {data.primary_image_display === "avatar" && (
+                        <Check className="w-3 h-3 text-white" />
+                      )}
+                    </div>
+                    <div>
+                      <p className="font-medium text-sm">Ma photo de profil</p>
+                      <p className="text-xs text-muted-foreground">
+                        Afficher votre photo personnelle
+                      </p>
+                    </div>
+                  </div>
+
+                  <div
+                    className={`cursor-pointer p-4 rounded-xl border-2 transition-all flex items-center gap-3 ${
+                      data.primary_image_display === "company_logo"
+                        ? "border-green-600 bg-green-50/50"
+                        : "border-slate-200 hover:border-slate-300"
+                    }`}
+                    onClick={() =>
+                      setData("primary_image_display", "company_logo")
+                    }
+                  >
+                    <div
+                      className={`w-5 h-5 rounded-full border-2 flex items-center justify-center ${
+                        data.primary_image_display === "company_logo"
+                          ? "border-green-600 bg-green-600"
+                          : "border-slate-300"
+                      }`}
+                    >
+                      {data.primary_image_display === "company_logo" && (
+                        <Check className="w-3 h-3 text-white" />
+                      )}
+                    </div>
+                    <div>
+                      <p className="font-medium text-sm">
+                        Le logo de mon entreprise
+                      </p>
+                      <p className="text-xs text-muted-foreground">
+                        Afficher l'identité de votre entreprise
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div className="space-y-3">
+                <Label className="text-base font-semibold block">
+                  Nom principal à afficher sur le site
+                </Label>
+                <div className="grid grid-cols-2 gap-4">
+                  <div
+                    className={`cursor-pointer p-4 rounded-xl border-2 transition-all flex items-center gap-3 ${
+                      data.primary_name_display === "personal"
+                        ? "border-green-600 bg-green-50/50"
+                        : "border-slate-200 hover:border-slate-300"
+                    }`}
+                    onClick={() => setData("primary_name_display", "personal")}
+                  >
+                    <div
+                      className={`w-5 h-5 rounded-full border-2 flex items-center justify-center ${
+                        data.primary_name_display === "personal"
+                          ? "border-green-600 bg-green-600"
+                          : "border-slate-300"
+                      }`}
+                    >
+                      {data.primary_name_display === "personal" && (
+                        <Check className="w-3 h-3 text-white" />
+                      )}
+                    </div>
+                    <div>
+                      <p className="font-medium text-sm">Mon nom personnel</p>
+                      <p className="text-xs text-muted-foreground">
+                        Afficher {data.name}
+                      </p>
+                    </div>
+                  </div>
+
+                  <div
+                    className={`cursor-pointer p-4 rounded-xl border-2 transition-all flex items-center gap-3 ${
+                      data.primary_name_display === "company"
+                        ? "border-green-600 bg-green-50/50"
+                        : "border-slate-200 hover:border-slate-300"
+                    }`}
+                    onClick={() => setData("primary_name_display", "company")}
+                  >
+                    <div
+                      className={`w-5 h-5 rounded-full border-2 flex items-center justify-center ${
+                        data.primary_name_display === "company"
+                          ? "border-green-600 bg-green-600"
+                          : "border-slate-300"
+                      }`}
+                    >
+                      {data.primary_name_display === "company" && (
+                        <Check className="w-3 h-3 text-white" />
+                      )}
+                    </div>
+                    <div>
+                      <p className="font-medium text-sm">
+                        Le nom de mon entreprise
+                      </p>
+                      <p className="text-xs text-muted-foreground">
+                        Afficher {data.company_name || "(Nom non renseigné)"}
+                      </p>
+                    </div>
+                  </div>
+                </div>
               </div>
             </div>
           </CardContent>
@@ -212,11 +431,107 @@ export function ProfileEdit({ member, onCancel }: ProfileEditProps) {
           </CardContent>
         </Card>
 
+        {/* Company Details Card */}
+        <Card className="border-0 shadow-md overflow-hidden">
+          <CardHeader className="bg-gradient-to-r from-slate-50 to-slate-100 border-b">
+            <CardTitle className="flex items-center gap-2">
+              <Building2 className="w-5 h-5 text-green-600" />
+              Informations sur l'entreprise
+            </CardTitle>
+            <CardDescription>
+              Détails sur votre structure ou entreprise.
+            </CardDescription>
+          </CardHeader>
+          <CardContent className="pt-6 space-y-6">
+            <div className="grid sm:grid-cols-2 gap-6">
+              <div className="space-y-2">
+                <Label htmlFor="company_name">Nom de l'entreprise</Label>
+                <Input
+                  id="company_name"
+                  value={data.company_name}
+                  onChange={(e) => setData("company_name", e.target.value)}
+                  placeholder="Ex: Ma Structure Agricole"
+                  className="focus-visible:ring-green-600"
+                />
+                {errors.company_name && (
+                  <p className="text-sm text-destructive">
+                    {errors.company_name}
+                  </p>
+                )}
+              </div>
+
+              <div className="space-y-2">
+                <Label htmlFor="company_website">Site Web d'entreprise</Label>
+                <Input
+                  id="company_website"
+                  value={data.company_website}
+                  onChange={(e) => setData("company_website", e.target.value)}
+                  placeholder="https://mon-entreprise.com"
+                  className="focus-visible:ring-green-600"
+                />
+                {errors.company_website && (
+                  <p className="text-sm text-destructive">
+                    {errors.company_website}
+                  </p>
+                )}
+              </div>
+
+              <div className="space-y-2">
+                <Label htmlFor="company_phone">Téléphone d'entreprise</Label>
+                <Input
+                  id="company_phone"
+                  value={data.company_phone}
+                  onChange={(e) => setData("company_phone", e.target.value)}
+                  className="focus-visible:ring-green-600"
+                />
+                {errors.company_phone && (
+                  <p className="text-sm text-destructive">
+                    {errors.company_phone}
+                  </p>
+                )}
+              </div>
+
+              <div className="space-y-2">
+                <Label htmlFor="company_address">Adresse d'entreprise</Label>
+                <Input
+                  id="company_address"
+                  value={data.company_address}
+                  onChange={(e) => setData("company_address", e.target.value)}
+                  className="focus-visible:ring-green-600"
+                />
+                {errors.company_address && (
+                  <p className="text-sm text-destructive">
+                    {errors.company_address}
+                  </p>
+                )}
+              </div>
+            </div>
+
+            <div className="space-y-2">
+              <Label htmlFor="company_description">
+                Description de l'entreprise
+              </Label>
+              <Textarea
+                id="company_description"
+                placeholder="Présentez votre entreprise..."
+                className="min-h-[100px] text-base resize-none focus-visible:ring-green-600"
+                value={data.company_description}
+                onChange={(e) => setData("company_description", e.target.value)}
+              />
+              {errors.company_description && (
+                <p className="text-sm text-destructive">
+                  {errors.company_description}
+                </p>
+              )}
+            </div>
+          </CardContent>
+        </Card>
+
         {/* Bio Card */}
         <Card className="border-0 shadow-md overflow-hidden">
           <CardHeader className="bg-gradient-to-r from-slate-50 to-slate-100 border-b">
             <CardTitle className="flex items-center gap-2">
-              <Briefcase className="w-5 h-5 text-green-600" />
+              <FileText className="w-5 h-5 text-green-600" />
               Biographie
             </CardTitle>
             <CardDescription>

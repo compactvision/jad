@@ -16,30 +16,40 @@ import {
   Check,
   Eye,
   EyeOff,
-  MapPin,
-  Phone,
   Mail,
-  Briefcase,
-  User,
+  Phone,
+  MapPin,
   Calendar,
+  Briefcase,
+  Building2,
   FileText,
+  Trash2,
+  UserCheck,
+  UserX,
   ArrowLeft, // Import de l'icône
 } from "lucide-react";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import React from "react";
 
 interface Member {
   id: number;
   name: string;
   email: string;
   phone: string;
-  role: string;
+  roles: string[];
   province: string;
   city: string;
-  sector: string;
+  sectors: string[];
   avatar: string | null;
   status: string;
   is_visible: boolean;
   created_at?: string;
+  company_name?: string;
+  company_description?: string;
+  company_website?: string;
+  company_phone?: string;
+  company_address?: string;
+  primary_name_display?: string;
 }
 
 export default function MemberDetails({ member }: { member: Member }) {
@@ -68,16 +78,26 @@ export default function MemberDetails({ member }: { member: Member }) {
               Retour
             </Button>
             <div>
-              <h1 className="text-3xl font-bold tracking-tight">{member.name}</h1>
-              <div className="flex items-center gap-2 text-muted-foreground mt-1">
+              <h1 className="text-3xl font-bold tracking-tight">
+                {member.name}
+              </h1>
+              <div className="flex flex-wrap items-center gap-2 text-muted-foreground mt-1">
                 <StatusBadge
                   status={member.status as any}
                   label={member.status}
                 />
-                <span>•</span>
-                <span className="capitalize">{member.role}</span>
-                <span>•</span>
-                <span className="capitalize">{member.sector}</span>
+                {member.roles?.map((role, idx) => (
+                  <React.Fragment key={role}>
+                    <span>•</span>
+                    <span className="capitalize">{role}</span>
+                  </React.Fragment>
+                ))}
+                {member.sectors?.map((sector, idx) => (
+                  <React.Fragment key={sector}>
+                    <span>•</span>
+                    <span className="capitalize">{sector}</span>
+                  </React.Fragment>
+                ))}
               </div>
             </div>
           </div>
@@ -186,6 +206,12 @@ export default function MemberDetails({ member }: { member: Member }) {
                   Vue d'ensemble
                 </TabsTrigger>
                 <TabsTrigger
+                  value="enterprise"
+                  className="data-[state=active]:bg-transparent data-[state=active]:shadow-none data-[state=active]:border-b-2 data-[state=active]:border-primary rounded-none pb-2 px-0 font-medium"
+                >
+                  Entreprise
+                </TabsTrigger>
+                <TabsTrigger
                   value="dossier"
                   className="data-[state=active]:bg-transparent data-[state=active]:shadow-none data-[state=active]:border-b-2 data-[state=active]:border-primary rounded-none pb-2 px-0 font-medium"
                 >
@@ -210,22 +236,125 @@ export default function MemberDetails({ member }: { member: Member }) {
                   <CardContent className="grid sm:grid-cols-2 gap-6">
                     <div className="space-y-1">
                       <Label className="text-muted-foreground">
-                        Secteur d'activité
+                        Secteurs d'activité
                       </Label>
-                      <p className="font-medium capitalize text-lg">
-                        {member.sector}
-                      </p>
+                      <div className="flex flex-wrap gap-2">
+                        {member.sectors?.map((s) => (
+                          <span
+                            key={s}
+                            className="px-2 py-1 bg-primary/10 text-primary rounded text-sm font-medium capitalize"
+                          >
+                            {s}
+                          </span>
+                        ))}
+                      </div>
                     </div>
                     <div className="space-y-1">
                       <Label className="text-muted-foreground">
-                        Rôle dans l'organisation
+                        Rôles dans l'organisation
                       </Label>
-                      <p className="font-medium capitalize text-lg">
-                        {member.role}
-                      </p>
+                      <div className="flex flex-wrap gap-2">
+                        {member.roles?.map((r) => (
+                          <span
+                            key={r}
+                            className="px-2 py-1 bg-green-100 text-green-800 rounded text-sm font-medium capitalize"
+                          >
+                            {r}
+                          </span>
+                        ))}
+                      </div>
                     </div>
                   </CardContent>
                 </Card>
+              </TabsContent>
+
+              <TabsContent value="enterprise" className="mt-0 space-y-6">
+                {member.company_name ? (
+                  <Card>
+                    <CardHeader>
+                      <CardTitle className="flex items-center gap-2">
+                        <Building2 className="w-5 h-5 text-primary" />
+                        Détails de l'entreprise
+                      </CardTitle>
+                    </CardHeader>
+                    <CardContent className="space-y-6">
+                      <div className="grid sm:grid-cols-2 gap-6">
+                        <div className="space-y-1">
+                          <Label className="text-muted-foreground">
+                            Nom de l'entreprise
+                          </Label>
+                          <p className="font-bold text-lg">
+                            {member.company_name}
+                          </p>
+                        </div>
+                        <div className="space-y-1">
+                          <Label className="text-muted-foreground">
+                            Site Web
+                          </Label>
+                          <p className="text-primary hover:underline">
+                            {member.company_website ? (
+                              <a
+                                href={member.company_website}
+                                target="_blank"
+                                rel="noopener noreferrer"
+                              >
+                                {member.company_website}
+                              </a>
+                            ) : (
+                              "Non renseigné"
+                            )}
+                          </p>
+                        </div>
+                      </div>
+
+                      <div className="space-y-1">
+                        <Label className="text-muted-foreground">
+                          Description
+                        </Label>
+                        <p className="leading-relaxed whitespace-pre-wrap">
+                          {member.company_description ||
+                            "Aucune description fournie."}
+                        </p>
+                      </div>
+
+                      <div className="grid sm:grid-cols-2 gap-6">
+                        <div className="space-y-1">
+                          <Label className="text-muted-foreground">
+                            Téléphone pro
+                          </Label>
+                          <p>{member.company_phone || "Non renseigné"}</p>
+                        </div>
+                        <div className="space-y-1">
+                          <Label className="text-muted-foreground">
+                            Adresse pro
+                          </Label>
+                          <p>{member.company_address || "Non renseigné"}</p>
+                        </div>
+                      </div>
+
+                      <div className="space-y-1 pt-4 border-t">
+                        <Label className="text-muted-foreground">
+                          Préférence d'affichage du nom
+                        </Label>
+                        <p className="capitalize font-medium">
+                          {member.primary_name_display === "company"
+                            ? "Entreprise"
+                            : "Nom personnel"}
+                        </p>
+                      </div>
+                    </CardContent>
+                  </Card>
+                ) : (
+                  <Card>
+                    <CardContent className="py-12 flex flex-col items-center justify-center text-center">
+                      <Building2 className="w-12 h-12 text-muted-foreground mb-4 opacity-20" />
+                      <p className="text-muted-foreground">
+                        Aucune information d'entreprise renseignée pour ce
+                        membre.
+                      </p>
+                    </CardContent>
+                  </Card>
+                )}
               </TabsContent>
 
               <TabsContent value="dossier" className="mt-0">

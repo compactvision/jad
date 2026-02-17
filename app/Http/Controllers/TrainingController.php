@@ -52,6 +52,7 @@ class TrainingController extends Controller
             'pdf' => 'required|file|mimes:pdf|max:10240', // 10MB max
             'allowed_pages' => 'required|integer|min:1',
             'is_public' => 'required|boolean',
+            'color' => 'nullable|string|max:7', // Hex color
         ]);
 
         $path = $request->file('pdf')->store('trainings', 'public');
@@ -62,6 +63,7 @@ class TrainingController extends Controller
             'pdf_path' => $path,
             'allowed_pages' => $request->allowed_pages,
             'is_public' => $request->is_public,
+            'color' => $request->color ?? '#064e3b',
         ]);
 
         return redirect()->back()->with('success', 'Formation ajoutée avec succès.');
@@ -74,9 +76,10 @@ class TrainingController extends Controller
             'description' => 'nullable|string',
             'allowed_pages' => 'required|integer|min:1',
             'is_public' => 'required|boolean',
+            'color' => 'nullable|string|max:7',
         ]);
 
-        $training->update($request->only(['title', 'description', 'allowed_pages', 'is_public']));
+        $training->update($request->only(['title', 'description', 'allowed_pages', 'is_public', 'color']));
 
         return redirect()->back()->with('success', 'Formation mise à jour.');
     }

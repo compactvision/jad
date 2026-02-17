@@ -9,7 +9,7 @@ use Illuminate\Http\UploadedFile;
 
 class EloquentMemberRepository implements MemberRepositoryInterface
 {
-    public function save(Member $member, ?UploadedFile $avatar = null): Member
+    public function save(Member $member, ?UploadedFile $avatar = null, ?UploadedFile $companyLogo = null): Member
     {
         $eloquentMember = EloquentMember::fromDomainEntity($member);
         
@@ -18,9 +18,19 @@ class EloquentMemberRepository implements MemberRepositoryInterface
             $member->setAvatar($imagePath);
             $eloquentMember->avatar = $imagePath;
         }
+
+        if ($companyLogo) {
+            $logoPath = $eloquentMember->uploadCompanyLogo($companyLogo);
+            $member->setCompanyLogo($logoPath);
+            $eloquentMember->company_logo = $logoPath;
+        }
         
         $eloquentMember->save();
         $member->setId($eloquentMember->id);
+
+        // Assign Spatie roles
+        $roles = array_map(fn($role) => $role->value, $member->getRoles());
+        $eloquentMember->syncRoles($roles);
         
         return $member;
     }

@@ -90,6 +90,14 @@ class ProfileController extends Controller
             'social_links.instagram' => 'nullable|url',
             'social_links.website' => 'nullable|url',
             'avatar' => 'nullable|image|max:2048',
+            'company_logo' => 'nullable|image|max:2048',
+            'primary_image_display' => 'required|in:avatar,company_logo',
+            'company_name' => 'nullable|string|max:255',
+            'company_description' => 'nullable|string|max:1000',
+            'company_website' => 'nullable|url|max:255',
+            'company_phone' => 'nullable|string|max:255',
+            'company_address' => 'nullable|string|max:255',
+            'primary_name_display' => 'required|in:personal,company',
         ]);
 
         $command = new UpdateProfileCommand(
@@ -101,7 +109,15 @@ class ProfileController extends Controller
             province: $request->province,
             bio: $request->bio,
             socialLinks: $request->social_links,
-            avatar: $request->file('avatar')
+            avatar: $request->file('avatar'),
+            companyLogo: $request->file('company_logo'),
+            primaryImageDisplay: $request->primary_image_display,
+            companyName: $request->company_name,
+            companyDescription: $request->company_description,
+            companyWebsite: $request->company_website,
+            companyPhone: $request->company_phone,
+            companyAddress: $request->company_address,
+            primaryNameDisplay: $request->primary_name_display
         );
 
         $this->updateProfileHandler->handle($command);

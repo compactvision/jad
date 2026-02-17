@@ -1,10 +1,17 @@
 // components/profile/components/ProfileView.tsx
 
 import { Button } from "@/components/ui/button";
-import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
+import {
+  Card,
+  CardContent,
+  CardHeader,
+  CardTitle,
+  CardDescription,
+} from "@/components/ui/card";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Badge } from "@/components/ui/badge";
+import { Label } from "@/components/ui/label";
 import {
   Edit,
   MapPin,
@@ -17,6 +24,7 @@ import {
   Star,
   Shield,
   Users,
+  Building2,
 } from "lucide-react";
 import { SocialLinkCard } from "./SocialLinkCard";
 import { StatCard } from "./StatCard";
@@ -93,12 +101,26 @@ export function ProfileView({
             <div className="relative group">
               <div className="absolute -inset-1 bg-gradient-to-r from-green-400 to-emerald-400 rounded-full blur opacity-75 group-hover:opacity-100 transition duration-300"></div>
               <Avatar className="relative w-32 h-32 md:w-40 md:h-40 border-4 border-white shadow-2xl">
-                <AvatarImage
-                  src={member.avatar ? `/storage/${member.avatar}` : undefined}
-                  className="object-cover"
-                />
+                {member.primary_image_display === "company_logo" &&
+                member.company_logo ? (
+                  <AvatarImage
+                    src={`/storage/${member.company_logo}`}
+                    className="object-cover"
+                  />
+                ) : (
+                  <AvatarImage
+                    src={
+                      member.avatar ? `/storage/${member.avatar}` : undefined
+                    }
+                    className="object-cover"
+                  />
+                )}
                 <AvatarFallback className="text-3xl font-bold bg-white text-green-800">
-                  {member.name.substring(0, 2).toUpperCase()}
+                  {member.primary_image_display === "company_logo" ? (
+                    <Building2 className="w-16 h-16" />
+                  ) : (
+                    member.name.substring(0, 2).toUpperCase()
+                  )}
                 </AvatarFallback>
               </Avatar>
             </div>
@@ -106,7 +128,10 @@ export function ProfileView({
             {/* Name and Role */}
             <div className="flex-1 text-center md:text-left text-white">
               <h1 className="text-3xl md:text-4xl font-bold tracking-tight drop-shadow-md">
-                {member.name}
+                {member.primary_name_display === "company" &&
+                member.company_name
+                  ? member.company_name
+                  : member.name}
               </h1>
               <p className="text-green-100 text-lg mt-2 drop-shadow">
                 {member.role} • {member.sector}
@@ -227,6 +252,12 @@ export function ProfileView({
                 Vue d'ensemble
               </TabsTrigger>
               <TabsTrigger
+                value="enterprise"
+                className="data-[state=active]:bg-transparent data-[state=active]:shadow-none data-[state=active]:border-b-2 data-[state=active]:border-green-600 rounded-none pb-3 px-0 font-medium text-base data-[state=active]:text-green-600"
+              >
+                Entreprise
+              </TabsTrigger>
+              <TabsTrigger
                 value="activity"
                 className="data-[state=active]:bg-transparent data-[state=active]:shadow-none data-[state=active]:border-b-2 data-[state=active]:border-green-600 rounded-none pb-3 px-0 font-medium text-base data-[state=active]:text-green-600"
               >
@@ -297,7 +328,7 @@ export function ProfileView({
                               </Badge>
                               <span className="text-xs text-slate-500">
                                 {new Date(
-                                  project.created_at
+                                  project.created_at,
                                 ).toLocaleDateString()}
                               </span>
                             </div>
@@ -312,6 +343,126 @@ export function ProfileView({
                   </div>
                 </CardContent>
               </Card>
+            </TabsContent>
+
+            <TabsContent
+              value="enterprise"
+              className="space-y-6 animate-in slide-in-from-bottom-2 duration-300"
+            >
+              {member.company_name ? (
+                <Card className="border-0 shadow-md overflow-hidden">
+                  <CardHeader className="bg-gradient-to-r from-slate-50 to-slate-100 border-b">
+                    <CardTitle className="flex items-center gap-2">
+                      <Building2 className="w-5 h-5 text-green-600" />
+                      Détails de l'entreprise
+                    </CardTitle>
+                  </CardHeader>
+                  <CardContent className="p-6 space-y-6">
+                    <div className="grid sm:grid-cols-2 gap-6">
+                      <div className="space-y-1">
+                        <Label className="text-muted-foreground text-xs uppercase tracking-wider font-semibold">
+                          Nom de l'entreprise
+                        </Label>
+                        <p className="font-bold text-lg text-slate-800">
+                          {member.company_name}
+                        </p>
+                      </div>
+                      <div className="space-y-1">
+                        <Label className="text-muted-foreground text-xs uppercase tracking-wider font-semibold">
+                          Site Web
+                        </Label>
+                        <p className="text-green-600 hover:text-green-700 transition-colors">
+                          {member.company_website ? (
+                            <a
+                              href={member.company_website}
+                              target="_blank"
+                              rel="noopener noreferrer"
+                              className="flex items-center gap-1"
+                            >
+                              {member.company_website}
+                            </a>
+                          ) : (
+                            "Non renseigné"
+                          )}
+                        </p>
+                      </div>
+                    </div>
+
+                    <div className="space-y-1">
+                      <Label className="text-muted-foreground text-xs uppercase tracking-wider font-semibold">
+                        Description
+                      </Label>
+                      <p className="leading-relaxed text-slate-600 whitespace-pre-wrap">
+                        {member.company_description ||
+                          "Aucune description fournie."}
+                      </p>
+                    </div>
+
+                    <div className="grid sm:grid-cols-2 gap-6">
+                      <div className="space-y-1">
+                        <Label className="text-muted-foreground text-xs uppercase tracking-wider font-semibold">
+                          Téléphone professionnel
+                        </Label>
+                        <p className="text-slate-700 font-medium">
+                          {member.company_phone || "Non renseigné"}
+                        </p>
+                      </div>
+                      <div className="space-y-1">
+                        <Label className="text-muted-foreground text-xs uppercase tracking-wider font-semibold">
+                          Adresse professionnelle
+                        </Label>
+                        <p className="text-slate-700 font-medium">
+                          {member.company_address || "Non renseigné"}
+                        </p>
+                      </div>
+                    </div>
+
+                    <div className="pt-6 border-t border-slate-100">
+                      <div className="flex items-center justify-between p-4 bg-slate-50 rounded-xl border border-slate-100">
+                        <div>
+                          <p className="text-sm font-semibold text-slate-700">
+                            Préférence d'affichage
+                          </p>
+                          <p className="text-xs text-slate-500 mt-0.5">
+                            Ce nom sera utilisé sur votre profil public
+                          </p>
+                        </div>
+                        <Badge
+                          variant="secondary"
+                          className="bg-white text-green-700 border-green-100 capitalize font-medium"
+                        >
+                          {member.primary_name_display === "company"
+                            ? "Entreprise"
+                            : "Personnel"}
+                        </Badge>
+                      </div>
+                    </div>
+                  </CardContent>
+                </Card>
+              ) : (
+                <Card className="border-0 shadow-md">
+                  <CardContent className="py-12 flex flex-col items-center justify-center text-center">
+                    <div className="w-16 h-16 rounded-full bg-slate-50 flex items-center justify-center mb-4">
+                      <Building2 className="w-8 h-8 text-slate-300" />
+                    </div>
+                    <h3 className="text-slate-800 font-semibold">
+                      Informations manquantes
+                    </h3>
+                    <p className="text-slate-500 text-sm max-w-xs mt-2">
+                      Vous n'avez pas encore renseigné les informations de votre
+                      entreprise. Cliquez sur "Modifier le profil" pour les
+                      ajouter.
+                    </p>
+                    <Button
+                      onClick={onEdit}
+                      variant="outline"
+                      className="mt-6 border-green-200 text-green-700 hover:bg-green-50"
+                    >
+                      Compléter mon profil
+                    </Button>
+                  </CardContent>
+                </Card>
+              )}
             </TabsContent>
 
             <TabsContent value="activity">

@@ -56,12 +56,16 @@ class MemberController extends Controller
              return [
                 'id' => $m->id,
                 'name' => $m->name,
-                'role' => $m->member_roles[0] ?? null, 
+                'roles' => $m->member_roles, 
                 'avatar' => $m->avatar, 
-                'sector' => $m->member_sectors[0] ?? null, 
+                'sectors' => $m->member_sectors, 
                 'city' => $m->city,
                 'description' => $m->bio,
                 'social_links' => $m->social_links,
+                'company_name' => $m->company_name,
+                'company_logo' => $m->company_logo,
+                'primary_name_display' => $m->primary_name_display,
+                'primary_image_display' => $m->primary_image_display,
              ];
         });
 
@@ -74,7 +78,7 @@ class MemberController extends Controller
     {
         $validated = $request->validated();
 
-        $member = $this->registerMemberService->execute($validated, $request->file('avatar'));
+        $member = $this->registerMemberService->execute($validated, $request->file('avatar'), $request->file('company_logo'));
 
         return redirect()->back()->with('success', 'Membre enregistré avec succès');
     }
@@ -121,14 +125,20 @@ class MemberController extends Controller
                 'name' => $member->getName(),
                 'email' => $member->getEmail(),
                 'phone' => $member->getPhone(),
-                'role' => ($member->getRoles()[0] ?? Role::MEMBRE_JAD)->value,
+                'roles' => array_map(fn($role) => $role->value, $member->getRoles()),
                 'province' => $member->getProvince(),
                 'city' => $member->getCity(),
-                'sector' => ($member->getSectors()[0] ?? Sector::AUTRE)->value,
+                'sectors' => array_map(fn($sector) => $sector->value, $member->getSectors()),
                 'avatar' => $member->getAvatar(),
                 'status' => $member->getStatus(),
                 'is_visible' => $member->isVisible(),
-                'created_at' => null, // Entity doesn't have timestamps yet, maybe add later if needed
+                'created_at' => null, 
+                'company_name' => $member->getCompanyName(),
+                'company_description' => $member->getCompanyDescription(),
+                'company_website' => $member->getCompanyWebsite(),
+                'company_phone' => $member->getCompanyPhone(),
+                'company_address' => $member->getCompanyAddress(),
+                'primary_name_display' => $member->getPrimaryNameDisplay(),
             ]
         ]);
     }

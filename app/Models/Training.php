@@ -12,5 +12,6 @@ class Training extends Model
         'pdf_path',
         'allowed_pages',
         'is_public',
+        'color',
     ];
 }

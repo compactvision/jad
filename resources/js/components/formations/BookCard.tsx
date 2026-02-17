@@ -7,9 +7,13 @@ interface BookCardProps {
   description: string;
   pdfPath: string;
   id: number;
+  color?: string;
 }
 
-export const BookCard = ({ title, description, id }: BookCardProps) => {
+export const BookCard = ({ title, description, id, color }: BookCardProps) => {
+  const primaryColor = color || "#064e3b"; // Default emerald-950
+  const lightColor = `${primaryColor}CC`;
+  const spineColor = `${primaryColor}EE`;
   return (
     <div className="group perspective-2000 w-[210px] h-[300px] cursor-pointer">
       <div className="relative w-full h-full transition-transform duration-1000 transform-style-3d group-hover:rotate-y-[-25deg]">
@@ -17,7 +21,10 @@ export const BookCard = ({ title, description, id }: BookCardProps) => {
         <div className="absolute inset-0 bg-black/20 blur-xl translate-x-4 translate-y-4 rounded-r-lg group-hover:translate-x-12 transition-all duration-1000" />
 
         {/* Book Spine */}
-        <div className="absolute left-0 top-0 bottom-0 w-[38px] bg-emerald-950 rounded-l-lg origin-left transform-style-3d shadow-[inset_-10px_0_20px_rgba(0,0,0,0.6)] z-20 flex flex-col justify-around py-6">
+        <div
+          className="absolute left-0 top-0 bottom-0 w-[38px] rounded-l-lg origin-left transform-style-3d shadow-[inset_-10px_0_20px_rgba(0,0,0,0.6)] z-20 flex flex-col justify-around py-6"
+          style={{ backgroundColor: spineColor }}
+        >
           {[...Array(4)].map((_, i) => (
             <div key={i} className="h-[1px] w-full bg-emerald-900/50" />
           ))}
@@ -75,13 +82,18 @@ export const BookCard = ({ title, description, id }: BookCardProps) => {
 
         {/* Front Cover - THIS MUST BE VISIBLE BY DEFAULT */}
         <div
-          className="absolute inset-0 bg-emerald-900 rounded-r-lg origin-left transition-transform duration-1000 transform-style-3d z-[100] shadow-2xl overflow-hidden border-l border-emerald-800/40"
+          className="absolute inset-0 rounded-r-lg origin-left transition-transform duration-1000 transform-style-3d z-[100] shadow-2xl overflow-hidden"
           style={{
             transform: "rotateY(0deg) translateZ(20px)",
             backfaceVisibility: "hidden",
+            backgroundColor: primaryColor,
+            borderLeft: "1px solid rgba(255,255,255,0.1)",
           }}
         >
-          <div className="w-full h-full flex flex-col justify-between p-7 relative bg-emerald-900 group-hover:scale-95 transition-transform duration-700">
+          <div
+            className="w-full h-full flex flex-col justify-between p-7 relative group-hover:scale-95 transition-transform duration-700"
+            style={{ backgroundColor: primaryColor }}
+          >
             {/* Elegant Frame */}
             <div className="absolute inset-4 border border-emerald-400/10 rounded-lg pointer-events-none" />
 

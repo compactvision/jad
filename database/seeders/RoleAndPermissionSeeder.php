@@ -44,6 +44,11 @@ class RoleAndPermissionSeeder extends Seeder
         $roleJadAdmin = Role::firstOrCreate(['name' => 'administrateur_jad']);
         // $roleJadAdmin->givePermissionTo([...]); // Add specific permissions if needed
 
+        // Seed all roles from the Domain Enum
+        foreach (\App\Modules\Member\Domain\Enums\Role::cases() as $roleEnum) {
+            Role::firstOrCreate(['name' => $roleEnum->value]);
+        }
+
         // Création d'un utilisateur Super Admin pour tester (dans la table members car c'est le provider d'auth)
         $superAdminEmail = 'superadmin@example.com';
         if (!\App\Modules\Member\Infrastructure\Eloquent\EloquentMember::where('email', $superAdminEmail)->exists()) {

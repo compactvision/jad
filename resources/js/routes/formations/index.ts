@@ -430,7 +430,7 @@ store.form = storeForm
 
 /**
 * @see \App\Http\Controllers\TrainingController::update
-* @see app/Http/Controllers/TrainingController.php:70
+* @see app/Http/Controllers/TrainingController.php:72
 * @route '/dashboard/formations/{training}'
 */
 export const update = (args: { training: number | { id: number } } | [training: number | { id: number } ] | number | { id: number }, options?: RouteQueryOptions): RouteDefinition<'patch'> => ({
@@ -445,7 +445,7 @@ update.definition = {
 
 /**
 * @see \App\Http\Controllers\TrainingController::update
-* @see app/Http/Controllers/TrainingController.php:70
+* @see app/Http/Controllers/TrainingController.php:72
 * @route '/dashboard/formations/{training}'
 */
 update.url = (args: { training: number | { id: number } } | [training: number | { id: number } ] | number | { id: number }, options?: RouteQueryOptions) => {
@@ -478,7 +478,7 @@ update.url = (args: { training: number | { id: number } } | [training: number | 
 
 /**
 * @see \App\Http\Controllers\TrainingController::update
-* @see app/Http/Controllers/TrainingController.php:70
+* @see app/Http/Controllers/TrainingController.php:72
 * @route '/dashboard/formations/{training}'
 */
 update.patch = (args: { training: number | { id: number } } | [training: number | { id: number } ] | number | { id: number }, options?: RouteQueryOptions): RouteDefinition<'patch'> => ({
@@ -488,7 +488,7 @@ update.patch = (args: { training: number | { id: number } } | [training: number 
 
 /**
 * @see \App\Http\Controllers\TrainingController::update
-* @see app/Http/Controllers/TrainingController.php:70
+* @see app/Http/Controllers/TrainingController.php:72
 * @route '/dashboard/formations/{training}'
 */
 const updateForm = (args: { training: number | { id: number } } | [training: number | { id: number } ] | number | { id: number }, options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
@@ -503,7 +503,7 @@ const updateForm = (args: { training: number | { id: number } } | [training: num
 
 /**
 * @see \App\Http\Controllers\TrainingController::update
-* @see app/Http/Controllers/TrainingController.php:70
+* @see app/Http/Controllers/TrainingController.php:72
 * @route '/dashboard/formations/{training}'
 */
 updateForm.patch = (args: { training: number | { id: number } } | [training: number | { id: number } ] | number | { id: number }, options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
@@ -520,7 +520,7 @@ update.form = updateForm
 
 /**
 * @see \App\Http\Controllers\TrainingController::destroy
-* @see app/Http/Controllers/TrainingController.php:84
+* @see app/Http/Controllers/TrainingController.php:87
 * @route '/dashboard/formations/{training}'
 */
 export const destroy = (args: { training: number | { id: number } } | [training: number | { id: number } ] | number | { id: number }, options?: RouteQueryOptions): RouteDefinition<'delete'> => ({
@@ -535,7 +535,7 @@ destroy.definition = {
 
 /**
 * @see \App\Http\Controllers\TrainingController::destroy
-* @see app/Http/Controllers/TrainingController.php:84
+* @see app/Http/Controllers/TrainingController.php:87
 * @route '/dashboard/formations/{training}'
 */
 destroy.url = (args: { training: number | { id: number } } | [training: number | { id: number } ] | number | { id: number }, options?: RouteQueryOptions) => {
@@ -568,7 +568,7 @@ destroy.url = (args: { training: number | { id: number } } | [training: number |
 
 /**
 * @see \App\Http\Controllers\TrainingController::destroy
-* @see app/Http/Controllers/TrainingController.php:84
+* @see app/Http/Controllers/TrainingController.php:87
 * @route '/dashboard/formations/{training}'
 */
 destroy.delete = (args: { training: number | { id: number } } | [training: number | { id: number } ] | number | { id: number }, options?: RouteQueryOptions): RouteDefinition<'delete'> => ({
@@ -578,7 +578,7 @@ destroy.delete = (args: { training: number | { id: number } } | [training: numbe
 
 /**
 * @see \App\Http\Controllers\TrainingController::destroy
-* @see app/Http/Controllers/TrainingController.php:84
+* @see app/Http/Controllers/TrainingController.php:87
 * @route '/dashboard/formations/{training}'
 */
 const destroyForm = (args: { training: number | { id: number } } | [training: number | { id: number } ] | number | { id: number }, options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
@@ -593,7 +593,7 @@ const destroyForm = (args: { training: number | { id: number } } | [training: nu
 
 /**
 * @see \App\Http\Controllers\TrainingController::destroy
-* @see app/Http/Controllers/TrainingController.php:84
+* @see app/Http/Controllers/TrainingController.php:87
 * @route '/dashboard/formations/{training}'
 */
 destroyForm.delete = (args: { training: number | { id: number } } | [training: number | { id: number } ] | number | { id: number }, options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({

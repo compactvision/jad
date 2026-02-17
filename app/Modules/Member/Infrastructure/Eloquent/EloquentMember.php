@@ -26,7 +26,8 @@ class EloquentMember extends Authenticatable
 
     protected $table = 'members';
     protected $fillable = [
-        'name', 'phone', 'email', 'password', 'member_roles', 'province', 'city', 'member_sectors', 'avatar', 'activationToken', 'status', 'is_visible', 'bio', 'social_links'
+        'name', 'phone', 'email', 'password', 'member_roles', 'province', 'city', 'member_sectors', 'avatar', 'company_logo', 'primary_image_display', 'activationToken', 'status', 'is_visible', 'bio', 'social_links',
+        'company_name', 'company_description', 'company_website', 'company_phone', 'company_address', 'primary_name_display'
     ];
     protected $hidden = ['password', 'remember_token'];
     protected $appends = ['role'];
@@ -55,12 +56,20 @@ class EloquentMember extends Authenticatable
             $this->city,
             $sectors,
             $this->avatar,
+            $this->company_logo,
             $this->activationToken,
             null, // Password
             $this->status ?? 'pending',
             (bool) ($this->is_visible ?? false),
             $this->bio,
-            $this->social_links ?? []
+            $this->social_links ?? [],
+            $this->primary_image_display ?? 'avatar',
+            $this->company_name,
+            $this->company_description,
+            $this->company_website,
+            $this->company_phone,
+            $this->company_address,
+            $this->primary_name_display ?? 'personal'
         );
     }
 
@@ -80,11 +89,19 @@ class EloquentMember extends Authenticatable
             'city' => $member->getCity(),
             'member_sectors' => $sectors,
             'avatar' => $member->getAvatar(),
+            'company_logo' => $member->getCompanyLogo(),
             'activationToken' => $member->getActivationToken(),
             'status' => $member->getStatus(),
             'is_visible' => $member->isVisible(),
             'bio' => $member->getBio(),
             'social_links' => $member->getSocialLinks(),
+            'primary_image_display' => $member->getPrimaryImageDisplay(),
+            'company_name' => $member->getCompanyName(),
+            'company_description' => $member->getCompanyDescription(),
+            'company_website' => $member->getCompanyWebsite(),
+            'company_phone' => $member->getCompanyPhone(),
+            'company_address' => $member->getCompanyAddress(),
+            'primary_name_display' => $member->getPrimaryNameDisplay(),
         ];
 
         // Only hash and set password if it's provided in the domain entity (new member or password change)
@@ -129,11 +146,24 @@ class EloquentMember extends Authenticatable
         return $path;
     }
 
+    public function uploadCompanyLogo(UploadedFile $file): ?string
+    {
+        $path = $file->store('company_logos', 'public');
+        return $path;
+    }
+
     // Accesseur pour obtenir l'URL complète de l'image
     public function getAvatarUrlAttribute(): ?string
     {
         return $this->avatar 
-            ? Storage::url($this->avatar) 
+            ? \Illuminate\Support\Facades\Storage::url($this->avatar) 
+            : null;
+    }
+    
+    public function getCompanyLogoUrlAttribute(): ?string
+    {
+        return $this->company_logo 
+            ? \Illuminate\Support\Facades\Storage::url($this->company_logo) 
             : null;
     }
 

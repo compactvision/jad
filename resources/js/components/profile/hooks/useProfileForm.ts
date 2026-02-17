@@ -23,6 +23,14 @@ export function useProfileForm(member: Member) {
         website: socialLinks.website || "",
       },
       avatar: null as File | null,
+      company_logo: null as File | null,
+      primary_image_display: member.primary_image_display || "avatar",
+      company_name: member.company_name || "",
+      company_description: member.company_description || "",
+      company_website: member.company_website || "",
+      company_phone: member.company_phone || "",
+      company_address: member.company_address || "",
+      primary_name_display: member.primary_name_display || "personal",
     });
 
   const handleSubmit = (e: React.FormEvent) => {
